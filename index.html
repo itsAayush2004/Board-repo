@@ -58,6 +58,8 @@ a{color:inherit}
 .gh{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:44px;background:var(--paper);color:var(--ink);text-decoration:none;font-weight:800;font-size:14px;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
 .gh:hover{background:var(--yellow)}
 .gh svg{width:18px;height:18px}
+.gh.mode{border:0;cursor:pointer;font-family:inherit}
+@media (max-width:520px){.gh.mode{padding:0 12px;font-size:12.5px}.brand span{display:none}}
 @media (max-width:1180px){.nav{display:none}}
 
 /* scroll progress: red string on the right edge */
@@ -143,6 +145,20 @@ ul.ticks li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;he
 .lib a span{min-width:0;overflow-wrap:anywhere}
 .ico{width:30px;height:30px;flex-shrink:0;border-radius:7px;background-image:url(assets/games-atlas.jpg);background-size:270px 360px;box-shadow:0 1px 2px rgba(0,0,0,.25)}
 @media (max-width:420px){.lib ul{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:minmax(0,1fr)}}
+.dev{border-top:1.5px dashed var(--rule);padding-top:18px;margin-top:20px}
+.dev-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;background:#efe6d0;border-radius:40px;padding:3px}
+.seg button{min-height:38px;padding:0 14px;border:0;background:transparent;border-radius:40px;font:700 13px var(--f-display);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.shot{margin:14px auto 0;background:#17130f;padding:10px;border-radius:26px;box-shadow:0 10px 20px -8px rgba(0,0,0,.5);max-width:100%}
+.shot img{display:block;width:100%;border-radius:16px;background:#2a2420}
+.shot figcaption{font-family:var(--f-mono);font-size:10.5px;color:#cfc4b2;text-align:center;margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.shot.phone{width:220px}.shot.tablet{width:300px;border-radius:22px}.shot.desktop{width:100%;border-radius:10px;padding:8px 8px 6px}.shot.desktop img{border-radius:4px}
+.live{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:16px 0 0}
+.live div{border:1.5px solid var(--ink);padding:8px 10px;min-width:0}
+.live dt{font-family:var(--f-mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.live dd{margin:2px 0 0;font-weight:800;font-size:15px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+@media (max-width:420px){.live{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .fallback{display:none;margin-top:14px;width:100%;border:8px solid #fff;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
 .nogl .fallback{display:block}
 
@@ -176,8 +192,9 @@ footer a{color:var(--yellow)}
   <a class="brand" href="#hello"><img src="assets/dp.png" alt="" width="34" height="34"><div><b>Aayush Kumar</b><br><span>Games · AI · 3D</span></div></a>
   <div class="right">
     <nav class="nav" aria-label="Sections">
-      <a href="#space">ARTHIS.space</a><a href="#land">ARTHIS.land</a><a href="#games">Engines</a><a href="#apps">Apps</a><a href="#ai">AI</a><a href="#blender">Blender</a><a href="#reels">Reels</a><a href="#contact">Contact</a>
+      <a href="#space">ARTHIS.space</a><a href="#land">ARTHIS.land</a><a href="#responsive">Responsive</a><a href="#games">Engines</a><a href="#apps">Apps</a><a href="#ai">AI</a><a href="#blender">Blender</a><a href="#reels">Reels</a><a href="#contact">Contact</a>
     </nav>
+    <button class="gh mode" type="button" id="mode" aria-label="Switch board view">Simple view</button>
     <a class="gh" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a>
   </div>
 </header>
@@ -277,6 +294,37 @@ footer a{color:var(--yellow)}
         <p>An 11-chapter design spec for a Unity editor tool that generates islands, lays out rooms and places furniture, grounded in the real ARTHIS asset library.</p>
         <div class="links"><a class="btn" href="https://itsaayush2004.github.io/arthis-land-maker-docs/" target="_blank" rel="noopener">Read the docs ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis-land-maker-docs" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="responsive" data-label="Responsive UI">
+  <div class="card" style="--r:-.3deg">
+    <div class="eyebrow">Responsive UI</div>
+    <h2>One UI that reshapes itself for every screen.</h2>
+    <p>Both ARTHIS sites are built to change layout with the screen, not just shrink. Pick a size to see the real current build.</p>
+    <div class="dev" data-site="space">
+      <div class="dev-head"><h3><img src="assets/logo-space.png" alt="" width="28" height="28">ARTHIS.space</h3>
+        <div class="seg" role="group" aria-label="ARTHIS.space screen size"><button type="button" data-w="phone" aria-pressed="true">Phone</button><button type="button" data-w="tablet" aria-pressed="false">Tablet</button><button type="button" data-w="desktop" aria-pressed="false">Desktop</button></div></div>
+      <figure class="shot phone"><img src="assets/rs-space-phone.jpg" alt="ARTHIS.space at phone width" data-base="assets/rs-space-" loading="lazy"><figcaption>390 px wide</figcaption></figure>
+      <!--SPACE-NOTES-->
+    </div>
+    <div class="dev" data-site="land">
+      <div class="dev-head"><h3><img src="assets/logo-land.png" alt="" width="28" height="28">ARTHIS.land</h3>
+        <div class="seg" role="group" aria-label="ARTHIS.land screen size"><button type="button" data-w="phone" aria-pressed="true">Phone</button><button type="button" data-w="tablet" aria-pressed="false">Tablet</button><button type="button" data-w="desktop" aria-pressed="false">Desktop</button></div></div>
+      <figure class="shot phone"><img src="assets/rs-land-phone.jpg" alt="ARTHIS.land at phone width" data-base="assets/rs-land-" loading="lazy"><figcaption>390 px wide</figcaption></figure>
+      <!--LAND-NOTES-->
+    </div>
+    <div class="item" style="margin-top:22px">
+      <h3>This page adapts too</h3>
+      <p>The board you are scrolling picks a level of detail for your device and steps down on its own if the frame rate drops.</p>
+      <ul class="ticks">
+        <li><b>Desktop:</b> full 3D, soft shadows, sharp 2× rendering, items sway</li>
+        <li><b>Tablet:</b> lighter shadows and 1.5× rendering</li>
+        <li><b>Phone or low-memory device:</b> no shadows, no anti-aliasing, still items, and the board only redraws when something moves</li>
+        <li><b>No WebGL or Data Saver:</b> a simple flat page with the images inline; the <i>Simple view</i> button in the header does the same</li>
+      </ul>
+      <dl class="live" id="live" aria-live="polite"></dl>
     </div>
   </div>
 </section>
@@ -467,10 +515,17 @@ document.getElementById('copy').addEventListener('click',function(){
   try{navigator.clipboard.writeText(t).then(function(){out.textContent='copied!';},sel);}catch(e){sel();}
 });
 
+[].forEach.call(document.querySelectorAll('.dev'),function(d){
+  var img=d.querySelector('.shot img'),fig=d.querySelector('.shot'),cap=fig.querySelector('figcaption'),btns=d.querySelectorAll('.seg button');
+  var W={phone:'390 px wide',tablet:'820 px wide',desktop:'1440 px wide'};
+  [].forEach.call(btns,function(b){b.addEventListener('click',function(){var w=b.dataset.w;
+    [].forEach.call(btns,function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    fig.className='shot '+w;img.src=img.dataset.base+w+'.jpg';img.alt=img.alt.replace(/at \w+ width/,'at '+w+' width');cap.textContent=W[w];
+    d.querySelectorAll('[data-for]').forEach(function(n){n.hidden=n.dataset.for!==w;});});});});
 function openUrl(u){var a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();}
 
 /* each section: the camera pans its column while the card is read, then travels */
-var SPAN=[0.6,1.9,10.7,6.0,1.5,3.1,2.0,1.5,0.7,0.3];
+var SPAN=[0.6,1.9,10.7,6.0,4.2,1.5,3.1,2.0,1.5,0.7,0.3];
 var keys=[];
 function measure(){
   var ih=innerHeight;keys=[];
@@ -491,14 +546,33 @@ function syncActive(p){var i=Math.min(secs.length-1,Math.floor(p+.25));if(i!==la
 addEventListener('scroll',function(){syncActive(progress());},{passive:true});
 syncActive(0);
 
+/* ---------- device tier: full (desktop) / mid (tablet) / lite (phone, low memory) / flat (no 3D) ---------- */
+var pref=null;try{pref=localStorage.getItem('boardMode');}catch(e){}
+var coarse=matchMedia('(pointer: coarse)').matches,mem=navigator.deviceMemory||8,cores=navigator.hardwareConcurrency||8;
+var saveData=!!(navigator.connection&&navigator.connection.saveData);
+var TIER=(innerWidth<700||(coarse&&(mem<=4||cores<=4)))?'lite':(innerWidth<1100||coarse)?'mid':'full';
+if(pref==='flat'||(pref==null&&saveData))TIER='flat';
+var modeBtn=document.getElementById('mode');
+modeBtn.textContent=TIER==='flat'?'3D board':'Simple view';
+modeBtn.addEventListener('click',function(){try{localStorage.setItem('boardMode',TIER==='flat'?'3d':'flat');}catch(e){}location.reload();});
+var stats={fps:0,shadows:false,dpr:1};
+function readout(){var el=document.getElementById('live');if(!el)return;
+  var names={full:'Full 3D',mid:'Balanced 3D',lite:'Lite 3D',flat:'Simple (no 3D)'};
+  el.innerHTML='<div><dt>Viewport</dt><dd>'+innerWidth+' × '+innerHeight+'</dd></div><div><dt>Mode</dt><dd>'+names[TIER]+'</dd></div>'+
+    '<div><dt>Render scale</dt><dd>'+(TIER==='flat'?'—':stats.dpr.toFixed(2)+'×')+'</dd></div><div><dt>Shadows</dt><dd>'+(TIER==='flat'?'—':stats.shadows?'on':'off')+'</dd></div>'+
+    '<div><dt>Frame rate</dt><dd>'+(TIER==='flat'||!stats.fps?'—':Math.round(stats.fps)+' fps')+'</dd></div><div><dt>Redraw</dt><dd>'+(TIER==='flat'?'—':TIER==='full'?'every frame':'only on change')+'</dd></div>';}
+addEventListener('resize',readout);readout();
+if(TIER==='flat'){document.documentElement.classList.add('nogl');hideLoader();return;}
+
 /* ---------- 3D board ---------- */
 var canvas=document.getElementById('gl'), renderer;
-try{ if(!window.THREE) throw 0; renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true}); }
-catch(e){ document.documentElement.classList.add('nogl'); hideLoader(); return; }
+try{ if(!window.THREE) throw 0; renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:TIER!=='lite',powerPreference:TIER==='full'?'high-performance':'low-power'}); }
+catch(e){ TIER='flat';readout();document.documentElement.classList.add('nogl'); hideLoader(); return; }
 var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
+var SWAY=!reduce&&TIER!=='lite';
+stats.dpr=Math.min(devicePixelRatio||1,{full:2,mid:1.5,lite:1.25}[TIER]);renderer.setPixelRatio(stats.dpr);
 renderer.outputEncoding=THREE.sRGBEncoding;
-renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.shadowMap.enabled=TIER!=='lite';stats.shadows=TIER!=='lite';renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 var scene=new THREE.Scene();scene.background=new THREE.Color(0x2e1d0f);
 var camera=new THREE.PerspectiveCamera(40,1,0.1,200);
 var FOVT=Math.tan(THREE.MathUtils.degToRad(20));
@@ -506,7 +580,7 @@ var maxAniso=renderer.capabilities.getMaxAnisotropy();
 
 scene.add(new THREE.HemisphereLight(0xfff3df,0x6b4420,0.7));
 var sun=new THREE.DirectionalLight(0xfff0d8,0.8);
-sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+sun.castShadow=TIER!=='lite';var SM=TIER==='full'?2048:1024;sun.shadow.mapSize.set(SM,SM);
 var sc=sun.shadow.camera;sc.left=-10;sc.right=10;sc.top=9;sc.bottom=-9;sc.near=1;sc.far=40;sun.shadow.bias=-0.0006;sun.shadow.radius=4;
 scene.add(sun);scene.add(sun.target);
 
@@ -534,7 +608,7 @@ function mk(w,h){var c=document.createElement('canvas');c.width=w;c.height=h;ret
   [[x0-T/2],[x1+T/2]].forEach(function(f){var m=new THREE.Mesh(new THREE.BoxGeometry(T,H,D),wm(1));m.rotation.z=0;m.position.set(f[0],(y0+y1)/2,D/2-.05);m.castShadow=true;scene.add(m);});
 })();
 
-var floaters=[], clickables=[];
+var floaters=[], clickables=[], dirty=2;
 var pinCols=[0xc42132,0x2b62d6,0xffc20e,0x2f8f5b,0xf2f2f2];
 var metal=new THREE.MeshStandardMaterial({color:0xc9ccd1,metalness:.85,roughness:.28});
 function addPin(group,x,y,z,col){
@@ -561,7 +635,7 @@ function tipOf(it){if(it.tip)return it.tip;if(it.url){try{return 'Open '+new URL
 function place(group,cx,cy,it){
   var z=it.z||.08;group.position.set(cx+it.x,cy+it.y,z);group.rotation.z=THREE.MathUtils.degToRad(it.r||0);
   group.userData={base:group.rotation.z,ph:Math.random()*6,z0:z,lift:0,url:linkOf(it),tip:tipOf(it)};
-  floaters.push(group);if(group.userData.url)clickables.push(group);scene.add(group);}
+  floaters.push(group);if(group.userData.url)clickables.push(group);scene.add(group);dirty=2;}
 function ghTag(group,x,y,z,label){
   var c=mk(512,112),g=c.getContext('2d');g.fillStyle='#17130f';g.beginPath();if(g.roundRect)g.roundRect(0,0,512,112,22);else g.rect(0,0,512,112);g.fill();
   g.save();g.translate(28,22);g.scale(2.8,2.8);g.fillStyle='#ffffff';g.fill(new Path2D(GHPATH));g.restore();
@@ -585,7 +659,7 @@ function noteTex(it){
   if(it.gh||it.url){g.font='700 30px Caveat, cursive';g.globalAlpha=.75;g.fillText(it.gh?'↗ open on GitHub':'↗ click to open',34,H-30);g.globalAlpha=1;}
   return tex(c);}
 function addNote(cx,cy,it){
-  var g=new THREE.Group(),geo=new THREE.PlaneGeometry(it.w,it.h,12,12);curl(geo,it.w,it.h,.16);
+  var g=new THREE.Group(),geo=new THREE.PlaneGeometry(it.w,it.h,TIER==='lite'?4:12,TIER==='lite'?4:12);curl(geo,it.w,it.h,.16);
   var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:noteTex(it),roughness:.92,side:THREE.DoubleSide}));
   m.castShadow=true;g.add(m);addPin(g,0,it.h/2-.16,.02);place(g,cx,cy,it);}
 function addCard(cx,cy,it){
@@ -725,6 +799,16 @@ var BOARD=[
    {k:'photo',src:'assets/land-mobile.jpg',w:1.15,x:1.35,y:-5.75,r:.6,z:.1,cap:'on mobile',url:LAND,pin:true},
    {k:'card',w:2.5,h:1.6,x:-1.35,y:-8.25,r:.5,z:.12,title:'arthisland-relay',lines:['TCP + WebSocket, one port','pure Python, 0 dependencies'],gh:'arthisland-relay'},
    {k:'card',w:2.5,h:1.6,x:1.35,y:-8.25,r:-.5,z:.12,title:'Land Maker docs',lines:['11-chapter Unity tool spec','islands → rooms → props'],url:'https://itsaayush2004.github.io/arthis-land-maker-docs/',gh:'arthis-land-maker-docs'} ],
+ [ {k:'dymo',text:'ONE UI, EVERY SCREEN',y:2.08},
+   {k:'device',kind:'laptop',src:'assets/rs-space-desktop.jpg',w:2.6,x:-1.3,y:.75,z:.08,cap:'desktop 1440',url:SPACE},
+   {k:'device',kind:'tablet',src:'assets/rs-space-tablet.jpg',w:1.1,x:.85,y:.75,z:.08,cap:'tablet 820',url:SPACE},
+   {k:'device',kind:'phone',src:'assets/rs-space-phone.jpg',w:.72,x:2.2,y:.7,z:.08,cap:'phone 390',url:SPACE},
+   {k:'dymo',text:'ARTHIS.SPACE',y:-.75,h:.2},
+   {k:'device',kind:'laptop',src:'assets/rs-land-desktop.jpg',w:2.6,x:-1.3,y:-2.5,z:.08,cap:'desktop 1440',url:LAND},
+   {k:'device',kind:'tablet',src:'assets/rs-land-tablet.jpg',w:1.1,x:.85,y:-2.5,z:.08,cap:'tablet 820',url:LAND},
+   {k:'device',kind:'phone',src:'assets/rs-land-phone.jpg',w:.72,x:2.2,y:-2.55,z:.08,cap:'phone 390',url:LAND},
+   {k:'dymo',text:'ARTHIS.LAND',y:-4.0,h:.2},
+   {k:'card',w:4.6,h:1.95,x:0,y:-5.55,r:-.3,z:.1,title:'this page adapts too',lines:['desktop: full 3D, soft shadows, 2× render','tablet: lighter shadows, 1.5× render','phone: no shadows, redraws only on change'],clip:true} ],
  [ {k:'dymo',text:'GAME ENGINES & APPS',y:2.08},
    {k:'photo',src:'assets/art-03.jpg',w:3.3,x:-.95,y:.5,r:-.6,cap:'HexaBed: Unity hex terrain engine'},
    {k:'note',color:B,w:1.5,h:1.35,x:1.95,y:.95,r:1,z:.14,label:'hexabed',text:'14 scripts\n3,705 lines of C#',textSize:40},
@@ -760,6 +844,18 @@ var BOARD=[
    {k:'marker',text:'open to roles from 2026',x:1.55,y:-1.0,w:2.1,r:-2,under:true} ]
 ];
 
+/* device mock-ups: a dark body with the real screenshot as its screen */
+function addDevice(cx,cy,it){
+  tl.load(it.src,function(t){t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);
+    var a=t.image.width/t.image.height,w=it.w,h=w/a,b=it.kind==='laptop'?.07:it.kind==='tablet'?.08:.06,grp=new THREE.Group();
+    var dark=new THREE.MeshStandardMaterial({color:0x1b1714,roughness:.35,metalness:.2});
+    var body=new THREE.Mesh(new THREE.BoxGeometry(w+2*b,h+2*b+(it.kind==='phone'?.08:0),.06),dark);body.castShadow=true;grp.add(body);
+    var scr=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:t,roughness:.3,emissive:0xffffff,emissiveMap:t,emissiveIntensity:.18}));scr.position.z=.031;grp.add(scr);
+    if(it.kind==='laptop'){var base=new THREE.Mesh(new THREE.BoxGeometry(w*1.18,.1,.08),new THREE.MeshStandardMaterial({color:0x9a958f,metalness:.6,roughness:.35}));base.position.set(0,-h/2-b-.05,.02);base.castShadow=true;grp.add(base);}
+    if(it.cap){var cc=mk(512,72),cg=cc.getContext('2d');cg.fillStyle='rgba(0,0,0,0)';cg.clearRect(0,0,512,72);cg.fillStyle='#fff6e0';cg.font='700 50px Caveat, cursive';cg.textAlign='center';cg.fillText(it.cap,256,52);
+      var cm=new THREE.Mesh(new THREE.PlaneGeometry(1.6,1.6*72/512),new THREE.MeshBasicMaterial({map:tex(cc),transparent:true,depthWrite:false}));cm.position.set(0,-h/2-b-(it.kind==='laptop'?.32:.24),-.03);grp.add(cm);}
+    place(grp,cx,cy,it);},undefined,function(){});}
+
 /* the ARTHIS.space wall: 105 icon tiles from one sprite sheet, single-player then multiplayer */
 function addGames(cx,cy,it){
   tl.load('assets/games-atlas.jpg',function(t){
@@ -790,13 +886,13 @@ function buildString(){
   s.castShadow=true;scene.add(s);
   var g=new THREE.Group();anchors.forEach(function(a){addPin(g,a.x+2.85,a.y+2.55,0,0xc42132);});scene.add(g);}
 function build(){
-  var F={games:addGames,note:addNote,photo:addPhoto,sticker:addSticker,reel:addReel,kit:addKit,card:addCard,dymo:addDymo,marker:addMarker,ring:addRing,gh:addGhCard};
+  var F={device:addDevice,games:addGames,note:addNote,photo:addPhoto,sticker:addSticker,reel:addReel,kit:addKit,card:addCard,dymo:addDymo,marker:addMarker,ring:addRing,gh:addGhCard};
   BOARD.forEach(function(list,i){var a=anchors[i];list.forEach(function(it){F[it.k](a.x,a.y,it);});});
   buildString();}
 
 var fontsReady=document.fonts?Promise.race([Promise.all(['700 40px Caveat','500 40px Caveat','900 40px Archivo','700 20px "JetBrains Mono"'].map(function(f){return document.fonts.load(f);})),new Promise(function(r){setTimeout(r,2500);})]):Promise.resolve();
 fontsReady.then(build);
-loadMgr.onLoad=function(){setTimeout(hideLoader,150);};
+loadMgr.onLoad=function(){dirty=3;setTimeout(hideLoader,150);};loadMgr.onProgress=function(){dirty=2;};
 setTimeout(hideLoader,5000);
 
 /* hover + click */
@@ -818,10 +914,18 @@ addEventListener('click',function(e){
 
 /* camera */
 var cur=0;
-function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();measure();}
+function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);dirty=2;camera.aspect=w/h;camera.updateProjectionMatrix();measure();}
 addEventListener('resize',resize);resize();
 function ease(f){return f*f*f*(f*(f*6-15)+10);}
+var last=0,acc=0,cnt=0,lastCam=new THREE.Vector3(),watch=TIER!=='lite';
+function downgrade(){TIER='lite';SWAY=false;watch=false;renderer.shadowMap.enabled=false;sun.castShadow=false;stats.shadows=false;
+  stats.dpr=Math.min(devicePixelRatio||1,1);renderer.setPixelRatio(stats.dpr);resize();
+  scene.traverse(function(o){if(o.material)[].concat(o.material).forEach(function(m){m.needsUpdate=true;});});dirty=2;readout();}
 function frame(t){
+  requestAnimationFrame(frame);
+  var dt=last?t-last:16;last=t;
+  if(!document.hidden&&dt<500){acc+=dt;cnt++;if(cnt>=60){stats.fps=1000/(acc/cnt);
+    if(watch&&loader.classList.contains('gone')&&stats.fps<28)downgrade();acc=0;cnt=0;readout();}}
   t*=.001;
   var target=progress();cur+=(target-cur)*(reduce?1:.085);
   var i=Math.min(Math.floor(cur),N-1),f=cur-i,ax,ay,swoop=0,dir=0;
@@ -831,15 +935,17 @@ function frame(t){
   if(asp>=.9){z=Math.max(7.9,9.6/(2*FOVT*asp));ox=-2*z*FOVT*asp*.19;}
   else{z=6.1/(2*FOVT*asp);oy=-2*z*FOVT*.22;}
   z+=2.2*swoop;
-  var px=reduce?0:mouse.x*.35,py=reduce?0:-mouse.y*.25;
+  var px=SWAY?mouse.x*.35:0,py=SWAY?-mouse.y*.25:0;
   camera.position.set(ax+ox+px,ay+oy+py,z);
   camera.lookAt(ax+ox+dir*.03*swoop,ay+oy,0);
-  sun.position.set(camera.position.x-7,camera.position.y+9,7);sun.target.position.set(camera.position.x,camera.position.y,0);
-  floaters.forEach(function(g){var u=g.userData;u.lift+=((g===hot?1:0)-u.lift)*.18;
-    g.position.z=u.z0+u.lift*.22;g.scale.setScalar(1+u.lift*.04);
-    if(!reduce){g.rotation.z=u.base+Math.sin(t*.7+u.ph)*.01;g.rotation.y=Math.sin(t*.5+u.ph)*.025;}});
-  renderer.render(scene,camera);
-  requestAnimationFrame(frame);}
+  var moving=camera.position.distanceToSquared(lastCam)>1e-7;lastCam.copy(camera.position);
+  if(moving){sun.position.set(camera.position.x-7,camera.position.y+9,7);sun.target.position.set(camera.position.x,camera.position.y,0);}
+  var lifting=false;
+  floaters.forEach(function(g){var u=g.userData,goal=g===hot?1:0;
+    if(Math.abs(goal-u.lift)>.002){u.lift+=(goal-u.lift)*.18;lifting=true;g.position.z=u.z0+u.lift*.22;g.scale.setScalar(1+u.lift*.04);}
+    if(SWAY){g.rotation.z=u.base+Math.sin(t*.7+u.ph)*.01;g.rotation.y=Math.sin(t*.5+u.ph)*.025;}});
+  if(TIER==='full'||SWAY||moving||lifting||dirty>0){renderer.render(scene,camera);if(dirty>0)dirty--;}
+}
 requestAnimationFrame(frame);
 })();
 </script>
