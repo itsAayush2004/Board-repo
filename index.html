@@ -59,7 +59,8 @@ a{color:inherit}
 .gh:hover{background:var(--yellow)}
 .gh svg{width:18px;height:18px}
 .gh.mode{border:0;cursor:pointer;font-family:inherit}
-@media (max-width:520px){.gh.mode{padding:0 12px;font-size:12.5px}.brand span{display:none}}
+.brand b,.gh{white-space:nowrap}
+@media (max-width:520px){.gh.mode{padding:0 12px;font-size:12.5px}.brand span{display:none}.gh .t{display:none}.gh{padding:0 13px}.brand b{font-size:14px}.top{gap:8px}}
 @media (max-width:1180px){.nav{display:none}}
 
 /* scroll progress: red string on the right edge */
@@ -145,6 +146,7 @@ ul.ticks li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;he
 .lib a span{min-width:0;overflow-wrap:anywhere}
 .ico{width:30px;height:30px;flex-shrink:0;border-radius:7px;background-image:url(assets/games-atlas.jpg);background-size:270px 360px;box-shadow:0 1px 2px rgba(0,0,0,.25)}
 @media (max-width:420px){.lib ul{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:minmax(0,1fr)}}
+.notes p{font-size:14.5px}
 .dev{border-top:1.5px dashed var(--rule);padding-top:18px;margin-top:20px}
 .dev-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
 .seg{display:inline-flex;background:#efe6d0;border-radius:40px;padding:3px}
@@ -195,7 +197,7 @@ footer a{color:var(--yellow)}
       <a href="#space">ARTHIS.space</a><a href="#land">ARTHIS.land</a><a href="#responsive">Responsive</a><a href="#games">Engines</a><a href="#apps">Apps</a><a href="#ai">AI</a><a href="#blender">Blender</a><a href="#reels">Reels</a><a href="#contact">Contact</a>
     </nav>
     <button class="gh mode" type="button" id="mode" aria-label="Switch board view">Simple view</button>
-    <a class="gh" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a>
+    <a class="gh" href="https://github.com/itsAayush2004" target="_blank" rel="noopener" aria-label="GitHub"><svg><use href="#gh"/></svg><span class="t">GitHub</span></a>
   </div>
 </header>
 <nav class="thread" aria-label="Board progress" id="thread"></nav>
@@ -254,7 +256,7 @@ footer a{color:var(--yellow)}
       <li>Backend scaled from 1 to 10,000 daily active users</li>
       <li>Every game has its own icon, three cover posters and a written guide page</li>
     </ul>
-    <img class="fallback" src="assets/space-feed.jpg" alt="ARTHIS.space feed showing Trigger Runner game cards" loading="lazy">
+    <img class="fallback" src="assets/rs-space-desktop.jpg" alt="ARTHIS.space today: games rail, feed and ad rail" loading="lazy">
     <div class="links"><a class="btn" href="https://arthis.space" target="_blank" rel="noopener">Play on arthis.space ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.space" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
     <div class="lib">
       <h3>Single player <span>61 games</span></h3>
@@ -307,13 +309,22 @@ footer a{color:var(--yellow)}
       <div class="dev-head"><h3><img src="assets/logo-space.png" alt="" width="28" height="28">ARTHIS.space</h3>
         <div class="seg" role="group" aria-label="ARTHIS.space screen size"><button type="button" data-w="phone" aria-pressed="true">Phone</button><button type="button" data-w="tablet" aria-pressed="false">Tablet</button><button type="button" data-w="desktop" aria-pressed="false">Desktop</button></div></div>
       <figure class="shot phone"><img src="assets/rs-space-phone.jpg" alt="ARTHIS.space at phone width" data-base="assets/rs-space-" loading="lazy"><figcaption>390 px wide</figcaption></figure>
-      <!--SPACE-NOTES-->
+      <div class="notes">
+        <p data-for="phone"><b>Under 600 px:</b> one full-width portrait card (10.5 : 16), the search bar shrinks to an icon that opens a full-screen list, one rounded bottom bar, and the prompt reads “Tap to play”. Heavy 3D games ask to open in Game Screen instead of running inside the feed, and only the games either side of you stay loaded.</p>
+        <p data-for="tablet" hidden><b>600–899 px:</b> the card turns landscape (27 : 14), the header shows the full search bar from 768 px, and the bottom bar splits into a name pill and actions. Still one column: ads arrive as a pop-up after a minute instead of a side rail.</p>
+        <p data-for="desktop" hidden><b>900 px and up:</b> a collapsible games rail appears on the left, sized so its tiles stay square; an ad rail joins on the right from 1100 px, and from 1280 px the bottom bar becomes one centred bar. The hint changes to “Press space for next game”.</p>
+        <p class="meta">On low-end phones, Data Saver or 2G, games never start by themselves (a poster and a Play button instead) and the moving background drops from about 260 shapes to 140 on touch screens and 45 on lite devices.</p>
+      </div>
     </div>
     <div class="dev" data-site="land">
       <div class="dev-head"><h3><img src="assets/logo-land.png" alt="" width="28" height="28">ARTHIS.land</h3>
-        <div class="seg" role="group" aria-label="ARTHIS.land screen size"><button type="button" data-w="phone" aria-pressed="true">Phone</button><button type="button" data-w="tablet" aria-pressed="false">Tablet</button><button type="button" data-w="desktop" aria-pressed="false">Desktop</button></div></div>
-      <figure class="shot phone"><img src="assets/rs-land-phone.jpg" alt="ARTHIS.land at phone width" data-base="assets/rs-land-" loading="lazy"><figcaption>390 px wide</figcaption></figure>
-      <!--LAND-NOTES-->
+        <div class="seg" role="group" aria-label="ARTHIS.land screen size"><button type="button" data-w="phone" aria-pressed="true">Phone</button><button type="button" data-w="desktop" aria-pressed="false">Desktop</button></div></div>
+      <figure class="shot phone"><img src="assets/rs-land-about-phone.jpg" alt="ARTHIS.land About page at phone width" data-base="assets/rs-land-about-" loading="lazy"><figcaption>390 px wide</figcaption></figure>
+      <div class="notes">
+        <p data-for="phone"><b>Under 720 px:</b> the nav pill scales down and its labels turn into icons, the minimap shrinks, the compass moves to the bottom-right and the wall rests zoomed out (0.72 instead of 1.25) so more rooms fit. A room opens as a bottom sheet with a drag handle instead of a side panel. On the About page, buttons go full width and the feature grid drops to one column.</p>
+        <p data-for="desktop" hidden><b>720 px and up:</b> full text nav, wheel zoom, rooms that lift on hover and a side panel for room details. The About page runs a 4-column room grid and 3-column features, stepping down to 2 at 1024 px.</p>
+        <p class="meta">On touch screens the wall swaps to smaller tile images, draws locked rooms as plain plots and skips hover effects and blur.</p>
+      </div>
     </div>
     <div class="item" style="margin-top:22px">
       <h3>This page adapts too</h3>
@@ -777,7 +788,7 @@ var BOARD=[
    {k:'note',color:Wh,w:1.6,h:1.5,x:0,y:-3.85,r:-.9,z:.16,big:'28',bigSize:150,text:'Blender add-ons'},
    {k:'note',color:B,w:1.6,h:1.5,x:1.8,y:-3.85,r:.6,z:.16,big:'21.9K',bigSize:112,text:'YouTube subs',url:YT} ],
  [ {k:'dymo',text:'ARTHIS.SPACE',y:2.08},
-   {k:'photo',src:'assets/space-feed.jpg',w:3.3,x:-.95,y:.55,r:-.6,cap:'arthis.space, the swipe feed',url:SPACE,gh:'arthis.space'},
+   {k:'photo',src:'assets/rs-space-desktop.jpg',w:3.3,x:-.95,y:.55,r:-.6,cap:'arthis.space today: rail, feed, ads',url:SPACE,gh:'arthis.space'},
    {k:'sticker',src:'assets/logo-space.png',w:.95,x:1.95,y:1.45,r:2,z:.06,url:SPACE},
    {k:'note',color:Y,w:1.5,h:1.35,x:1.95,y:-.1,r:1,z:.14,label:'players',title:'10,000 DAU',titleSize:62,text:'from 1 to 10K a day'},
    {k:'photo',src:'assets/cover-fruit-blast.jpg',w:1.12,x:-2.0,y:-2.55,r:-.8,z:.1,cap:'Fruit Blast',pin:true,url:SPACE+'/minigame/single_player/fruit-blast'},
@@ -804,10 +815,9 @@ var BOARD=[
    {k:'device',kind:'tablet',src:'assets/rs-space-tablet.jpg',w:1.1,x:.85,y:.75,z:.08,cap:'tablet 820',url:SPACE},
    {k:'device',kind:'phone',src:'assets/rs-space-phone.jpg',w:.72,x:2.2,y:.7,z:.08,cap:'phone 390',url:SPACE},
    {k:'dymo',text:'ARTHIS.SPACE',y:-.75,h:.2},
-   {k:'device',kind:'laptop',src:'assets/rs-land-desktop.jpg',w:2.6,x:-1.3,y:-2.5,z:.08,cap:'desktop 1440',url:LAND},
-   {k:'device',kind:'tablet',src:'assets/rs-land-tablet.jpg',w:1.1,x:.85,y:-2.5,z:.08,cap:'tablet 820',url:LAND},
-   {k:'device',kind:'phone',src:'assets/rs-land-phone.jpg',w:.72,x:2.2,y:-2.55,z:.08,cap:'phone 390',url:LAND},
-   {k:'dymo',text:'ARTHIS.LAND',y:-4.0,h:.2},
+   {k:'device',kind:'laptop',src:'assets/rs-land-about-desktop.jpg',w:2.9,x:-1.1,y:-2.5,z:.08,cap:'desktop 1440',url:LAND},
+   {k:'device',kind:'phone',src:'assets/rs-land-about-phone.jpg',w:.72,x:1.75,y:-2.55,z:.08,cap:'phone 390',url:LAND},
+   {k:'dymo',text:'ARTHIS.LAND · ABOUT PAGE',y:-4.0,h:.2},
    {k:'card',w:4.6,h:1.95,x:0,y:-5.55,r:-.3,z:.1,title:'this page adapts too',lines:['desktop: full 3D, soft shadows, 2× render','tablet: lighter shadows, 1.5× render','phone: no shadows, redraws only on change'],clip:true} ],
  [ {k:'dymo',text:'GAME ENGINES & APPS',y:2.08},
    {k:'photo',src:'assets/art-03.jpg',w:3.3,x:-.95,y:.5,r:-.6,cap:'HexaBed: Unity hex terrain engine'},
@@ -917,7 +927,7 @@ var cur=0;
 function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);dirty=2;camera.aspect=w/h;camera.updateProjectionMatrix();measure();}
 addEventListener('resize',resize);resize();
 function ease(f){return f*f*f*(f*(f*6-15)+10);}
-var last=0,acc=0,cnt=0,lastCam=new THREE.Vector3(),watch=TIER!=='lite';
+var slow=0,last=0,acc=0,cnt=0,lastCam=new THREE.Vector3(),watch=TIER!=='lite';
 function downgrade(){TIER='lite';SWAY=false;watch=false;renderer.shadowMap.enabled=false;sun.castShadow=false;stats.shadows=false;
   stats.dpr=Math.min(devicePixelRatio||1,1);renderer.setPixelRatio(stats.dpr);resize();
   scene.traverse(function(o){if(o.material)[].concat(o.material).forEach(function(m){m.needsUpdate=true;});});dirty=2;readout();}
@@ -925,7 +935,7 @@ function frame(t){
   requestAnimationFrame(frame);
   var dt=last?t-last:16;last=t;
   if(!document.hidden&&dt<500){acc+=dt;cnt++;if(cnt>=60){stats.fps=1000/(acc/cnt);
-    if(watch&&loader.classList.contains('gone')&&stats.fps<28)downgrade();acc=0;cnt=0;readout();}}
+    if(watch&&loader.classList.contains('gone')){slow=stats.fps<28?slow+1:0;if(slow>=2)downgrade();}acc=0;cnt=0;readout();}}
   t*=.001;
   var target=progress();cur+=(target-cur)*(reduce?1:.085);
   var i=Math.min(Math.floor(cur),N-1),f=cur-i,ax,ay,swoop=0,dir=0;
