@@ -130,6 +130,19 @@ ul.ticks li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;he
 .mail code{font-family:var(--f-mono);font-size:14px;background:#efe6d0;padding:9px 12px;border-radius:6px;user-select:all;overflow-wrap:anywhere}
 .copied{font-family:var(--f-hand);font-size:22px;color:var(--red)}
 
+.sub{font-size:16px;margin-top:20px}
+.rooms{font-size:14.5px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.steps div{background:var(--ink);color:var(--paper);padding:10px 12px;display:flex;gap:10px;align-items:center;font-weight:800;font-size:14px;line-height:1.15}
+.steps b{display:inline-grid;place-items:center;width:26px;height:26px;flex-shrink:0;background:var(--yellow);color:var(--ink);border-radius:50%;font-size:14px}
+.lib h3{margin-top:24px;font-size:16px;justify-content:space-between}
+.lib h3 span{font-family:var(--f-mono);font-size:11px;color:var(--muted);font-weight:500}
+.lib ul{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 12px}
+.lib a{display:flex;align-items:center;gap:9px;min-height:38px;text-decoration:none;font-size:13.5px;font-weight:600;border-radius:6px;padding:2px 4px}
+.lib a:hover{background:#f1e7cf}
+.lib a span{min-width:0;overflow-wrap:anywhere}
+.ico{width:30px;height:30px;flex-shrink:0;border-radius:7px;background-image:url(assets/games-atlas.jpg);background-size:270px 360px;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+@media (max-width:420px){.lib ul{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:minmax(0,1fr)}}
 .fallback{display:none;margin-top:14px;width:100%;border:8px solid #fff;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
 .nogl .fallback{display:block}
 
@@ -163,7 +176,7 @@ footer a{color:var(--yellow)}
   <a class="brand" href="#hello"><img src="assets/dp.png" alt="" width="34" height="34"><div><b>Aayush Kumar</b><br><span>Games · AI · 3D</span></div></a>
   <div class="right">
     <nav class="nav" aria-label="Sections">
-      <a href="#web">Websites</a><a href="#games">Games</a><a href="#apps">Apps &amp; tools</a><a href="#ai">AI</a><a href="#blender">Blender</a><a href="#reels">Reels</a><a href="#contact">Contact</a>
+      <a href="#space">ARTHIS.space</a><a href="#land">ARTHIS.land</a><a href="#games">Engines</a><a href="#apps">Apps</a><a href="#ai">AI</a><a href="#blender">Blender</a><a href="#reels">Reels</a><a href="#contact">Contact</a>
     </nav>
     <a class="gh" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a>
   </div>
@@ -188,7 +201,7 @@ footer a{color:var(--yellow)}
       <a class="btn" href="#numbers">Scroll the board <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
       <a class="btn alt" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>github.com/itsAayush2004</a>
     </div>
-    <p class="meta">Tip: everything pinned on the board is clickable.</p>
+    <p class="meta">Tip: everything pinned on the board is clickable, including all 105 game tiles.</p>
   </div>
 </section>
 
@@ -213,32 +226,47 @@ footer a{color:var(--yellow)}
   </div>
 </section>
 
-<section class="sec" id="web" data-label="Websites">
-  <div class="card" style="--r:-.7deg">
-    <div class="eyebrow">Live websites</div>
-    <h2>The ARTHIS universe, on the open web.</h2>
+<section class="sec" id="space" data-label="ARTHIS.space">
+  <div class="card" style="--r:-.4deg">
+    <div class="eyebrow">Website 01 · ARTHIS.space</div>
+    <h2>105 games in one swipeable feed.</h2>
+    <p>A mini-games platform with a TikTok-style vertical feed. Open it and you are already playing; swipe up for the next game. Single-player rounds, or friends on one device.</p>
+    <ul class="ticks">
+      <li>Each card in the feed is a complete game, loaded on demand</li>
+      <li>AI agents generate gameplay logic and 3D web content from prompts via MCP tools</li>
+      <li>Backend scaled from 1 to 10,000 daily active users</li>
+      <li>Every game has its own icon, three cover posters and a written guide page</li>
+    </ul>
+    <img class="fallback" src="assets/space-feed.jpg" alt="ARTHIS.space feed showing Trigger Runner game cards" loading="lazy">
+    <div class="links"><a class="btn" href="https://arthis.space" target="_blank" rel="noopener">Play on arthis.space ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.space" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+    <div class="lib">
+      <h3>Single player <span>61 games</span></h3>
+      <ul><li><a href="https://arthis.space/minigame/single_player/drift-car" target="_blank" rel="noopener" title="A hundred seconds in a walled arena while beach balls the size of the car come at you"><i class="ico" style="background-position:-0px -0px"></i><span>Drift Car</span></a></li><li><a href="https://arthis.space/minigame/single_player/trigger-runner" target="_blank" rel="noopener" title="One button, three lives, and spikes that stay hidden until you are close enough to care"><i class="ico" style="background-position:-30px -0px"></i><span>Trigger Runner</span></a></li><li><a href="https://arthis.space/minigame/single_player/flappy-peacock" target="_blank" rel="noopener" title="The gap keeps narrowing while the pipe is still on its way towards you"><i class="ico" style="background-position:-60px -0px"></i><span>Peacock Glide</span></a></li><li><a href="https://arthis.space/minigame/single_player/3072-merge" target="_blank" rel="noopener" title="Slide a 4x4 grid, fuse matching tiles, and try to build the 3072"><i class="ico" style="background-position:-90px -0px"></i><span>3072 Merge</span></a></li><li><a href="https://arthis.space/minigame/single_player/fruit-blast" target="_blank" rel="noopener" title="Match-three against a clock, a score target and a board full of blocks that will not move"><i class="ico" style="background-position:-120px -0px"></i><span>Fruit Blast</span></a></li><li><a href="https://arthis.space/minigame/single_player/slime-shooter" target="_blank" rel="noopener" title="A bubble shooter turned upside down: you fire downward, and the stack climbs towards you"><i class="ico" style="background-position:-150px -0px"></i><span>Slime Shooter</span></a></li><li><a href="https://arthis.space/minigame/single_player/pixel-snake" target="_blank" rel="noopener" title="Fourteen by fourteen, edges that wrap, and nothing to kill you but yourself"><i class="ico" style="background-position:-180px -0px"></i><span>Pixel Snake</span></a></li><li><a href="https://arthis.space/minigame/single_player/hole-eater" target="_blank" rel="noopener" title="Thirty seconds, one city, and a hole that only grows by eating"><i class="ico" style="background-position:-210px -0px"></i><span>Hole Eater</span></a></li><li><a href="https://arthis.space/minigame/single_player/farmer" target="_blank" rel="noopener" title="A small island plot where one tap plants, waters or harvests depending on what the soil needs"><i class="ico" style="background-position:-240px -0px"></i><span>Farmer</span></a></li><li><a href="https://arthis.space/minigame/single_player/palace-vs-aliens" target="_blank" rel="noopener" title="One cannon on the palace wall, ten waves of invaders, one upgrade between each"><i class="ico" style="background-position:-0px -30px"></i><span>Palace vs Aliens</span></a></li><li><a href="https://arthis.space/minigame/single_player/ball-eater" target="_blank" rel="noopener" title="Swallow anything eight per cent smaller, and stay well clear of the spiky red one"><i class="ico" style="background-position:-30px -30px"></i><span>Ball Eater</span></a></li><li><a href="https://arthis.space/minigame/single_player/space-invaders" target="_blank" rel="noopener" title="Sixty seconds, fourteen aliens, and a walk back to the pad you landed on"><i class="ico" style="background-position:-60px -30px"></i><span>Alien Ship Assault</span></a></li><li><a href="https://arthis.space/minigame/single_player/asteroids-breaker" target="_blank" rel="noopener" title="Splitting rocks on a wrapping screen, where the smallest fragments are worth the most"><i class="ico" style="background-position:-90px -30px"></i><span>Space Rock Breaker</span></a></li><li><a href="https://arthis.space/minigame/single_player/territory-expander" target="_blank" rel="noopener" title="Ant Colony Wars: run out of your land, loop back, and claim whatever you enclosed"><i class="ico" style="background-position:-120px -30px"></i><span>Territory Expander</span></a></li><li><a href="https://arthis.space/minigame/single_player/perfect-circle" target="_blank" rel="noopener" title="One stroke, one dot, and a percentage you will not like as much as you expected"><i class="ico" style="background-position:-150px -30px"></i><span>Perfect Circle</span></a></li><li><a href="https://arthis.space/minigame/single_player/cube-solver" target="_blank" rel="noopener" title="A 3D cube you turn with your thumb, three scramble lengths and a clock if you want one"><i class="ico" style="background-position:-180px -30px"></i><span>Cube Solver</span></a></li><li><a href="https://arthis.space/minigame/single_player/sudoku" target="_blank" rel="noopener" title="A four-by-four to warm up on, and an eighteen-clue nine-by-nine when you mean it"><i class="ico" style="background-position:-210px -30px"></i><span>Sudoku</span></a></li><li><a href="https://arthis.space/minigame/single_player/emoji-drawer" target="_blank" rel="noopener" title="Sixty-three emoji, one blank square, and a percentage that updates while you draw"><i class="ico" style="background-position:-240px -30px"></i><span>Emoji Drawer</span></a></li><li><a href="https://arthis.space/minigame/single_player/memory-card" target="_blank" rel="noopener" title="Concentration with a move counter that decides your rank and a clock that mostly does not"><i class="ico" style="background-position:-0px -60px"></i><span>Memory Card</span></a></li><li><a href="https://arthis.space/minigame/single_player/word-search" target="_blank" rel="noopener" title="Themed grids drawn from thirteen word lists, against a clock and your own best time"><i class="ico" style="background-position:-30px -60px"></i><span>Word Search</span></a></li><li><a href="https://arthis.space/minigame/single_player/ball-breaker" target="_blank" rel="noopener" title="Eight columns, one more row of bricks every level, and a paddle that aims by contact"><i class="ico" style="background-position:-60px -60px"></i><span>Ball Breaker</span></a></li><li><a href="https://arthis.space/minigame/single_player/ball-runner" target="_blank" rel="noopener" title="Find the hole in the floor before the meteors find you, then find it again"><i class="ico" style="background-position:-90px -60px"></i><span>Ball Runner</span></a></li><li><a href="https://arthis.space/minigame/single_player/solitaire" target="_blank" rel="noopener" title="Klondike dealt one card at a time, with a clock that decides most of your score"><i class="ico" style="background-position:-120px -60px"></i><span>Solitaire</span></a></li><li><a href="https://arthis.space/minigame/single_player/memory-number" target="_blank" rel="noopener" title="A number flashes, then vanishes. Type it back. One mistake ends the run"><i class="ico" style="background-position:-150px -60px"></i><span>Memory Number</span></a></li><li><a href="https://arthis.space/minigame/single_player/balloon-ninja" target="_blank" rel="noopener" title="Balloons go up, you cut them on the way down, and the mines are not negotiable"><i class="ico" style="background-position:-180px -60px"></i><span>Balloon Ninja</span></a></li><li><a href="https://arthis.space/minigame/single_player/mini-clash" target="_blank" rel="noopener" title="Lay out a base, wall it in, and find out which raider type your plan forgot about"><i class="ico" style="background-position:-210px -60px"></i><span>Mini Skirmish</span></a></li><li><a href="https://arthis.space/minigame/single_player/custom-devil" target="_blank" rel="noopener" title="Twelve levels that lie to you, and a death counter that remembers"><i class="ico" style="background-position:-240px -60px"></i><span>Custom Devil</span></a></li><li><a href="https://arthis.space/minigame/single_player/atlas-globe" target="_blank" rel="noopener" title="Ten places, one spinning world, and your score measured in kilometres of error"><i class="ico" style="background-position:-0px -90px"></i><span>Atlas Globe</span></a></li><li><a href="https://arthis.space/minigame/single_player/dodge-circle-3d" target="_blank" rel="noopener" title="One ring, throwers all round the rim, and a dash with just enough invincibility to matter"><i class="ico" style="background-position:-30px -90px"></i><span>Dodge Circle 3D</span></a></li><li><a href="https://arthis.space/minigame/single_player/dodgeball" target="_blank" rel="noopener" title="One against the pack, three lives, and a catch that knocks the thrower straight out"><i class="ico" style="background-position:-60px -90px"></i><span>Dodgeball</span></a></li><li><a href="https://arthis.space/minigame/single_player/egg-guard-3d" target="_blank" rel="noopener" title="One slingshot, three eggs in a nest, and pig carts coming down the lane in fives"><i class="ico" style="background-position:-90px -90px"></i><span>Egg Guard 3D</span></a></li><li><a href="https://arthis.space/minigame/single_player/iron-tower" target="_blank" rel="noopener" title="Seven masters, three buttons, and a guard that still leaks damage on every hit"><i class="ico" style="background-position:-120px -90px"></i><span>Iron Tower</span></a></li><li><a href="https://arthis.space/minigame/single_player/skystack" target="_blank" rel="noopener" title="Drop sliding blocks onto a growing tower and lose whatever hangs over the edge"><i class="ico" style="background-position:-150px -90px"></i><span>Sky Stack</span></a></li><li><a href="https://arthis.space/minigame/single_player/spinout" target="_blank" rel="noopener" title="One orbit, one button, and a combo that never resets until something hurts you"><i class="ico" style="background-position:-180px -90px"></i><span>Spinout</span></a></li><li><a href="https://arthis.space/minigame/single_player/sticker-siege" target="_blank" rel="noopener" title="Paper, tape and stickers — twelve waves marching down the page to your front door"><i class="ico" style="background-position:-210px -90px"></i><span>Sticker Siege</span></a></li><li><a href="https://arthis.space/minigame/single_player/voxel-peak-climb" target="_blank" rel="noopener" title="An ice axe, 250 metres of blocky mountain, and gravity that never forgets"><i class="ico" style="background-position:-240px -90px"></i><span>Voxel Peak Climb</span></a></li><li><a href="https://arthis.space/minigame/single_player/voxel-vault" target="_blank" rel="noopener" title="Twenty-four grids, one tall block, and a vault that only accepts it standing up"><i class="ico" style="background-position:-0px -120px"></i><span>Voxel Vault</span></a></li><li><a href="https://arthis.space/minigame/single_player/rooftop-rails" target="_blank" rel="noopener" title="Three lanes, three answers, and a crusher that only falls back while you stop making mistakes"><i class="ico" style="background-position:-30px -120px"></i><span>Bolt Belt</span></a></li><li><a href="https://arthis.space/minigame/single_player/pottery-wheel" target="_blank" rel="noopener" title="A lump of clay, a spinning wheel, and a shape in the corner you have to hit"><i class="ico" style="background-position:-60px -120px"></i><span>Pottery Wheel</span></a></li><li><a href="https://arthis.space/minigame/single_player/arena-strike-3d" target="_blank" rel="noopener" title="Eight waves in a closed octagon, twelve rounds to a magazine, and no reload button"><i class="ico" style="background-position:-90px -120px"></i><span>Arena Strike 3D</span></a></li><li><a href="https://arthis.space/minigame/single_player/chip-rush" target="_blank" rel="noopener" title="Twenty chips a round against five machines, and the only thing you control is when you press"><i class="ico" style="background-position:-120px -120px"></i><span>Chip Rush</span></a></li><li><a href="https://arthis.space/minigame/single_player/jetpack-dash" target="_blank" rel="noopener" title="One button, twelve hundred metres, and a sky full of things that are coral for a reason"><i class="ico" style="background-position:-150px -120px"></i><span>Jetpack Dash</span></a></li><li><a href="https://arthis.space/minigame/single_player/voxel-freerun" target="_blank" rel="noopener" title="A cube that never stops hopping, across islands that run out of tiles"><i class="ico" style="background-position:-180px -120px"></i><span>Voxel Freerun</span></a></li><li><a href="https://arthis.space/minigame/single_player/land-grab-3d" target="_blank" rel="noopener" title="Four rolling balls carving an island into coloured tiles, and every line on the ground can kill you"><i class="ico" style="background-position:-210px -120px"></i><span>Land Grab 3D</span></a></li><li><a href="https://arthis.space/minigame/single_player/number-gates" target="_blank" rel="noopener" title="Run a squad of counting cubes through the arithmetic that makes it big enough for the next wall"><i class="ico" style="background-position:-240px -120px"></i><span>Number Gates</span></a></li><li><a href="https://arthis.space/minigame/single_player/balance-scales" target="_blank" rel="noopener" title="A beam, a hidden shape and a tray of weights, with one arrangement that sits level"><i class="ico" style="background-position:-0px -150px"></i><span>Balance Scales</span></a></li><li><a href="https://arthis.space/minigame/single_player/number-forge" target="_blank" rel="noopener" title="Four ingots, one target, and every puzzle built backwards from a solution that exists"><i class="ico" style="background-position:-30px -150px"></i><span>Number Forge</span></a></li><li><a href="https://arthis.space/minigame/single_player/prime-grid" target="_blank" rel="noopener" title="Thirty numbers, one rule above them, and a wrong tap costs a shield"><i class="ico" style="background-position:-60px -150px"></i><span>Prime Grid</span></a></li><li><a href="https://arthis.space/minigame/single_player/math-cages" target="_blank" rel="noopener" title="Irregular cages, one arithmetic target each, and a grid that only has one way to fill it"><i class="ico" style="background-position:-90px -150px"></i><span>Math Cages</span></a></li><li><a href="https://arthis.space/minigame/single_player/mini-craft" target="_blank" rel="noopener" title="Mine a tiny floating island block by block and fill five ghost builds"><i class="ico" style="background-position:-120px -150px"></i><span>Craft Isle</span></a></li><li><a href="https://arthis.space/minigame/single_player/balling-ball" target="_blank" rel="noopener" title="Slide the floors under a bouncing ball and drop it through the gaps"><i class="ico" style="background-position:-150px -150px"></i><span>Balling Ball</span></a></li><li><a href="https://arthis.space/minigame/single_player/paint-hide" target="_blank" rel="noopener" title="Paint yourself to match the wall before the seeker walks past"><i class="ico" style="background-position:-180px -150px"></i><span>Paint &amp; Hide</span></a></li><li><a href="https://arthis.space/minigame/single_player/pocket-prix" target="_blank" rel="noopener" title="Palm-sized open-wheel racers, three laps round a floating island circuit"><i class="ico" style="background-position:-210px -150px"></i><span>Pocket Prix</span></a></li><li><a href="https://arthis.space/minigame/single_player/five-star-getaway" target="_blank" rel="noopener" title="Grab the cash, outrun five stars of heat, bank it in a garage"><i class="ico" style="background-position:-240px -150px"></i><span>Five Star Getaway</span></a></li><li><a href="https://arthis.space/minigame/single_player/critter-crew" target="_blank" rel="noopener" title="Eight cute animals, one cosy airship, and one of them is a sneak"><i class="ico" style="background-position:-0px -180px"></i><span>Critter Crew</span></a></li><li><a href="https://arthis.space/minigame/single_player/summer-lane" target="_blank" rel="noopener" title="A stick-figure anime boss rush to save Coral Bay&#x27;s summer festival"><i class="ico" style="background-position:-30px -180px"></i><span>Summer Lane</span></a></li><li><a href="https://arthis.space/minigame/single_player/claw-crane" target="_blank" rel="noopener" title="A candy-pink claw machine full of plush critters, and ten tokens to win them all"><i class="ico" style="background-position:-60px -180px"></i><span>Claw Crane</span></a></li><li><a href="https://arthis.space/minigame/single_player/dehla-pakad" target="_blank" rel="noopener" title="The Indian partnership card game where the whole hand is about catching the tens"><i class="ico" style="background-position:-90px -180px"></i><span>Dehla Pakad</span></a></li><li><a href="https://arthis.space/minigame/single_player/matrix-mind" target="_blank" rel="noopener" title="Fifteen picture puzzles: find the tile that completes every row of the grid"><i class="ico" style="background-position:-120px -180px"></i><span>Matrix Mind</span></a></li><li><a href="https://arthis.space/minigame/single_player/series-sense" target="_blank" rel="noopener" title="What comes next? Crack the rule behind each number series"><i class="ico" style="background-position:-150px -180px"></i><span>Series Sense</span></a></li><li><a href="https://arthis.space/minigame/single_player/fold-lab" target="_blank" rel="noopener" title="Fold nets into cubes and punch folded paper, all in your head"><i class="ico" style="background-position:-180px -180px"></i><span>Fold Lab</span></a></li></ul>
+      <h3>Multiplayer · same device <span>44 games</span></h3>
+      <ul><li><a href="https://arthis.space/minigame/multiplayer/bigger-tic-tac-toe" target="_blank" rel="noopener" title="Nine small boards inside one big one, and your square picks where your opponent plays"><i class="ico" style="background-position:-210px -180px"></i><span>Bigger Tic Tac Toe</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/table-tennis" target="_blank" rel="noopener" title="3D ping pong where the ball must bounce on your half before you can return it"><i class="ico" style="background-position:-240px -180px"></i><span>Table Tennis</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/doodle-militia" target="_blank" rel="noopener" title="A four-way jetpack deathmatch in a sketched arena: three minutes, ten kills, one fuel bar"><i class="ico" style="background-position:-0px -210px"></i><span>Doodle Militia</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/boat-tagger" target="_blank" rel="noopener" title="Ninety seconds of paper boats chasing each other round a garden pond"><i class="ico" style="background-position:-30px -210px"></i><span>Boat Tagger</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/volleyball" target="_blank" rel="noopener" title="Beach volleyball from behind your own eyes, where reading depth is most of the game"><i class="ico" style="background-position:-60px -210px"></i><span>Volleyball</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/foosball" target="_blank" rel="noopener" title="Three rods a side, one shared slider, and forty seconds on the clock"><i class="ico" style="background-position:-90px -210px"></i><span>Foosball</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/air-hockey" target="_blank" rel="noopener" title="A puck that sheds almost no speed, and nowhere on the table to hide"><i class="ico" style="background-position:-120px -210px"></i><span>Air Hockey</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/8-ball" target="_blank" rel="noopener" title="Pot the balls, add up their numbers, land on exactly 100"><i class="ico" style="background-position:-150px -210px"></i><span>Pool Rummy</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/smile-ball" target="_blank" rel="noopener" title="Two grinning blobs, one bouncy ball, and a rule that punishes goal-hanging"><i class="ico" style="background-position:-180px -210px"></i><span>Smile Ball</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/stick-fighter" target="_blank" rel="noopener" title="Two attacks, one block, sixty seconds a round, and the first to two rounds wins"><i class="ico" style="background-position:-210px -210px"></i><span>Stick Fighter</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/snake-and-ladder" target="_blank" rel="noopener" title="Ten snakes, nine ladders, and a finish line you have to hit exactly"><i class="ico" style="background-position:-240px -210px"></i><span>Snake &amp; Ladder</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/bluff-card" target="_blank" rel="noopener" title="One rank for the whole round, four cards face down at most, eight seconds to call a liar"><i class="ico" style="background-position:-0px -240px"></i><span>Bluff Card</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/housie" target="_blank" rel="noopener" title="Tambola against three computer players, with a voice calling the numbers for you"><i class="ico" style="background-position:-30px -240px"></i><span>Housie</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/ono" target="_blank" rel="noopener" title="A two-handed shedding card game: match the colour or the number, empty your hand first"><i class="ico" style="background-position:-60px -240px"></i><span>4 Colour</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/ludo" target="_blank" rel="noopener" title="Four colours, one board, and the arguments your family has been having for years"><i class="ico" style="background-position:-90px -240px"></i><span>Ludo</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/sumo-fighter" target="_blank" rel="noopener" title="Mash to build power, lean into the lock, shove them over the rope"><i class="ico" style="background-position:-120px -240px"></i><span>Sumo Fighter</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/chess" target="_blank" rel="noopener" title="Every rule of chess, and an opponent that never looks at your reply"><i class="ico" style="background-position:-150px -240px"></i><span>Chess</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/poker" target="_blank" rel="noopener" title="Pixel Derby — rank six horses first to last, then watch the race take your reasoning apart"><i class="ico" style="background-position:-180px -240px"></i><span>Pixel Derby</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/5-vs-10" target="_blank" rel="noopener" title="Draughts fought with gold five-coins against teal ten-coins, every capture forced"><i class="ico" style="background-position:-210px -240px"></i><span>5 vs 10</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/four-in-line" target="_blank" rel="noopener" title="Seven columns, six rows, and a search that would rather block you than build"><i class="ico" style="background-position:-240px -240px"></i><span>Four in Line</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/business-tycoon" target="_blank" rel="noopener" title="Twelve properties, twenty rounds, and a winner decided on net worth, not bankruptcy"><i class="ico" style="background-position:-0px -270px"></i><span>Business Tycoon</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/potato-pong" target="_blank" rel="noopener" title="Pong with a goal mouth in each end wall and a lumpy potato instead of a ball"><i class="ico" style="background-position:-30px -270px"></i><span>Potato Pong</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/zombie-fighter" target="_blank" rel="noopener" title="Drive a turreted ball around a fenced field, collect fourteen stars, outrun the crowd"><i class="ico" style="background-position:-60px -270px"></i><span>Zombie Fighter</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/truth-and-dare" target="_blank" rel="noopener" title="A spinning bottle, up to eight names and ninety-six prompts you did not have to think of"><i class="ico" style="background-position:-90px -270px"></i><span>Truth &amp; Dare</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/car-football" target="_blank" rel="noopener" title="Two cars, one ball you actually carry, and three minutes to score more than they do"><i class="ico" style="background-position:-120px -270px"></i><span>Car Football</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/slimy-guys" target="_blank" rel="noopener" title="Eight slimes, three courses, and only one of them gets through the last one"><i class="ico" style="background-position:-150px -270px"></i><span>Slimy Guys</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/ant-colony" target="_blank" rel="noopener" title="Eight ants underground, sixteen duties to finish, and one of them is not an ant"><i class="ico" style="background-position:-180px -270px"></i><span>Ant Colony</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/8-ball-pool-3d" target="_blank" rel="noopener" title="A table built to real dimensions, with the camera down at cue height where cuts get hard to read"><i class="ico" style="background-position:-210px -270px"></i><span>Pool 3D</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/fifa" target="_blank" rel="noopener" title="Five-a-side 3D football against the computer, two minutes on the clock"><i class="ico" style="background-position:-240px -270px"></i><span>Street Football</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/carrom-clash" target="_blank" rel="noopener" title="Slide the striker, pull back, release — nineteen pieces and a queen that must be covered"><i class="ico" style="background-position:-0px -300px"></i><span>Carrom Clash</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/doodle-duel" target="_blank" rel="noopener" title="Notebook artillery, three shell types, and a crosswind that resets every single turn"><i class="ico" style="background-position:-30px -300px"></i><span>Doodle Duel</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/math-duel" target="_blank" rel="noopener" title="Fifteen questions, four tiles, and a wrong tap costs you a point and your turn"><i class="ico" style="background-position:-60px -300px"></i><span>Math Duel</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/tic-tac-push" target="_blank" rel="noopener" title="A 5x5 board, two walkers, loose blocks — shove three of your mark into a line"><i class="ico" style="background-position:-90px -300px"></i><span>Tic Tac Push</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/voxel-blitz-tdm" target="_blank" rel="noopener" title="Four-on-four team deathmatch in a blocky arena, viewed from above"><i class="ico" style="background-position:-120px -300px"></i><span>Voxel Blitz TDM</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/hand-cricket" target="_blank" rel="noopener" title="Pick a number from one to six. Match the bowler and you are out. That is the entire game"><i class="ico" style="background-position:-150px -300px"></i><span>Hand Cricket</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/bike-rush-3d" target="_blank" rel="noopener" title="Two and a half kilometres of traffic, three crashes, and a rival that will not let go"><i class="ico" style="background-position:-180px -300px"></i><span>Bike Rush 3D</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/drive-mayhem" target="_blank" rel="noopener" title="Eight physics stages, two pedals, and a driver whose head you must keep off the scenery"><i class="ico" style="background-position:-210px -300px"></i><span>Drive Mayhem</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/hill-climb-rally" target="_blank" rel="noopener" title="Two pedals, a soft-sprung buggy and hills that never stop coming"><i class="ico" style="background-position:-240px -300px"></i><span>Ridge Rally</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/smash-kart-arena" target="_blank" rel="noopener" title="Weapon crates, a walled arena and three hearts each — first to eight knockouts takes it"><i class="ico" style="background-position:-0px -330px"></i><span>Bumper Kart Arena</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/tennis-3d" target="_blank" rel="noopener" title="Proper tennis on a clay court — share one screen, or play a match out against the CPU"><i class="ico" style="background-position:-30px -330px"></i><span>Tennis 3D</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/bed-wars" target="_blank" rel="noopener" title="Bridge across the sky, break their bed, then knock them off the island"><i class="ico" style="background-position:-60px -330px"></i><span>Bed Brawl</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/number-line-hop" target="_blank" rel="noopener" title="A hand of four operations, five hops, and a flag you have to land on exactly"><i class="ico" style="background-position:-90px -330px"></i><span>Number Line Hop</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/bowling-3d" target="_blank" rel="noopener" title="Roll a heavy ball down a maple lane and knock down all ten pins"><i class="ico" style="background-position:-120px -330px"></i><span>Bowling 3D</span></a></li><li><a href="https://arthis.space/minigame/multiplayer/toss-tac-toe" target="_blank" rel="noopener" title="Tic-tac-toe on a wall, where you claim a square by hitting it with a ball"><i class="ico" style="background-position:-150px -330px"></i><span>Toss Tac Toe</span></a></li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="land" data-label="ARTHIS.land">
+  <div class="card" style="--r:.4deg">
+    <div class="eyebrow">Website 02 · ARTHIS.land</div>
+    <h2>The Wall: a city of rooms you build and share.</h2>
+    <p>A handcrafted vertical city in the browser. Unity, shipped to WebGL, where every brick on the wall is a room someone built, and 2–4 people can explore a space together in real time.</p>
+    <div class="steps">
+      <div><b>1</b><span>Build your bed</span></div>
+      <div><b>2</b><span>Create your avatar</span></div>
+      <div><b>3</b><span>Edit the blocks</span></div>
+    </div>
+    <h3 class="sub">Rooms on the wall</h3>
+    <p class="rooms">My Room · Aashna Room · Bindo + Pinky Room · Dada Room · Mummy Papa Room · Kitchen · Mandir</p>
+    <ul class="ticks">
+      <li>Host a room and invite friends with a 4-digit code</li>
+      <li>Each room is a folder: a GLB build, a thumbnail and a room.json; the city lays itself out from them</li>
+    </ul>
+    <img class="fallback" src="assets/land-wall.jpg" alt="ARTHIS.land, a grid of rooms on The Wall" loading="lazy">
+    <div class="links"><a class="btn" href="https://arthis.land" target="_blank" rel="noopener">Enter arthis.land ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.land" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
     <div class="stack">
-      <div class="item">
-        <h3><img src="assets/logo-space.png" alt="" width="28" height="28">ARTHIS.space</h3>
-        <p>A mini-games platform with a TikTok-style vertical feed. Open it and you are already playing; swipe up for the next game.</p>
-        <ul class="ticks">
-          <li>Infinite feed; each card is a complete mini-game loaded on demand</li>
-          <li>AI agents generate gameplay logic and 3D web content from prompts via MCP tools</li>
-          <li>Backend scaled from 1 to 10,000 daily active users</li>
-        </ul>
-        <img class="fallback" src="assets/space-feed.jpg" alt="ARTHIS.space feed showing Trigger Runner game cards" loading="lazy">
-        <div class="links"><a class="btn" href="https://arthis.space" target="_blank" rel="noopener">arthis.space ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.space" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
-      </div>
-      <div class="item">
-        <h3><img src="assets/logo-land.png" alt="" width="28" height="28">ARTHIS.land — The Wall</h3>
-        <p>A handcrafted vertical city you climb in the browser. Unity shipped to WebGL, with 2–4 people sharing a space in real time.</p>
-        <ul class="ticks">
-          <li>40+ live rooms on the wall, from Halcyon to Xeno Garden</li>
-          <li>Host a room and invite friends with a 4-digit code</li>
-        </ul>
-        <img class="fallback" src="assets/land-wall.jpg" alt="ARTHIS.land, a grid of rooms on The Wall" loading="lazy">
-        <div class="links"><a class="btn" href="https://arthis.land" target="_blank" rel="noopener">arthis.land ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.land" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
-      </div>
       <div class="item">
         <h3>arthisland-relay</h3>
         <p>The multiplayer backend behind The Wall: TCP and WebSocket on one port, handshake and framing written from scratch, zero dependencies (Python stdlib only). Docker-ready.</p>
@@ -253,10 +281,10 @@ footer a{color:var(--yellow)}
   </div>
 </section>
 
-<section class="sec" id="games" data-label="Game apps">
-  <div class="card" style="--r:.6deg">
-    <div class="eyebrow">Games &amp; game engines</div>
-    <h2>Engines I built, then games on top.</h2>
+<section class="sec" id="games" data-label="Engines & apps">
+  <div class="card" style="--r:-.4deg">
+    <div class="eyebrow">Game engines &amp; apps</div>
+    <h2>The tools under the games.</h2>
     <div class="stack">
       <div class="item">
         <h3>HexaBed</h3>
@@ -271,18 +299,12 @@ footer a{color:var(--yellow)}
       </div>
       <div class="item">
         <h3>HexGrid Architect <span class="priv">private repo</span></h3>
-        <p>A 3D hex-grid builder in the browser: pick a foundation tile, then stack roofs and props in an orthographic side view. React Three Fiber with custom GLB hex pieces.</p>
+        <p>A 3D hex-grid builder in the browser: select ground tiles, press Build, then stack houses, towers and roofs layer by layer. React Three Fiber with custom GLB hex pieces.</p>
         <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/build-it-again-friend" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
-      </div>
-      <div class="item">
-        <h3>Panda <span class="priv">private repo</span></h3>
-        <p>A stage-by-stage story game starring a pixel panda, with video scenes between stages and an eating-panda and bye-bye-panda ending.</p>
-        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/stage-play" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
       </div>
       <div class="item">
         <h3>ARTHIS mini-games app</h3>
         <p>The ARTHIS feed as an Android app, built with Expo and React Native. Reanimated motion, Skia graphics and a strict 60fps rule.</p>
-        <p class="hand">Playable inside: Trigger Runner, Fruit Blast, Doodle Militia, Flappy Fird, 3072, Sudoku…</p>
         <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/game-reel-galaxy" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Feed prototype</a></div>
       </div>
     </div>
@@ -448,7 +470,7 @@ document.getElementById('copy').addEventListener('click',function(){
 function openUrl(u){var a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();}
 
 /* each section: the camera pans its column while the card is read, then travels */
-var SPAN=[1.1,1.6,4.6,5.6,6.2,2.6,1.9,1.6,0.8];
+var SPAN=[0.6,1.9,10.7,6.0,1.5,3.1,2.0,1.5,0.7,0.3];
 var keys=[];
 function measure(){
   var ih=innerHeight;keys=[];
@@ -584,7 +606,7 @@ function addDymo(cx,cy,it){
   var tw=g.measureText(it.text.split('').join(' ')).width;c.width=Math.ceil(tw+70);g=c.getContext('2d');
   g.fillStyle='#141414';g.fillRect(0,0,c.width,96);for(var i=0;i<500;i++){g.fillStyle='rgba(255,255,255,'+Math.random()*.05+')';g.fillRect(Math.random()*c.width,Math.random()*96,3,1);}
   g.font='900 58px Archivo, sans-serif';g.fillStyle='#f5f5f0';g.shadowColor='rgba(255,255,255,.35)';g.shadowBlur=2;g.fillText(it.text.split('').join(' '),35,68);
-  var h=.3,w=h*c.width/96,grp=new THREE.Group();
+  var h=it.h||.3,w=h*c.width/96,grp=new THREE.Group();
   var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,.02),[0,0,0,0,new THREE.MeshStandardMaterial({map:tex(c),roughness:.35}),0].map(function(x){return x||new THREE.MeshStandardMaterial({color:0x141414});}));
   m.castShadow=true;grp.add(m);it.z=it.z||.03;it.x=(it.x==null?-2.6+w/2:it.x);place(grp,cx,cy,it);}
 function addMarker(cx,cy,it){
@@ -660,79 +682,103 @@ function addGhCard(cx,cy,it){
   var grp=new THREE.Group(),w=it.w,h=w*H/W,geo=new THREE.PlaneGeometry(w,h,8,8);curl(geo,w,h,.1);
   var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(c),roughness:.6,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);addPin(grp,0,h/2-.15,.02,0xffc20e);place(grp,cx,cy,it);}
 
+var GAMES=[["drift-car","Drift Car","s"],["trigger-runner","Trigger Runner","s"],["flappy-peacock","Peacock Glide","s"],["3072-merge","3072 Merge","s"],["fruit-blast","Fruit Blast","s"],["slime-shooter","Slime Shooter","s"],["pixel-snake","Pixel Snake","s"],["hole-eater","Hole Eater","s"],["farmer","Farmer","s"],["palace-vs-aliens","Palace vs Aliens","s"],["ball-eater","Ball Eater","s"],["space-invaders","Alien Ship Assault","s"],["asteroids-breaker","Space Rock Breaker","s"],["territory-expander","Territory Expander","s"],["perfect-circle","Perfect Circle","s"],["cube-solver","Cube Solver","s"],["sudoku","Sudoku","s"],["emoji-drawer","Emoji Drawer","s"],["memory-card","Memory Card","s"],["word-search","Word Search","s"],["ball-breaker","Ball Breaker","s"],["ball-runner","Ball Runner","s"],["solitaire","Solitaire","s"],["memory-number","Memory Number","s"],["balloon-ninja","Balloon Ninja","s"],["mini-clash","Mini Skirmish","s"],["custom-devil","Custom Devil","s"],["atlas-globe","Atlas Globe","s"],["dodge-circle-3d","Dodge Circle 3D","s"],["dodgeball","Dodgeball","s"],["egg-guard-3d","Egg Guard 3D","s"],["iron-tower","Iron Tower","s"],["skystack","Sky Stack","s"],["spinout","Spinout","s"],["sticker-siege","Sticker Siege","s"],["voxel-peak-climb","Voxel Peak Climb","s"],["voxel-vault","Voxel Vault","s"],["rooftop-rails","Bolt Belt","s"],["pottery-wheel","Pottery Wheel","s"],["arena-strike-3d","Arena Strike 3D","s"],["chip-rush","Chip Rush","s"],["jetpack-dash","Jetpack Dash","s"],["voxel-freerun","Voxel Freerun","s"],["land-grab-3d","Land Grab 3D","s"],["number-gates","Number Gates","s"],["balance-scales","Balance Scales","s"],["number-forge","Number Forge","s"],["prime-grid","Prime Grid","s"],["math-cages","Math Cages","s"],["mini-craft","Craft Isle","s"],["balling-ball","Balling Ball","s"],["paint-hide","Paint & Hide","s"],["pocket-prix","Pocket Prix","s"],["five-star-getaway","Five Star Getaway","s"],["critter-crew","Critter Crew","s"],["summer-lane","Summer Lane","s"],["claw-crane","Claw Crane","s"],["dehla-pakad","Dehla Pakad","s"],["matrix-mind","Matrix Mind","s"],["series-sense","Series Sense","s"],["fold-lab","Fold Lab","s"],["bigger-tic-tac-toe","Bigger Tic Tac Toe","m"],["table-tennis","Table Tennis","m"],["doodle-militia","Doodle Militia","m"],["boat-tagger","Boat Tagger","m"],["volleyball","Volleyball","m"],["foosball","Foosball","m"],["air-hockey","Air Hockey","m"],["8-ball","Pool Rummy","m"],["smile-ball","Smile Ball","m"],["stick-fighter","Stick Fighter","m"],["snake-and-ladder","Snake & Ladder","m"],["bluff-card","Bluff Card","m"],["housie","Housie","m"],["ono","4 Colour","m"],["ludo","Ludo","m"],["sumo-fighter","Sumo Fighter","m"],["chess","Chess","m"],["poker","Pixel Derby","m"],["5-vs-10","5 vs 10","m"],["four-in-line","Four in Line","m"],["business-tycoon","Business Tycoon","m"],["potato-pong","Potato Pong","m"],["zombie-fighter","Zombie Fighter","m"],["truth-and-dare","Truth & Dare","m"],["car-football","Car Football","m"],["slimy-guys","Slimy Guys","m"],["ant-colony","Ant Colony","m"],["8-ball-pool-3d","Pool 3D","m"],["fifa","Street Football","m"],["carrom-clash","Carrom Clash","m"],["doodle-duel","Doodle Duel","m"],["math-duel","Math Duel","m"],["tic-tac-push","Tic Tac Push","m"],["voxel-blitz-tdm","Voxel Blitz TDM","m"],["hand-cricket","Hand Cricket","m"],["bike-rush-3d","Bike Rush 3D","m"],["drive-mayhem","Drive Mayhem","m"],["hill-climb-rally","Ridge Rally","m"],["smash-kart-arena","Bumper Kart Arena","m"],["tennis-3d","Tennis 3D","m"],["bed-wars","Bed Brawl","m"],["number-line-hop","Number Line Hop","m"],["bowling-3d","Bowling 3D","m"],["toss-tac-toe","Toss Tac Toe","m"]],GCOLS=9,GROWS=12,NSINGLE=61;
 var Y='#f8dc6c',P='#f5a9bb',B='#a2d4ea',G='#b9dd92',O='#f7b267',Wh='#fbf7ec';
+var YT='https://www.youtube.com/@AKverseOfficial',SPACE='https://arthis.space',LAND='https://arthis.land';
+/* every column is 5.4 wide (x -2.7..2.7): full-width rows, or two 2.5-wide cells at x = ±1.35 */
 var BOARD=[
  [ {k:'dymo',text:'HELLO, I AM AAYUSH',y:2.08},
-   {k:'photo',src:'assets/dp.png',w:1.7,x:-1.6,y:1.05,r:-6,cap:"that's me",stack:true,url:GH.slice(0,-1),tip:'Open my GitHub profile ↗'},
-   {k:'note',color:Y,w:1.9,h:1.9,x:1.55,y:1.2,r:5,z:.16,label:'hello',title:"hi, I'm Aayush",text:'I build worlds, games & the tools behind them.'},
-   {k:'photo',src:'assets/art-01.jpg',w:3.1,x:.55,y:-1.25,r:3,z:.1,cap:'Unity · Web 3D · AI · GitHub',clip:true},
-   {k:'note',color:P,w:1.45,h:1.15,x:-2.05,y:-1.2,r:-4,z:.14,label:'based in',title:'Jaipur, India',titleSize:64},
-   {k:'card',w:2.5,h:1.45,x:-1.2,y:-3.05,r:-2,z:.1,title:'NIT Jaipur · ECE',lines:['JEE Main: 98.9 %ile','JEE Advanced: AIR 8956'],chips:['B.TECH','2026']},
-   {k:'ring',x:1.9,y:-3.1},
-   {k:'marker',text:'scroll down',arrow:'down',x:1.6,y:-3.05,w:2.2,r:-4} ],
+   {k:'photo',src:'assets/dp.png',w:1.65,x:-1.8,y:.75,r:-1.2,cap:"that's me",url:GH.slice(0,-1),tip:'Open my GitHub profile ↗'},
+   {k:'note',color:Y,w:1.75,h:1.75,x:.15,y:.85,r:1,z:.14,label:'hello',title:"hi, I'm Aayush",text:'I build worlds, games & the tools behind them.',titleSize:66},
+   {k:'note',color:P,w:1.45,h:1.25,x:1.95,y:.95,r:-1,z:.14,label:'based in',title:'Jaipur, India',titleSize:62},
+   {k:'photo',src:'assets/art-01.jpg',w:3.0,x:-1.15,y:-1.55,r:.8,z:.1,cap:'Unity · Web 3D · AI · GitHub',clip:true},
+   {k:'card',w:2.05,h:1.5,x:1.65,y:-1.35,r:-.8,z:.1,title:'NIT Jaipur',lines:['B.Tech ECE · 2026','JEE Main 98.9 %ile'],chips:['AIR 8956']},
+   {k:'marker',text:'scroll down',arrow:'down',x:1.6,y:-2.75,w:2.0,r:-2} ],
  [ {k:'dymo',text:'BY THE NUMBERS',y:2.08},
-   {k:'photo',src:'assets/art-06.jpg',w:3.7,x:.1,y:.85,r:-2,cap:'counted, not estimated',pin:true},
-   {k:'note',color:Y,w:1.3,h:1.3,x:-2.0,y:-1.55,r:-6,z:.18,big:'154',bigSize:150,text:'interactive builds'},
-   {k:'note',color:O,w:1.3,h:1.3,x:-.65,y:-1.75,r:4,z:.18,big:'141K',bigSize:120,text:'lines of game code'},
-   {k:'note',color:G,w:1.3,h:1.3,x:.7,y:-1.55,r:-3,z:.18,big:'43',bigSize:150,text:'Three.js builds'},
-   {k:'note',color:P,w:1.3,h:1.3,x:2.05,y:-1.75,r:5,z:.18,big:'15',bigSize:150,text:'P2P multiplayer'},
-   {k:'note',color:Wh,w:1.3,h:1.3,x:-1.3,y:-3.25,r:3,z:.18,big:'28',bigSize:150,text:'Blender add-ons'},
-   {k:'note',color:B,w:1.3,h:1.3,x:.1,y:-3.35,r:-4,z:.18,big:'21.9K',bigSize:108,text:'YouTube subs',url:'https://www.youtube.com/@AKverseOfficial'},
-   {k:'marker',text:'measured, not guessed!',x:1.6,y:-3.2,w:2.2,r:6,under:true} ],
- [ {k:'dymo',text:'WEBSITES',y:2.08},
-   {k:'photo',src:'assets/space-feed.jpg',w:3.0,x:-.95,y:.95,r:-3,cap:'arthis.space, the swipe feed',url:'https://arthis.space',gh:'arthis.space'},
-   {k:'sticker',src:'assets/logo-space.png',w:.85,x:2.0,y:2.2,r:10,z:.06,url:'https://arthis.space'},
-   {k:'note',color:Y,w:1.5,h:1.4,x:1.85,y:.75,r:5,z:.16,label:'arthis.space',title:'10,000 DAU',titleSize:66,text:'1 → 10K daily players'},
-   {k:'marker',text:'live!',arrow:'left',x:2.1,y:-.4,w:1.6,r:-8},
-   {k:'photo',src:'assets/land-wall.jpg',w:3.1,x:.6,y:-1.75,r:2.5,z:.12,cap:'arthis.land, The Wall',url:'https://arthis.land',gh:'arthis.land'},
-   {k:'sticker',src:'assets/logo-land.png',w:1.0,x:-2.25,y:-1.0,r:-8,z:.06,url:'https://arthis.land'},
-   {k:'photo',src:'assets/land-room.jpg',w:2.1,x:-1.35,y:-3.65,r:-4,z:.1,cap:'the Akverse Room',url:'https://arthis.land',pin:true},
-   {k:'card',w:2.45,h:1.6,x:1.35,y:-3.75,r:3,z:.14,title:'arthisland-relay',lines:['TCP + WebSocket, one port','pure Python, 0 dependencies','2–4 players · 4-digit rooms'],gh:'arthisland-relay',clip:true},
-   {k:'card',w:2.7,h:1.55,x:-.4,y:-5.85,r:-2,z:.1,title:'Arthis Land Maker',lines:['11-chapter Unity tool spec','islands → rooms → furniture'],chips:['DOCS','UNITY'],url:'https://itsaayush2004.github.io/arthis-land-maker-docs/',gh:'arthis-land-maker-docs'},
-   {k:'marker',text:'I wrote the relay from scratch',x:1.45,y:-5.6,w:2.3,r:-6} ],
- [ {k:'dymo',text:'GAMES & ENGINES',y:2.08},
-   {k:'photo',src:'assets/art-03.jpg',w:3.3,x:-.3,y:.95,r:-2,cap:'HexaBed: Unity hex terrain engine'},
-   {k:'note',color:B,w:1.35,h:1.2,x:2.05,y:-.55,r:5,z:.18,label:'hexabed',text:'14 scripts\n3,705 lines C#',textSize:40},
-   {k:'photo',src:'assets/shot-hexgrid.jpg',w:2.7,x:.55,y:-2.2,r:2,z:.12,cap:'HexGrid Architect',gh:'build-it-again-friend',ph:'#2f5f8f'},
-   {k:'sticker',src:'assets/panda-sticker.png',w:1.5,x:-2.0,y:-1.6,r:-5,z:.06,gh:'stage-play'},
-   {k:'photo',src:'assets/shot-panda.jpg',w:2.5,x:-.85,y:-4.35,r:-3,z:.1,cap:'Panda, a stage story game',gh:'stage-play',ph:'#4c7a3a'},
-   {k:'note',color:G,w:1.6,h:1.5,x:1.9,y:-4.0,r:4,z:.16,label:'game app',title:'ARTHIS app',text:'Expo · Skia · 60fps',gh:'game-reel-galaxy'},
-   {k:'photo',src:'assets/space-fruit.jpg',w:1.15,x:-2.15,y:-6.55,r:-5,z:.12,cap:'Fruit Blast',url:'https://arthis.space',pin:true},
-   {k:'photo',src:'assets/space-doodle.jpg',w:1.0,x:-.75,y:-6.65,r:4,z:.12,cap:'Doodle Militia',url:'https://arthis.space',pin:true},
-   {k:'note',color:Y,w:1.9,h:1.55,x:1.3,y:-6.4,r:-3,z:.16,label:'also playable',text:'Flappy Fird · Trigger Runner · 3072 · Sudoku',textSize:42,url:'https://arthis.space'} ],
+   {k:'photo',src:'assets/art-06.jpg',w:3.6,x:0,y:.4,r:-.6,cap:'counted, not estimated',pin:true},
+   {k:'note',color:Y,w:1.6,h:1.5,x:-1.8,y:-2.1,r:-1,z:.16,big:'154',bigSize:150,text:'interactive builds'},
+   {k:'note',color:O,w:1.6,h:1.5,x:0,y:-2.1,r:.8,z:.16,big:'141K',bigSize:124,text:'lines of game code'},
+   {k:'note',color:G,w:1.6,h:1.5,x:1.8,y:-2.1,r:-.6,z:.16,big:'43',bigSize:150,text:'Three.js 3D builds'},
+   {k:'note',color:P,w:1.6,h:1.5,x:-1.8,y:-3.85,r:.7,z:.16,big:'15',bigSize:150,text:'P2P multiplayer'},
+   {k:'note',color:Wh,w:1.6,h:1.5,x:0,y:-3.85,r:-.9,z:.16,big:'28',bigSize:150,text:'Blender add-ons'},
+   {k:'note',color:B,w:1.6,h:1.5,x:1.8,y:-3.85,r:.6,z:.16,big:'21.9K',bigSize:112,text:'YouTube subs',url:YT} ],
+ [ {k:'dymo',text:'ARTHIS.SPACE',y:2.08},
+   {k:'photo',src:'assets/space-feed.jpg',w:3.3,x:-.95,y:.55,r:-.6,cap:'arthis.space, the swipe feed',url:SPACE,gh:'arthis.space'},
+   {k:'sticker',src:'assets/logo-space.png',w:.95,x:1.95,y:1.45,r:2,z:.06,url:SPACE},
+   {k:'note',color:Y,w:1.5,h:1.35,x:1.95,y:-.1,r:1,z:.14,label:'players',title:'10,000 DAU',titleSize:62,text:'from 1 to 10K a day'},
+   {k:'photo',src:'assets/cover-fruit-blast.jpg',w:1.12,x:-2.0,y:-2.55,r:-.8,z:.1,cap:'Fruit Blast',pin:true,url:SPACE+'/minigame/single_player/fruit-blast'},
+   {k:'photo',src:'assets/cover-chess.jpg',w:1.12,x:-.67,y:-2.55,r:.6,z:.1,cap:'Chess',pin:true,url:SPACE+'/minigame/multiplayer/chess'},
+   {k:'photo',src:'assets/cover-table-tennis.jpg',w:1.12,x:.67,y:-2.55,r:-.5,z:.1,cap:'Table Tennis',pin:true,url:SPACE+'/minigame/multiplayer/table-tennis'},
+   {k:'photo',src:'assets/cover-doodle-militia.jpg',w:1.12,x:2.0,y:-2.55,r:.8,z:.1,cap:'Doodle Militia',pin:true,url:SPACE+'/minigame/multiplayer/doodle-militia'},
+   {k:'dymo',text:'ALL 105 GAMES · TAP ONE TO PLAY',y:-4.45,h:.26},
+   {k:'games',y:-4.95} ],
+ [ {k:'dymo',text:'ARTHIS.LAND · THE WALL',y:2.08},
+   {k:'photo',src:'assets/land-wall.jpg',w:3.3,x:-.95,y:.55,r:-.6,cap:'arthis.land, a city of rooms',url:LAND,gh:'arthis.land'},
+   {k:'sticker',src:'assets/arthis-banner.png',w:1.45,x:1.95,y:1.45,r:2,z:.06,url:LAND},
+   {k:'note',color:G,w:1.5,h:1.35,x:1.95,y:-.1,r:1,z:.14,label:'multiplayer',title:'2–4 players',titleSize:62,text:'4-digit room codes'},
+   {k:'sticker',src:'assets/land-steps-title.png',w:2.5,x:-1.35,y:-1.85,r:-.5,z:.06,url:LAND},
+   {k:'sticker',src:'assets/land-step-1.png',w:2.4,x:-1.35,y:-2.85,r:.4,z:.06,url:LAND},
+   {k:'sticker',src:'assets/land-step-2.png',w:2.4,x:-1.35,y:-3.42,r:-.4,z:.06,url:LAND},
+   {k:'sticker',src:'assets/land-step-3.png',w:2.4,x:-1.35,y:-3.99,r:.4,z:.06,url:LAND},
+   {k:'photo',src:'assets/land-room.jpg',w:2.4,x:1.35,y:-2.55,r:.7,z:.1,cap:'the Akverse Room',url:LAND,pin:true},
+   {k:'card',w:2.5,h:2.25,x:-1.35,y:-6.0,r:-.5,z:.1,title:'Rooms on the wall',lines:['My Room · Aashna Room','Bindo + Pinky Room','Dada · Mummy Papa Room','Kitchen · Mandir'],url:LAND,clip:true},
+   {k:'photo',src:'assets/land-mobile.jpg',w:1.15,x:1.35,y:-5.75,r:.6,z:.1,cap:'on mobile',url:LAND,pin:true},
+   {k:'card',w:2.5,h:1.6,x:-1.35,y:-8.25,r:.5,z:.12,title:'arthisland-relay',lines:['TCP + WebSocket, one port','pure Python, 0 dependencies'],gh:'arthisland-relay'},
+   {k:'card',w:2.5,h:1.6,x:1.35,y:-8.25,r:-.5,z:.12,title:'Land Maker docs',lines:['11-chapter Unity tool spec','islands → rooms → props'],url:'https://itsaayush2004.github.io/arthis-land-maker-docs/',gh:'arthis-land-maker-docs'} ],
+ [ {k:'dymo',text:'GAME ENGINES & APPS',y:2.08},
+   {k:'photo',src:'assets/art-03.jpg',w:3.3,x:-.95,y:.5,r:-.6,cap:'HexaBed: Unity hex terrain engine'},
+   {k:'note',color:B,w:1.5,h:1.35,x:1.95,y:.95,r:1,z:.14,label:'hexabed',text:'14 scripts\n3,705 lines of C#',textSize:40},
+   {k:'photo',src:'assets/shot-hexgrid.jpg',w:2.5,x:-1.35,y:-2.45,r:.6,z:.1,cap:'HexGrid Architect',gh:'build-it-again-friend',ph:'#2f5f8f'},
+   {k:'note',color:G,w:2.3,h:1.75,x:1.35,y:-2.35,r:-.8,z:.14,label:'game app',title:'ARTHIS app',text:'Android · Expo · Skia · 60fps',gh:'game-reel-galaxy'} ],
  [ {k:'dymo',text:'WEB APPS & TOOLS',y:2.08},
-   {k:'sticker',src:'assets/logo-hustiq.png',w:1.4,x:1.85,y:2.4,r:6,z:.06,gh:'editease-pro'},
-   {k:'photo',src:'assets/shot-hustiq.jpg',w:3.3,x:-.35,y:.75,r:-2,cap:'Hustiq: edit video by chatting',gh:'editease-pro',ph:'#c42132'},
-   {k:'card',w:2.5,h:1.5,x:1.3,y:-1.95,r:3,z:.12,title:'Avatar Maker',lines:['presets or mix your own parts','saved to your account'],chips:['REACT','SUPABASE'],gh:'avatar-studio-maker'},
-   {k:'photo',src:'assets/shot-pomodoro.jpg',w:2.0,x:-1.55,y:-2.1,r:-4,z:.14,cap:'Work For it, a pomodoro app',gh:'daily-rest-flow',ph:'#2f8f5b'},
-   {k:'photo',src:'assets/shot-3dasset.jpg',w:2.4,x:-1.0,y:-4.4,r:2,z:.1,cap:'3D asset viewer',gh:'3d-asset',ph:'#3b82c4'},
-   {k:'photo',src:'assets/shot-atlas.jpg',w:2.4,x:1.4,y:-4.6,r:-2,z:.12,cap:'Travel Atlas, a 3D globe',url:'https://itsaayush2004.github.io/TravelDiary/',gh:'TravelAtlas',ph:'#0b3b5c'},
-   {k:'photo',src:'assets/gallery-poster.jpg',w:2.5,x:-.5,y:-6.75,r:3,z:.1,cap:'my 3D gallery portfolio',url:'https://itsaayush2004.github.io/portfolio/',gh:'portfolio'},
-   {k:'marker',text:'all built solo',arrow:'left',x:1.7,y:-6.6,w:1.9,r:-5} ],
+   {k:'photo',src:'assets/shot-hustiq.jpg',w:2.45,x:-1.35,y:.55,r:-.6,cap:'Hustiq: edit video by chat',gh:'editease-pro',ph:'#c42132'},
+   {k:'photo',src:'assets/shot-pomodoro.jpg',w:2.45,x:1.35,y:.55,r:.6,cap:'Work For it: pomodoro',gh:'daily-rest-flow',ph:'#2f8f5b'},
+   {k:'photo',src:'assets/shot-3dasset.jpg',w:2.45,x:-1.35,y:-1.95,r:.5,z:.1,cap:'3D asset viewer',gh:'3d-asset',ph:'#3b82c4'},
+   {k:'photo',src:'assets/shot-atlas.jpg',w:2.45,x:1.35,y:-1.95,r:-.5,z:.1,cap:'Travel Atlas, a 3D globe',url:'https://itsaayush2004.github.io/TravelDiary/',gh:'TravelAtlas',ph:'#0b3b5c'},
+   {k:'photo',src:'assets/gallery-poster.jpg',w:2.45,x:-1.35,y:-4.4,r:-.5,z:.1,cap:'my 3D gallery portfolio',url:'https://itsaayush2004.github.io/portfolio/',gh:'portfolio'},
+   {k:'card',w:2.45,h:1.6,x:1.35,y:-4.15,r:.5,z:.1,title:'Avatar Maker',lines:['presets or mix your own parts','saved to your account'],chips:['REACT','SUPABASE'],gh:'avatar-studio-maker'} ],
  [ {k:'dymo',text:'AI AUTOMATION',y:2.08},
-   {k:'photo',src:'assets/art-05.jpg',w:3.4,x:.1,y:.9,r:2,cap:'Clymora: systems & inference',clip:true},
-   {k:'note',color:O,w:1.9,h:1.7,x:-1.5,y:-1.55,r:-5,z:.18,label:'system 01',title:'Game Factory',text:'idea in → AI judge loop → finished game'},
-   {k:'note',color:Wh,w:1.9,h:1.7,x:1.45,y:-1.75,r:4,z:.18,label:'system 02',title:'Reel Factory',text:'script → storyboard → Blender render'},
-   {k:'card',w:2.4,h:1.5,x:-1.25,y:-3.95,r:-2,z:.12,title:'GPT-2 from scratch',lines:['transformer blocks','tokeniser + training loop'],chips:['PYTORCH']},
-   {k:'card',w:2.4,h:1.5,x:1.35,y:-4.1,r:3,z:.12,title:'23 ComfyUI flows',lines:['Flux · SDXL · Hunyuan3D','WAN VACE · LTX-2'],chips:['RAG','FASTAPI']} ],
+   {k:'photo',src:'assets/art-05.jpg',w:3.4,x:0,y:.4,r:.5,cap:'Clymora: systems & inference',clip:true},
+   {k:'note',color:O,w:2.45,h:1.55,x:-1.35,y:-2.3,r:-.7,z:.16,label:'system 01',title:'Game Factory',text:'idea in → AI judge loop → finished game',titleSize:64},
+   {k:'note',color:Wh,w:2.45,h:1.55,x:1.35,y:-2.3,r:.7,z:.16,label:'system 02',title:'Reel Factory',text:'script → storyboard → Blender render',titleSize:64},
+   {k:'card',w:2.45,h:1.5,x:-1.35,y:-4.15,r:.5,z:.12,title:'GPT-2 from scratch',lines:['transformer blocks','tokeniser + training loop']},
+   {k:'card',w:2.45,h:1.5,x:1.35,y:-4.15,r:-.5,z:.12,title:'23 ComfyUI flows',lines:['Flux · SDXL · Hunyuan3D','WAN VACE · LTX-2']} ],
  [ {k:'dymo',text:'BLENDER ADD-ONS',y:2.08},
-   {k:'photo',src:'assets/art-04.jpg',w:3.3,x:0,y:.85,r:-2,cap:'28 add-ons, 27,208 lines of Python',pin:true},
-   {k:'card',w:2.6,h:1.85,x:1.2,y:-1.85,r:3,z:.14,title:'my favourites',lines:['lipsync_pro (v5)','camera_animator_pro','arthis_auto_pose'],clip:true},
-   {k:'note',color:P,w:1.5,h:1.3,x:-1.7,y:-1.7,r:-5,z:.18,big:'28',bigSize:140,text:'add-ons, all mine'},
-   {k:'note',color:Y,w:2.1,h:1.3,x:-1.0,y:-3.6,r:2,z:.16,label:'dioramas',text:'houses, clinics, dhabas & trucks, matte low-poly',textSize:40},
-   {k:'marker',text:'no more frame-by-frame',x:1.5,y:-3.65,w:2.2,r:-5,under:true} ],
+   {k:'photo',src:'assets/art-04.jpg',w:3.4,x:0,y:.45,r:-.5,cap:'28 add-ons, 27,208 lines of Python',pin:true},
+   {k:'card',w:2.45,h:1.8,x:-1.35,y:-2.25,r:.6,z:.12,title:'favourites',lines:['lipsync_pro (v5)','camera_animator_pro','arthis_auto_pose']},
+   {k:'note',color:Y,w:2.45,h:1.8,x:1.35,y:-2.25,r:-.6,z:.14,label:'dioramas',text:'houses, clinics, dhabas & trucks, all matte low-poly',textSize:42} ],
  [ {k:'dymo',text:'REELS & YOUTUBE',y:2.08},
-   {k:'reel',bg:'#e9a23b',chip:'#ffffff',lines:['KALESHI','FAMILY'],w:1.15,x:-1.95,y:.75,r:-5,z:.1,cap:'reel 01',url:'https://www.youtube.com/@AKverseOfficial'},
-   {k:'reel',bg:'#2b62d6',chip:'#ffc20e',lines:['AAJ HUM','BANAYENGE!'],w:1.15,x:-.3,y:.95,r:4,z:.1,cap:'reel 02',url:'https://www.youtube.com/@AKverseOfficial'},
-   {k:'kit',w:2.2,x:1.7,y:1.25,r:2,z:.1,url:'https://www.youtube.com/@AKverseOfficial'},
-   {k:'note',color:P,w:1.6,h:1.25,x:1.75,y:-.75,r:-4,z:.18,label:'youtube',title:'@AKverseOfficial',titleSize:56,url:'https://www.youtube.com/@AKverseOfficial'},
-   {k:'card',w:2.7,h:1.45,x:.4,y:-2.85,r:-2,z:.12,title:'more series',lines:['Dr Lodha reels','Friends On Stand-Up · school eps'],url:'https://www.youtube.com/@AKverseOfficial',clip:true} ],
+   {k:'reel',bg:'#e9a23b',chip:'#ffffff',lines:['KALESHI','FAMILY'],w:1.1,x:-2.0,y:.6,r:-.8,z:.1,cap:'reel 01',url:YT},
+   {k:'reel',bg:'#2b62d6',chip:'#ffc20e',lines:['AAJ HUM','BANAYENGE!'],w:1.1,x:-.55,y:.6,r:.8,z:.1,cap:'reel 02',url:YT},
+   {k:'kit',w:2.2,x:1.55,y:1.0,r:.6,z:.1,url:YT},
+   {k:'note',color:P,w:2.2,h:1.0,x:1.55,y:-.55,r:-.6,z:.14,label:'channel',title:'@AKverseOfficial',titleSize:58,url:YT},
+   {k:'card',w:3.6,h:1.25,x:0,y:-2.3,r:.4,z:.12,title:'more AKverse series',lines:['Dr Lodha · Friends On Stand-Up · school eps'],url:YT} ],
  [ {k:'dymo',text:'SAY HI',y:2.08},
-   {k:'photo',src:'assets/art-07.jpg',w:3.3,x:.3,y:.85,r:2,cap:'say hi'},
-   {k:'note',color:Y,w:2.4,h:1.25,x:-1.25,y:-1.6,r:-2,z:.18,label:'email',title:'aayushkumarofficial21@gmail.com',titleSize:40},
-   {k:'gh',w:2.1,x:1.5,y:-1.75,r:3,z:.16,url:GH.slice(0,-1),tip:'Open github.com/itsAayush2004 ↗'},
-   {k:'marker',text:'open to roles from 2026',x:-.2,y:-2.85,w:2.4,r:-3,under:true} ]
+   {k:'photo',src:'assets/art-07.jpg',w:3.0,x:-1.0,y:.55,r:.5,cap:'say hi'},
+   {k:'gh',w:2.0,x:1.6,y:.85,r:-.6,z:.14,url:GH.slice(0,-1),tip:'Open github.com/itsAayush2004 ↗'},
+   {k:'note',color:Y,w:3.0,h:1.05,x:-1.0,y:-1.75,r:-.4,z:.16,label:'email',title:'aayushkumarofficial21@gmail.com',titleSize:44},
+   {k:'marker',text:'open to roles from 2026',x:1.55,y:-1.0,w:2.1,r:-2,under:true} ]
 ];
+
+/* the ARTHIS.space wall: 105 icon tiles from one sprite sheet, single-player then multiplayer */
+function addGames(cx,cy,it){
+  tl.load('assets/games-atlas.jpg',function(t){
+    t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);
+    var mat=new THREE.MeshStandardMaterial({map:t,roughness:.55}),paper=new THREE.MeshStandardMaterial({color:0xfdfbf5,roughness:.85});
+    var P_=.6,S=.52,x0=-2.4,y=it.y;
+    function block(list,offset,label,top){
+      addDymo(cx,cy,{text:label,y:top,h:.2,z:.03});
+      list.forEach(function(g,j){var k=offset+j,col=k%GCOLS,row=Math.floor(k/GCOLS);
+        var u0=col/GCOLS,u1=(col+1)/GCOLS,v1=1-row/GROWS,v0=1-(row+1)/GROWS;
+        var geo=new THREE.PlaneGeometry(S,S);geo.setAttribute('uv',new THREE.Float32BufferAttribute([u0,v1,u1,v1,u0,v0,u1,v0],2));
+        var grp=new THREE.Group(),back=new THREE.Mesh(new THREE.PlaneGeometry(S+.05,S+.05),paper);back.castShadow=true;grp.add(back);
+        var ic=new THREE.Mesh(geo,mat);ic.position.z=.004;grp.add(ic);
+        var url=SPACE+'/minigame/'+(g[2]==='s'?'single_player':'multiplayer')+'/'+g[0];
+        place(grp,cx,cy,{x:x0+(j%GCOLS)*P_,y:top-.45-Math.floor(j/GCOLS)*P_,r:(Math.random()-.5)*1.6,z:.05,url:url,tip:'Play '+g[1]+' ↗'});});
+      return top-.45-Math.ceil(list.length/GCOLS)*P_;}
+    var end=block(GAMES.slice(0,NSINGLE),0,'SINGLE PLAYER · '+NSINGLE,y);
+    block(GAMES.slice(NSINGLE),NSINGLE,'MULTIPLAYER · '+(GAMES.length-NSINGLE),end-.1);
+  });}
 
 function buildString(){
   var pts=[];
@@ -744,7 +790,7 @@ function buildString(){
   s.castShadow=true;scene.add(s);
   var g=new THREE.Group();anchors.forEach(function(a){addPin(g,a.x+2.85,a.y+2.55,0,0xc42132);});scene.add(g);}
 function build(){
-  var F={note:addNote,photo:addPhoto,sticker:addSticker,reel:addReel,kit:addKit,card:addCard,dymo:addDymo,marker:addMarker,ring:addRing,gh:addGhCard};
+  var F={games:addGames,note:addNote,photo:addPhoto,sticker:addSticker,reel:addReel,kit:addKit,card:addCard,dymo:addDymo,marker:addMarker,ring:addRing,gh:addGhCard};
   BOARD.forEach(function(list,i){var a=anchors[i];list.forEach(function(it){F[it.k](a.x,a.y,it);});});
   buildString();}
 
@@ -782,7 +828,7 @@ function frame(t){
   if(f<=.5||i===N-1){var pan=Math.min(1,f*2);ax=anchors[i].x;ay=anchors[i].y-.3-SPAN[i]*ease(pan);}
   else{var e=ease((f-.5)*2),A=anchors[i],B=anchors[i+1];ax=A.x+(B.x-A.x)*e;ay=(A.y-.3-SPAN[i])+((B.y-.3)-(A.y-.3-SPAN[i]))*e;swoop=Math.sin(Math.PI*e);dir=B.x-A.x;}
   var asp=camera.aspect,z,ox=0,oy=0;
-  if(asp>=.9){z=Math.max(7.5,9.2/(2*FOVT*asp));ox=-2*z*FOVT*asp*.215;}
+  if(asp>=.9){z=Math.max(7.9,9.6/(2*FOVT*asp));ox=-2*z*FOVT*asp*.19;}
   else{z=6.1/(2*FOVT*asp);oy=-2*z*FOVT*.22;}
   z+=2.2*swoop;
   var px=reduce?0:mouse.x*.35,py=reduce?0:-mouse.y*.25;
