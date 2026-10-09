@@ -161,6 +161,12 @@ ul.ticks li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;he
 .live dt{font-family:var(--f-mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
 .live dd{margin:2px 0 0;font-weight:800;font-size:15px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 @media (max-width:420px){.live{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.explore{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.explore a{display:flex;flex-direction:column;justify-content:center;min-height:56px;padding:9px 12px;border:1.5px solid var(--ink);text-decoration:none;border-radius:6px}
+.explore a:hover{background:var(--yellow)}
+.explore b{font-size:14.5px}.explore b::after{content:" ↗"}
+.explore span{font-size:12.5px;color:var(--muted)}
+@media (max-width:420px){.explore{grid-template-columns:minmax(0,1fr)}}
 .fallback{display:none;margin-top:14px;width:100%;border:8px solid #fff;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
 .nogl .fallback{display:block}
 
@@ -215,12 +221,11 @@ footer a{color:var(--yellow)}
       <div><b>AIR 8956</b><span>JEE Advanced</span></div>
       <div><b>2026</b><span>graduating</span></div>
     </div>
-    <img class="fallback" src="assets/art-01.jpg" alt="Aayush's pixel avatar with Unity, Web 3D, AI and GitHub stickers" loading="lazy">
     <div class="links">
-      <a class="btn" href="#numbers">Scroll the board <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
-      <a class="btn alt" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>github.com/itsAayush2004</a>
+      <a class="btn" href="#space">Explore my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <a class="btn alt" href="#more">Explore every link</a>
     </div>
-    <p class="meta">Tip: everything pinned on the board is clickable, including all 105 game tiles.</p>
+    <p class="meta">Every card pinned on the board has an Explore button. Tap a card to open it.</p>
   </div>
 </section>
 
@@ -257,7 +262,7 @@ footer a{color:var(--yellow)}
       <li>Every game has its own icon, three cover posters and a written guide page</li>
     </ul>
     <img class="fallback" src="assets/rs-space-desktop.jpg" alt="ARTHIS.space today: games rail, feed and ad rail" loading="lazy">
-    <div class="links"><a class="btn" href="https://arthis.space" target="_blank" rel="noopener">Play on arthis.space ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.space" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+    <div class="links"><a class="btn" href="https://arthis.space" target="_blank" rel="noopener">Explore arthis.space ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.space" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
     <div class="lib">
       <h3>Single player <span>61 games</span></h3>
       <ul><li><a href="https://arthis.space/minigame/single_player/drift-car" target="_blank" rel="noopener" title="A hundred seconds in a walled arena while beach balls the size of the car come at you"><i class="ico" style="background-position:-0px -0px"></i><span>Drift Car</span></a></li><li><a href="https://arthis.space/minigame/single_player/trigger-runner" target="_blank" rel="noopener" title="One button, three lives, and spikes that stay hidden until you are close enough to care"><i class="ico" style="background-position:-30px -0px"></i><span>Trigger Runner</span></a></li><li><a href="https://arthis.space/minigame/single_player/flappy-peacock" target="_blank" rel="noopener" title="The gap keeps narrowing while the pipe is still on its way towards you"><i class="ico" style="background-position:-60px -0px"></i><span>Peacock Glide</span></a></li><li><a href="https://arthis.space/minigame/single_player/3072-merge" target="_blank" rel="noopener" title="Slide a 4x4 grid, fuse matching tiles, and try to build the 3072"><i class="ico" style="background-position:-90px -0px"></i><span>3072 Merge</span></a></li><li><a href="https://arthis.space/minigame/single_player/fruit-blast" target="_blank" rel="noopener" title="Match-three against a clock, a score target and a board full of blocks that will not move"><i class="ico" style="background-position:-120px -0px"></i><span>Fruit Blast</span></a></li><li><a href="https://arthis.space/minigame/single_player/slime-shooter" target="_blank" rel="noopener" title="A bubble shooter turned upside down: you fire downward, and the stack climbs towards you"><i class="ico" style="background-position:-150px -0px"></i><span>Slime Shooter</span></a></li><li><a href="https://arthis.space/minigame/single_player/pixel-snake" target="_blank" rel="noopener" title="Fourteen by fourteen, edges that wrap, and nothing to kill you but yourself"><i class="ico" style="background-position:-180px -0px"></i><span>Pixel Snake</span></a></li><li><a href="https://arthis.space/minigame/single_player/hole-eater" target="_blank" rel="noopener" title="Thirty seconds, one city, and a hole that only grows by eating"><i class="ico" style="background-position:-210px -0px"></i><span>Hole Eater</span></a></li><li><a href="https://arthis.space/minigame/single_player/farmer" target="_blank" rel="noopener" title="A small island plot where one tap plants, waters or harvests depending on what the soil needs"><i class="ico" style="background-position:-240px -0px"></i><span>Farmer</span></a></li><li><a href="https://arthis.space/minigame/single_player/palace-vs-aliens" target="_blank" rel="noopener" title="One cannon on the palace wall, ten waves of invaders, one upgrade between each"><i class="ico" style="background-position:-0px -30px"></i><span>Palace vs Aliens</span></a></li><li><a href="https://arthis.space/minigame/single_player/ball-eater" target="_blank" rel="noopener" title="Swallow anything eight per cent smaller, and stay well clear of the spiky red one"><i class="ico" style="background-position:-30px -30px"></i><span>Ball Eater</span></a></li><li><a href="https://arthis.space/minigame/single_player/space-invaders" target="_blank" rel="noopener" title="Sixty seconds, fourteen aliens, and a walk back to the pad you landed on"><i class="ico" style="background-position:-60px -30px"></i><span>Alien Ship Assault</span></a></li><li><a href="https://arthis.space/minigame/single_player/asteroids-breaker" target="_blank" rel="noopener" title="Splitting rocks on a wrapping screen, where the smallest fragments are worth the most"><i class="ico" style="background-position:-90px -30px"></i><span>Space Rock Breaker</span></a></li><li><a href="https://arthis.space/minigame/single_player/territory-expander" target="_blank" rel="noopener" title="Ant Colony Wars: run out of your land, loop back, and claim whatever you enclosed"><i class="ico" style="background-position:-120px -30px"></i><span>Territory Expander</span></a></li><li><a href="https://arthis.space/minigame/single_player/perfect-circle" target="_blank" rel="noopener" title="One stroke, one dot, and a percentage you will not like as much as you expected"><i class="ico" style="background-position:-150px -30px"></i><span>Perfect Circle</span></a></li><li><a href="https://arthis.space/minigame/single_player/cube-solver" target="_blank" rel="noopener" title="A 3D cube you turn with your thumb, three scramble lengths and a clock if you want one"><i class="ico" style="background-position:-180px -30px"></i><span>Cube Solver</span></a></li><li><a href="https://arthis.space/minigame/single_player/sudoku" target="_blank" rel="noopener" title="A four-by-four to warm up on, and an eighteen-clue nine-by-nine when you mean it"><i class="ico" style="background-position:-210px -30px"></i><span>Sudoku</span></a></li><li><a href="https://arthis.space/minigame/single_player/emoji-drawer" target="_blank" rel="noopener" title="Sixty-three emoji, one blank square, and a percentage that updates while you draw"><i class="ico" style="background-position:-240px -30px"></i><span>Emoji Drawer</span></a></li><li><a href="https://arthis.space/minigame/single_player/memory-card" target="_blank" rel="noopener" title="Concentration with a move counter that decides your rank and a clock that mostly does not"><i class="ico" style="background-position:-0px -60px"></i><span>Memory Card</span></a></li><li><a href="https://arthis.space/minigame/single_player/word-search" target="_blank" rel="noopener" title="Themed grids drawn from thirteen word lists, against a clock and your own best time"><i class="ico" style="background-position:-30px -60px"></i><span>Word Search</span></a></li><li><a href="https://arthis.space/minigame/single_player/ball-breaker" target="_blank" rel="noopener" title="Eight columns, one more row of bricks every level, and a paddle that aims by contact"><i class="ico" style="background-position:-60px -60px"></i><span>Ball Breaker</span></a></li><li><a href="https://arthis.space/minigame/single_player/ball-runner" target="_blank" rel="noopener" title="Find the hole in the floor before the meteors find you, then find it again"><i class="ico" style="background-position:-90px -60px"></i><span>Ball Runner</span></a></li><li><a href="https://arthis.space/minigame/single_player/solitaire" target="_blank" rel="noopener" title="Klondike dealt one card at a time, with a clock that decides most of your score"><i class="ico" style="background-position:-120px -60px"></i><span>Solitaire</span></a></li><li><a href="https://arthis.space/minigame/single_player/memory-number" target="_blank" rel="noopener" title="A number flashes, then vanishes. Type it back. One mistake ends the run"><i class="ico" style="background-position:-150px -60px"></i><span>Memory Number</span></a></li><li><a href="https://arthis.space/minigame/single_player/balloon-ninja" target="_blank" rel="noopener" title="Balloons go up, you cut them on the way down, and the mines are not negotiable"><i class="ico" style="background-position:-180px -60px"></i><span>Balloon Ninja</span></a></li><li><a href="https://arthis.space/minigame/single_player/mini-clash" target="_blank" rel="noopener" title="Lay out a base, wall it in, and find out which raider type your plan forgot about"><i class="ico" style="background-position:-210px -60px"></i><span>Mini Skirmish</span></a></li><li><a href="https://arthis.space/minigame/single_player/custom-devil" target="_blank" rel="noopener" title="Twelve levels that lie to you, and a death counter that remembers"><i class="ico" style="background-position:-240px -60px"></i><span>Custom Devil</span></a></li><li><a href="https://arthis.space/minigame/single_player/atlas-globe" target="_blank" rel="noopener" title="Ten places, one spinning world, and your score measured in kilometres of error"><i class="ico" style="background-position:-0px -90px"></i><span>Atlas Globe</span></a></li><li><a href="https://arthis.space/minigame/single_player/dodge-circle-3d" target="_blank" rel="noopener" title="One ring, throwers all round the rim, and a dash with just enough invincibility to matter"><i class="ico" style="background-position:-30px -90px"></i><span>Dodge Circle 3D</span></a></li><li><a href="https://arthis.space/minigame/single_player/dodgeball" target="_blank" rel="noopener" title="One against the pack, three lives, and a catch that knocks the thrower straight out"><i class="ico" style="background-position:-60px -90px"></i><span>Dodgeball</span></a></li><li><a href="https://arthis.space/minigame/single_player/egg-guard-3d" target="_blank" rel="noopener" title="One slingshot, three eggs in a nest, and pig carts coming down the lane in fives"><i class="ico" style="background-position:-90px -90px"></i><span>Egg Guard 3D</span></a></li><li><a href="https://arthis.space/minigame/single_player/iron-tower" target="_blank" rel="noopener" title="Seven masters, three buttons, and a guard that still leaks damage on every hit"><i class="ico" style="background-position:-120px -90px"></i><span>Iron Tower</span></a></li><li><a href="https://arthis.space/minigame/single_player/skystack" target="_blank" rel="noopener" title="Drop sliding blocks onto a growing tower and lose whatever hangs over the edge"><i class="ico" style="background-position:-150px -90px"></i><span>Sky Stack</span></a></li><li><a href="https://arthis.space/minigame/single_player/spinout" target="_blank" rel="noopener" title="One orbit, one button, and a combo that never resets until something hurts you"><i class="ico" style="background-position:-180px -90px"></i><span>Spinout</span></a></li><li><a href="https://arthis.space/minigame/single_player/sticker-siege" target="_blank" rel="noopener" title="Paper, tape and stickers — twelve waves marching down the page to your front door"><i class="ico" style="background-position:-210px -90px"></i><span>Sticker Siege</span></a></li><li><a href="https://arthis.space/minigame/single_player/voxel-peak-climb" target="_blank" rel="noopener" title="An ice axe, 250 metres of blocky mountain, and gravity that never forgets"><i class="ico" style="background-position:-240px -90px"></i><span>Voxel Peak Climb</span></a></li><li><a href="https://arthis.space/minigame/single_player/voxel-vault" target="_blank" rel="noopener" title="Twenty-four grids, one tall block, and a vault that only accepts it standing up"><i class="ico" style="background-position:-0px -120px"></i><span>Voxel Vault</span></a></li><li><a href="https://arthis.space/minigame/single_player/rooftop-rails" target="_blank" rel="noopener" title="Three lanes, three answers, and a crusher that only falls back while you stop making mistakes"><i class="ico" style="background-position:-30px -120px"></i><span>Bolt Belt</span></a></li><li><a href="https://arthis.space/minigame/single_player/pottery-wheel" target="_blank" rel="noopener" title="A lump of clay, a spinning wheel, and a shape in the corner you have to hit"><i class="ico" style="background-position:-60px -120px"></i><span>Pottery Wheel</span></a></li><li><a href="https://arthis.space/minigame/single_player/arena-strike-3d" target="_blank" rel="noopener" title="Eight waves in a closed octagon, twelve rounds to a magazine, and no reload button"><i class="ico" style="background-position:-90px -120px"></i><span>Arena Strike 3D</span></a></li><li><a href="https://arthis.space/minigame/single_player/chip-rush" target="_blank" rel="noopener" title="Twenty chips a round against five machines, and the only thing you control is when you press"><i class="ico" style="background-position:-120px -120px"></i><span>Chip Rush</span></a></li><li><a href="https://arthis.space/minigame/single_player/jetpack-dash" target="_blank" rel="noopener" title="One button, twelve hundred metres, and a sky full of things that are coral for a reason"><i class="ico" style="background-position:-150px -120px"></i><span>Jetpack Dash</span></a></li><li><a href="https://arthis.space/minigame/single_player/voxel-freerun" target="_blank" rel="noopener" title="A cube that never stops hopping, across islands that run out of tiles"><i class="ico" style="background-position:-180px -120px"></i><span>Voxel Freerun</span></a></li><li><a href="https://arthis.space/minigame/single_player/land-grab-3d" target="_blank" rel="noopener" title="Four rolling balls carving an island into coloured tiles, and every line on the ground can kill you"><i class="ico" style="background-position:-210px -120px"></i><span>Land Grab 3D</span></a></li><li><a href="https://arthis.space/minigame/single_player/number-gates" target="_blank" rel="noopener" title="Run a squad of counting cubes through the arithmetic that makes it big enough for the next wall"><i class="ico" style="background-position:-240px -120px"></i><span>Number Gates</span></a></li><li><a href="https://arthis.space/minigame/single_player/balance-scales" target="_blank" rel="noopener" title="A beam, a hidden shape and a tray of weights, with one arrangement that sits level"><i class="ico" style="background-position:-0px -150px"></i><span>Balance Scales</span></a></li><li><a href="https://arthis.space/minigame/single_player/number-forge" target="_blank" rel="noopener" title="Four ingots, one target, and every puzzle built backwards from a solution that exists"><i class="ico" style="background-position:-30px -150px"></i><span>Number Forge</span></a></li><li><a href="https://arthis.space/minigame/single_player/prime-grid" target="_blank" rel="noopener" title="Thirty numbers, one rule above them, and a wrong tap costs a shield"><i class="ico" style="background-position:-60px -150px"></i><span>Prime Grid</span></a></li><li><a href="https://arthis.space/minigame/single_player/math-cages" target="_blank" rel="noopener" title="Irregular cages, one arithmetic target each, and a grid that only has one way to fill it"><i class="ico" style="background-position:-90px -150px"></i><span>Math Cages</span></a></li><li><a href="https://arthis.space/minigame/single_player/mini-craft" target="_blank" rel="noopener" title="Mine a tiny floating island block by block and fill five ghost builds"><i class="ico" style="background-position:-120px -150px"></i><span>Craft Isle</span></a></li><li><a href="https://arthis.space/minigame/single_player/balling-ball" target="_blank" rel="noopener" title="Slide the floors under a bouncing ball and drop it through the gaps"><i class="ico" style="background-position:-150px -150px"></i><span>Balling Ball</span></a></li><li><a href="https://arthis.space/minigame/single_player/paint-hide" target="_blank" rel="noopener" title="Paint yourself to match the wall before the seeker walks past"><i class="ico" style="background-position:-180px -150px"></i><span>Paint &amp; Hide</span></a></li><li><a href="https://arthis.space/minigame/single_player/pocket-prix" target="_blank" rel="noopener" title="Palm-sized open-wheel racers, three laps round a floating island circuit"><i class="ico" style="background-position:-210px -150px"></i><span>Pocket Prix</span></a></li><li><a href="https://arthis.space/minigame/single_player/five-star-getaway" target="_blank" rel="noopener" title="Grab the cash, outrun five stars of heat, bank it in a garage"><i class="ico" style="background-position:-240px -150px"></i><span>Five Star Getaway</span></a></li><li><a href="https://arthis.space/minigame/single_player/critter-crew" target="_blank" rel="noopener" title="Eight cute animals, one cosy airship, and one of them is a sneak"><i class="ico" style="background-position:-0px -180px"></i><span>Critter Crew</span></a></li><li><a href="https://arthis.space/minigame/single_player/summer-lane" target="_blank" rel="noopener" title="A stick-figure anime boss rush to save Coral Bay&#x27;s summer festival"><i class="ico" style="background-position:-30px -180px"></i><span>Summer Lane</span></a></li><li><a href="https://arthis.space/minigame/single_player/claw-crane" target="_blank" rel="noopener" title="A candy-pink claw machine full of plush critters, and ten tokens to win them all"><i class="ico" style="background-position:-60px -180px"></i><span>Claw Crane</span></a></li><li><a href="https://arthis.space/minigame/single_player/dehla-pakad" target="_blank" rel="noopener" title="The Indian partnership card game where the whole hand is about catching the tens"><i class="ico" style="background-position:-90px -180px"></i><span>Dehla Pakad</span></a></li><li><a href="https://arthis.space/minigame/single_player/matrix-mind" target="_blank" rel="noopener" title="Fifteen picture puzzles: find the tile that completes every row of the grid"><i class="ico" style="background-position:-120px -180px"></i><span>Matrix Mind</span></a></li><li><a href="https://arthis.space/minigame/single_player/series-sense" target="_blank" rel="noopener" title="What comes next? Crack the rule behind each number series"><i class="ico" style="background-position:-150px -180px"></i><span>Series Sense</span></a></li><li><a href="https://arthis.space/minigame/single_player/fold-lab" target="_blank" rel="noopener" title="Fold nets into cubes and punch folded paper, all in your head"><i class="ico" style="background-position:-180px -180px"></i><span>Fold Lab</span></a></li></ul>
@@ -284,17 +289,17 @@ footer a{color:var(--yellow)}
       <li>Each room is a folder: a GLB build, a thumbnail and a room.json; the city lays itself out from them</li>
     </ul>
     <img class="fallback" src="assets/land-wall.jpg" alt="ARTHIS.land, a grid of rooms on The Wall" loading="lazy">
-    <div class="links"><a class="btn" href="https://arthis.land" target="_blank" rel="noopener">Enter arthis.land ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.land" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+    <div class="links"><a class="btn" href="https://arthis.land" target="_blank" rel="noopener">Explore arthis.land ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.land" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
     <div class="stack">
       <div class="item">
         <h3>arthisland-relay</h3>
         <p>The multiplayer backend behind The Wall: TCP and WebSocket on one port, handshake and framing written from scratch, zero dependencies (Python stdlib only). Docker-ready.</p>
-        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/arthisland-relay" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/arthisland-relay" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
       <div class="item">
         <h3>Arthis Land Maker docs</h3>
         <p>An 11-chapter design spec for a Unity editor tool that generates islands, lays out rooms and places furniture, grounded in the real ARTHIS asset library.</p>
-        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/arthis-land-maker-docs/" target="_blank" rel="noopener">Read the docs ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis-land-maker-docs" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/arthis-land-maker-docs/" target="_blank" rel="noopener">Explore the docs ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis-land-maker-docs" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
     </div>
   </div>
@@ -353,18 +358,17 @@ footer a{color:var(--yellow)}
           <li>Road generator picks straight, turn, ramp or pit pieces from neighbouring tile heights</li>
           <li>HexTileEditor inspector with 60° snapping and GLB export (25+ world meshes)</li>
         </ul>
-        <img class="fallback" src="assets/art-03.jpg" alt="HexaBed editor with a generated hex island" loading="lazy">
         <div class="tags"><span>Unity</span><span>C#</span><span>14 scripts</span><span>3,705 lines</span></div>
       </div>
       <div class="item">
         <h3>HexGrid Architect <span class="priv">private repo</span></h3>
         <p>A 3D hex-grid builder in the browser: select ground tiles, press Build, then stack houses, towers and roofs layer by layer. React Three Fiber with custom GLB hex pieces.</p>
-        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/build-it-again-friend" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/build-it-again-friend" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
       <div class="item">
         <h3>ARTHIS mini-games app</h3>
         <p>The ARTHIS feed as an Android app, built with Expo and React Native. Reanimated motion, Skia graphics and a strict 60fps rule.</p>
-        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/game-reel-galaxy" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Feed prototype</a></div>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/game-reel-galaxy" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore the prototype</a></div>
       </div>
     </div>
   </div>
@@ -376,34 +380,34 @@ footer a{color:var(--yellow)}
     <h2>Small products, each one shipped end to end.</h2>
     <div class="stack">
       <div class="item">
-        <h3><img src="assets/logo-hustiq.png" alt="" width="56" height="28" style="width:56px">Hustiq <span class="priv">private repo</span></h3>
+        <h3>Hustiq <span class="priv">private repo</span></h3>
         <p>A video editor you drive by chatting. Timeline, captions, clip effects, audio waveform and background panels, with FFmpeg running in the browser for export. Supabase accounts.</p>
-        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/editease-pro" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/editease-pro" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
       <div class="item">
         <h3>Avatar Maker <span class="priv">private repo</span></h3>
         <p>Design a custom avatar from presets or mix your own parts, saved to your account. A lighter version, Avatar Studio Lite, sits beside it.</p>
-        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/avatar-studio-maker" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/avatar-studio-maker" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
       <div class="item">
         <h3>3D asset viewer <span class="priv">private repo</span></h3>
         <p>A Three.js model viewer for ARTHIS furniture and props, with info panels, 3D slider controls and a download page.</p>
-        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/3d-asset" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/3d-asset" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
       <div class="item">
         <h3>Daily Rest Flow <span class="priv">private repo</span></h3>
         <p>“Work For it”: a Pomodoro timer with focus-time, streak and task stats, a task list with estimated pomodoros, packaged as a Windows desktop app with Electron.</p>
-        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/daily-rest-flow" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/daily-rest-flow" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
       <div class="item">
         <h3>Travel Atlas</h3>
         <p>A Three.js globe with an antique parchment texture charting 30+ places I've been and the ones I still dream of, with a logbook and a progress ring.</p>
-        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/TravelDiary/" target="_blank" rel="noopener">Spin the globe ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/TravelAtlas" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/TravelDiary/" target="_blank" rel="noopener">Explore the globe ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/TravelAtlas" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
       <div class="item">
         <h3>3D gallery portfolio</h3>
         <p>My CV as rooms you walk through: scroll moves the camera through eight toon-shaded rooms, with playable arcade cabinets on the walls.</p>
-        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/portfolio/" target="_blank" rel="noopener">Walk through ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/portfolio" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/portfolio/" target="_blank" rel="noopener">Explore the gallery ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/portfolio" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Explore on GitHub</a></div>
       </div>
     </div>
   </div>
@@ -431,7 +435,6 @@ footer a{color:var(--yellow)}
           <li>Async FastAPI inference endpoints for low-latency workloads</li>
           <li>23 ComfyUI workflows: Flux, SDXL, Hunyuan3D, WAN VACE, LTX-2, VibeVoice</li>
         </ul>
-        <img class="fallback" src="assets/art-05.jpg" alt="Systems and Inference poster" loading="lazy">
         <div class="tags"><span>FastAPI</span><span>RAG</span><span>MCP</span><span>ComfyUI</span><span>n8n</span></div>
       </div>
     </div>
@@ -449,7 +452,6 @@ footer a{color:var(--yellow)}
       <li><b>quick_bone_animator / arthis_auto_pose</b>: drag-based IK rigging and auto-posing</li>
       <li><b>asset_spawner_pro</b>, <b>one_click_render_setup</b>, <b>smart_pose_interpolate</b></li>
     </ul>
-    <img class="fallback" src="assets/art-04.jpg" alt="Blender logo next to Aayush's pixel avatar" loading="lazy">
     <p class="hand">Plus low-poly Indian dioramas: houses, clinics, dhabas, trucks, all matte and chunky.</p>
     <div class="tags"><span>Blender Python API</span><span>27,208 lines</span><span>GLB / FBX</span></div>
   </div>
@@ -479,7 +481,7 @@ footer a{color:var(--yellow)}
             <div><div class="thumb t3"><b>DR LODHA</b></div><small>Dr Lodha reels</small></div>
           </div>
         </div>
-        <div class="links"><a class="btn" href="https://www.youtube.com/@AKverseOfficial" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>
+        <div class="links"><a class="btn" href="https://www.youtube.com/@AKverseOfficial" target="_blank" rel="noopener">Explore the channel ↗</a></div>
       </div>
     </div>
   </div>
@@ -492,13 +494,23 @@ footer a{color:var(--yellow)}
     <p>Game development, graphics and AI engineering roles from 2026, or a collab on the channel.</p>
     <div class="mail"><code id="email">aayushkumarofficial21@gmail.com</code><button class="btn" type="button" id="copy">Copy email</button><span class="copied" id="copied" aria-live="polite"></span></div>
     <p class="meta">Channel &amp; business: akversebusiness@gmail.com</p>
-    <img class="fallback" src="assets/art-07.jpg" alt="Mail me" loading="lazy">
     <div class="links">
       <a class="btn" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a>
       <a class="btn alt" href="https://www.youtube.com/@AKverseOfficial" target="_blank" rel="noopener">YouTube</a>
       <a class="btn alt" href="https://arthis.space" target="_blank" rel="noopener">arthis.space</a>
       <a class="btn alt" href="https://arthis.land" target="_blank" rel="noopener">arthis.land</a>
     </div>
+<h3 class="sub" id="more">Explore more</h3>
+    <ul class="explore">
+      <li><a href="https://arthis.space" target="_blank" rel="noopener"><b>ARTHIS.space</b><span>105 mini-games in a swipe feed</span></a></li>
+      <li><a href="https://arthis.land" target="_blank" rel="noopener"><b>ARTHIS.land</b><span>The Wall, a city of rooms</span></a></li>
+      <li><a href="https://www.youtube.com/@AKverseOfficial" target="_blank" rel="noopener"><b>AKverse on YouTube</b><span>Kaleshi Family, Diorama Builds</span></a></li>
+      <li><a href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><b>GitHub</b><span>@itsAayush2004 · every repo</span></a></li>
+      <li><a href="https://itsaayush2004.github.io/TravelDiary/" target="_blank" rel="noopener"><b>Travel Atlas</b><span>3D globe of places I’ve been</span></a></li>
+      <li><a href="https://itsaayush2004.github.io/portfolio/" target="_blank" rel="noopener"><b>3D gallery portfolio</b><span>my CV as rooms you walk through</span></a></li>
+      <li><a href="https://itsaayush2004.github.io/arthis-land-maker-docs/" target="_blank" rel="noopener"><b>Arthis Land Maker docs</b><span>the Unity tool spec</span></a></li>
+      <li><a href="https://github.com/itsAayush2004/arthisland-relay" target="_blank" rel="noopener"><b>arthisland-relay</b><span>the multiplayer relay source</span></a></li>
+    </ul>
   </div>
 </section>
 </main>
@@ -536,7 +548,6 @@ document.getElementById('copy').addEventListener('click',function(){
 function openUrl(u){var a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();}
 
 /* each section: the camera pans its column while the card is read, then travels */
-var SPAN=[0.6,1.9,10.7,6.0,4.2,1.5,3.1,2.0,1.5,0.7,0.3];
 var keys=[];
 function measure(){
   var ih=innerHeight;keys=[];
@@ -580,7 +591,7 @@ var canvas=document.getElementById('gl'), renderer;
 try{ if(!window.THREE) throw 0; renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:TIER!=='lite',powerPreference:TIER==='full'?'high-performance':'low-power'}); }
 catch(e){ TIER='flat';readout();document.documentElement.classList.add('nogl'); hideLoader(); return; }
 var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-var SWAY=!reduce&&TIER!=='lite';
+var SWAY=!reduce&&TIER==='full';
 stats.dpr=Math.min(devicePixelRatio||1,{full:2,mid:1.5,lite:1.25}[TIER]);renderer.setPixelRatio(stats.dpr);
 renderer.outputEncoding=THREE.sRGBEncoding;
 renderer.shadowMap.enabled=TIER!=='lite';stats.shadows=TIER!=='lite';renderer.shadowMap.type=THREE.PCFSoftShadowMap;
@@ -588,319 +599,282 @@ var scene=new THREE.Scene();scene.background=new THREE.Color(0x2e1d0f);
 var camera=new THREE.PerspectiveCamera(40,1,0.1,200);
 var FOVT=Math.tan(THREE.MathUtils.degToRad(20));
 var maxAniso=renderer.capabilities.getMaxAnisotropy();
-
-scene.add(new THREE.HemisphereLight(0xfff3df,0x6b4420,0.7));
-var sun=new THREE.DirectionalLight(0xfff0d8,0.8);
+scene.add(new THREE.HemisphereLight(0xfff3df,0x6b4420,0.72));
+var sun=new THREE.DirectionalLight(0xfff0d8,0.78);
 sun.castShadow=TIER!=='lite';var SM=TIER==='full'?2048:1024;sun.shadow.mapSize.set(SM,SM);
 var sc=sun.shadow.camera;sc.left=-10;sc.right=10;sc.top=9;sc.bottom=-9;sc.near=1;sc.far=40;sun.shadow.bias=-0.0006;sun.shadow.radius=4;
 scene.add(sun);scene.add(sun.target);
 
-var SP=12, N=secs.length, MAXS=Math.max.apply(null,SPAN);
+var SP=12,N=secs.length;
 var anchors=secs.map(function(_,i){return new THREE.Vector2(i*SP,0);});
 function tex(c){var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);return t;}
-function mk(w,h){var c=document.createElement('canvas');c.width=w;c.height=h;return c;}
+function mk(w,h){var c=document.createElement('canvas');c.width=Math.round(w);c.height=Math.round(h);return c;}
+function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+function wrap(g,text,max){var w=text.split(' '),lines=[],l='';w.forEach(function(x){var t=l?l+' '+x:x;if(g.measureText(t).width>max&&l){lines.push(l);l=x;}else l=t;});if(l)lines.push(l);return lines;}
+var GH='https://github.com/itsAayush2004/',SPACE='https://arthis.space',LAND='https://arthis.land',YT='https://www.youtube.com/@AKverseOfficial';
+var GHPATH=document.querySelector('#gh path').getAttribute('d');
+var INK='#1c1712',PAPER='#fdfbf4';
 
-/* cork + wooden frame */
-(function(){
-  var c=mk(512,512),g=c.getContext('2d');g.fillStyle='#b98551';g.fillRect(0,0,512,512);
-  for(var i=0;i<18000;i++){var x=Math.random()*512,y=Math.random()*512,r=Math.random()*1.9+.3,d=Math.random();
-    g.fillStyle=d<.6?'rgba(80,46,18,'+(Math.random()*.35+.1)+')':'rgba(255,226,180,'+(Math.random()*.22+.05)+')';
-    g.beginPath();g.arc(x,y,r,0,7);g.fill();}
-  var t=tex(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;
-  var x0=-7,x1=(N-1)*SP+7,y0=3.9,y1=-(MAXS+3.9),W=x1-x0,H=y0-y1;t.repeat.set(W/3,H/3);
-  var wall=new THREE.Mesh(new THREE.PlaneGeometry(W,H),new THREE.MeshStandardMaterial({map:t,roughness:1}));
-  wall.position.set((x0+x1)/2,(y0+y1)/2,0);wall.receiveShadow=true;scene.add(wall);
-  var wc=mk(256,64),wg=wc.getContext('2d');wg.fillStyle='#6b4423';wg.fillRect(0,0,256,64);
-  for(var k=0;k<40;k++){wg.strokeStyle='rgba('+(Math.random()<.5?'40,22,8':'150,100,60')+','+(Math.random()*.4+.1)+')';wg.lineWidth=Math.random()*2+.5;wg.beginPath();var yy=Math.random()*64;wg.moveTo(0,yy);wg.bezierCurveTo(80,yy+Math.random()*6-3,170,yy+Math.random()*6-3,256,yy+Math.random()*4-2);wg.stroke();}
-  var wt=tex(wc);wt.wrapS=THREE.RepeatWrapping;
-  var wm=function(rep){var tt=wt.clone();tt.needsUpdate=true;tt.repeat.set(rep,1);return new THREE.MeshStandardMaterial({map:tt,roughness:.75});};
-  var T=.55,D=.35;
-  [[ (x0+x1)/2,y0+T/2,W+2*T,T,true],[(x0+x1)/2,y1-T/2,W+2*T,T,true]].forEach(function(f){var m=new THREE.Mesh(new THREE.BoxGeometry(f[2],f[3],D),wm(f[2]/3));m.position.set(f[0],f[1],D/2-.05);m.castShadow=true;m.receiveShadow=true;scene.add(m);});
-  [[x0-T/2],[x1+T/2]].forEach(function(f){var m=new THREE.Mesh(new THREE.BoxGeometry(T,H,D),wm(1));m.rotation.z=0;m.position.set(f[0],(y0+y1)/2,D/2-.05);m.castShadow=true;scene.add(m);});
-})();
-
-var floaters=[], clickables=[], dirty=2;
-var pinCols=[0xc42132,0x2b62d6,0xffc20e,0x2f8f5b,0xf2f2f2];
+var floaters=[],clickables=[],dirty=2;
 var metal=new THREE.MeshStandardMaterial({color:0xc9ccd1,metalness:.85,roughness:.28});
 function addPin(group,x,y,z,col){
-  if(col==null)col=pinCols[(Math.random()*pinCols.length)|0];
   var mat=new THREE.MeshStandardMaterial({color:col,roughness:.3,metalness:.05});
-  var base=new THREE.Mesh(new THREE.CylinderGeometry(.075,.085,.05,20),mat);base.rotation.x=Math.PI/2;base.position.set(x,y,z+.03);base.castShadow=true;group.add(base);
-  var neck=new THREE.Mesh(new THREE.CylinderGeometry(.035,.05,.09,14),mat);neck.rotation.x=Math.PI/2;neck.position.set(x,y,z+.1);neck.castShadow=true;group.add(neck);
-  var head=new THREE.Mesh(new THREE.SphereGeometry(.07,18,14),mat);head.scale.z=.7;head.position.set(x,y,z+.16);head.castShadow=true;group.add(head);}
-function addClip(group,x,y,z,rot){
-  var p=[[0,-.02],[0,.44],[.06,.5],[.12,.44],[.12,.06],[.17,0],[.22,.06],[.22,.56],[.15,.63],[.07,.56],[.07,.14]];
-  var curve=new THREE.CatmullRomCurve3(p.map(function(q){return new THREE.Vector3(q[0]-.11,q[1]-.3,0);}));
-  var m=new THREE.Mesh(new THREE.TubeGeometry(curve,80,.011,6,false),metal);m.position.set(x,y,z+.02);m.rotation.z=rot||0;m.castShadow=true;group.add(m);}
-function addTape(group,x,y,z,w,rot,col){
-  var m=new THREE.Mesh(new THREE.PlaneGeometry(w||.9,.26),new THREE.MeshStandardMaterial({color:col||0xf3ead2,transparent:true,opacity:.8,roughness:.9}));
-  m.position.set(x,y,z+.012);m.rotation.z=rot==null?(Math.random()-.5)*.25:rot;group.add(m);}
-function curl(geo,w,h,amt){
-  var p=geo.attributes.position;
-  for(var i=0;i<p.count;i++){var u=p.getX(i)/w+.5,v=p.getY(i)/h+.5;
-    var a=Math.max(0,(u-.55)/.45),b=Math.max(0,(.45-v)/.45);
-    p.setZ(i,amt*a*a*b*b+.02*Math.sin(u*Math.PI));}
-  geo.computeVertexNormals();}
-function linkOf(it){return it.url||(it.gh?GH+it.gh:null);}
-function tipOf(it){if(it.tip)return it.tip;if(it.url){try{return 'Open '+new URL(it.url).host.replace('www.','')+' ↗';}catch(e){}}if(it.gh)return 'Open '+it.gh+' on GitHub ↗';return '';}
+  var base=new THREE.Mesh(new THREE.CylinderGeometry(.07,.08,.05,20),mat);base.rotation.x=Math.PI/2;base.position.set(x,y,z+.03);base.castShadow=true;group.add(base);
+  var neck=new THREE.Mesh(new THREE.CylinderGeometry(.032,.046,.08,14),mat);neck.rotation.x=Math.PI/2;neck.position.set(x,y,z+.09);neck.castShadow=true;group.add(neck);
+  var head=new THREE.Mesh(new THREE.SphereGeometry(.065,18,14),mat);head.scale.z=.7;head.position.set(x,y,z+.15);head.castShadow=true;group.add(head);}
 function place(group,cx,cy,it){
-  var z=it.z||.08;group.position.set(cx+it.x,cy+it.y,z);group.rotation.z=THREE.MathUtils.degToRad(it.r||0);
-  group.userData={base:group.rotation.z,ph:Math.random()*6,z0:z,lift:0,url:linkOf(it),tip:tipOf(it)};
+  var z=it.z||.07;group.position.set(cx+it.x,cy+it.y,z);
+  group.userData={ph:Math.random()*6,z0:z,lift:0,url:it.url||(it.gh?GH+it.gh:null),tip:it.tip||''};
   floaters.push(group);if(group.userData.url)clickables.push(group);scene.add(group);dirty=2;}
-function ghTag(group,x,y,z,label){
-  var c=mk(512,112),g=c.getContext('2d');g.fillStyle='#17130f';g.beginPath();if(g.roundRect)g.roundRect(0,0,512,112,22);else g.rect(0,0,512,112);g.fill();
-  g.save();g.translate(28,22);g.scale(2.8,2.8);g.fillStyle='#ffffff';g.fill(new Path2D(GHPATH));g.restore();
-  g.fillStyle='#fff';g.font='700 40px "JetBrains Mono", monospace';var t=label;while(g.measureText(t+' ↗').width>390&&t.length>4)t=t.slice(0,-1);g.fillText(t+' ↗',110,72);
-  var w=1.15,m=new THREE.Mesh(new THREE.PlaneGeometry(w,w*112/512),new THREE.MeshStandardMaterial({map:tex(c),roughness:.5}));
-  m.position.set(x,y,z+.03);m.rotation.z=-.06;m.castShadow=true;group.add(m);}
+function hostOf(it){if(it.url&&it.url[0]==='#')return 'jump to section';if(it.url){try{return new URL(it.url).host.replace('www.','');}catch(e){}}return it.gh?'github · '+it.gh:'';}
 
-/* canvas-drawn paper */
-function wrap(g,text,max){var w=text.split(' '),lines=[],l='';w.forEach(function(x){var t=l?l+' '+x:x;if(g.measureText(t).width>max&&l){lines.push(l);l=x;}else l=t;});if(l)lines.push(l);return lines;}
-function noteTex(it){
-  var W=512,H=Math.round(512*it.h/it.w),c=mk(W,H),g=c.getContext('2d');
-  g.fillStyle=it.color;g.fillRect(0,0,W,H);
-  g.fillStyle='rgba(0,0,0,.05)';g.fillRect(0,0,W,46);
-  for(var i=0;i<600;i++){g.fillStyle='rgba(0,0,0,'+Math.random()*.035+')';g.fillRect(Math.random()*W,Math.random()*H,2,2);}
-  var gr=g.createLinearGradient(W*.5,H*.5,W,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.13)');g.fillStyle=gr;g.fillRect(0,0,W,H);
-  var ink=it.ink||'#1c1712',y=66;g.fillStyle=ink;
-  if(it.label){g.font='700 22px "JetBrains Mono", monospace';g.globalAlpha=.7;g.fillText(it.label.toUpperCase(),36,y);g.globalAlpha=1;y+=20;}
-  if(it.big){var bs=it.bigSize||130;g.font='900 '+bs+'px Archivo, sans-serif';y+=bs*.85;g.fillText(it.big,32,y);y+=10;}
-  if(it.title){var ts=it.titleSize||72;g.font='700 '+ts+'px Caveat, cursive';wrap(g,it.title,W-64).forEach(function(l){y+=ts*.92;g.fillText(l,34,y);});y+=6;}
-  if(it.text){var s=it.textSize||44;g.font='500 '+s+'px Caveat, cursive';it.text.split('\n').forEach(function(par){wrap(g,par,W-64).forEach(function(l){y+=s*.98;g.fillText(l,34,y);});});}
-  if(it.gh||it.url){g.font='700 30px Caveat, cursive';g.globalAlpha=.75;g.fillText(it.gh?'↗ open on GitHub':'↗ click to open',34,H-30);g.globalAlpha=1;}
-  return tex(c);}
-function addNote(cx,cy,it){
-  var g=new THREE.Group(),geo=new THREE.PlaneGeometry(it.w,it.h,TIER==='lite'?4:12,TIER==='lite'?4:12);curl(geo,it.w,it.h,.16);
-  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:noteTex(it),roughness:.92,side:THREE.DoubleSide}));
-  m.castShadow=true;g.add(m);addPin(g,0,it.h/2-.16,.02);place(g,cx,cy,it);}
-function addCard(cx,cy,it){
-  var W=640,H=Math.round(640*it.h/it.w),c=mk(W,H),g=c.getContext('2d');
-  g.fillStyle='#fdfbf3';g.fillRect(0,0,W,H);
-  g.strokeStyle='#9cc3e0';g.lineWidth=2;for(var y=118;y<H;y+=46){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();}
-  g.strokeStyle='#e58a8a';g.beginPath();g.moveTo(0,84);g.lineTo(W,84);g.stroke();g.beginPath();g.moveTo(52,0);g.lineTo(52,H);g.stroke();
-  g.fillStyle='#1c1712';g.font='900 42px Archivo, sans-serif';g.fillText(it.title,66,64);
-  g.font='600 38px Caveat, cursive';var yy=110;(it.lines||[]).forEach(function(l){g.fillText(l,66,yy);yy+=46;});
-  if(it.chips){var x=66;g.font='700 20px "JetBrains Mono", monospace';it.chips.forEach(function(ch){var w=g.measureText(ch).width+20;g.strokeStyle='#1c1712';g.lineWidth=3;g.strokeRect(x,H-58,w,34);g.fillText(ch,x+10,H-34);x+=w+10;});}
-  var grp=new THREE.Group(),geo=new THREE.PlaneGeometry(it.w,it.h,10,10);curl(geo,it.w,it.h,.12);
-  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(c),roughness:.9,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);
-  if(it.clip)addClip(grp,-it.w/2+.35,it.h/2,.0,.0);else addPin(grp,0,it.h/2-.14,.02);
-  if(it.gh)ghTag(grp,it.w/2-.5,-it.h/2-.08,.0,it.gh);
-  place(grp,cx,cy,it);}
-function addDymo(cx,cy,it){
-  var c=mk(1024,96),g=c.getContext('2d');g.font='900 58px Archivo, sans-serif';
-  var tw=g.measureText(it.text.split('').join(' ')).width;c.width=Math.ceil(tw+70);g=c.getContext('2d');
-  g.fillStyle='#141414';g.fillRect(0,0,c.width,96);for(var i=0;i<500;i++){g.fillStyle='rgba(255,255,255,'+Math.random()*.05+')';g.fillRect(Math.random()*c.width,Math.random()*96,3,1);}
-  g.font='900 58px Archivo, sans-serif';g.fillStyle='#f5f5f0';g.shadowColor='rgba(255,255,255,.35)';g.shadowBlur=2;g.fillText(it.text.split('').join(' '),35,68);
-  var h=it.h||.3,w=h*c.width/96,grp=new THREE.Group();
-  var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,.02),[0,0,0,0,new THREE.MeshStandardMaterial({map:tex(c),roughness:.35}),0].map(function(x){return x||new THREE.MeshStandardMaterial({color:0x141414});}));
-  m.castShadow=true;grp.add(m);it.z=it.z||.03;it.x=(it.x==null?-2.6+w/2:it.x);place(grp,cx,cy,it);}
-function addMarker(cx,cy,it){
-  var c=mk(768,192),g=c.getContext('2d');g.font='700 92px Caveat, cursive';g.fillStyle=it.color||'#fff6e0';g.globalAlpha=.92;
-  var tw=g.measureText(it.text).width;var x0=it.arrow==='left'?130:20;g.fillText(it.text,x0,120);
-  g.strokeStyle=g.fillStyle;g.lineWidth=7;g.lineCap='round';g.beginPath();
-  if(it.arrow==='left'){g.moveTo(115,95);g.quadraticCurveTo(60,70,20,110);g.moveTo(20,110);g.lineTo(52,82);g.moveTo(20,110);g.lineTo(58,122);}
-  if(it.arrow==='right'){var ax=x0+tw+15;g.moveTo(ax,90);g.quadraticCurveTo(ax+50,60,ax+95,100);g.lineTo(ax+60,90);g.moveTo(ax+95,100);g.lineTo(ax+82,64);}
-  if(it.arrow==='down'){var dx=x0+tw+30;g.moveTo(dx,40);g.quadraticCurveTo(dx+30,100,dx+10,170);g.lineTo(dx-14,140);g.moveTo(dx+10,170);g.lineTo(dx+34,146);}
-  if(it.under){g.moveTo(x0,140);g.quadraticCurveTo(x0+tw/2,150,x0+tw,134);}
-  g.stroke();
-  var w=it.w||2.4,m=new THREE.Mesh(new THREE.PlaneGeometry(w,w/4),new THREE.MeshBasicMaterial({map:tex(c),transparent:true,depthWrite:false,toneMapped:false}));
-  m.position.set(cx+it.x,cy+it.y,.006);m.rotation.z=THREE.MathUtils.degToRad(it.r||0);scene.add(m);}
-function addRing(cx,cy,it){
-  var c=mk(256,256),g=c.getContext('2d');g.strokeStyle='rgba(92,52,18,.35)';g.lineWidth=10;g.beginPath();g.arc(128,128,96,.3,6.0);g.stroke();g.lineWidth=3;g.strokeStyle='rgba(92,52,18,.25)';g.beginPath();g.arc(128,128,104,1,5.5);g.stroke();
-  var m=new THREE.Mesh(new THREE.PlaneGeometry(1.3,1.3),new THREE.MeshBasicMaterial({map:tex(c),transparent:true,depthWrite:false}));m.position.set(cx+it.x,cy+it.y,.004);scene.add(m);}
+/* cork board in a wooden frame, sized to fit every column */
+function buildBoard(MAXS){
+  var c=mk(512,512),g=c.getContext('2d');g.fillStyle='#b98551';g.fillRect(0,0,512,512);
+  for(var i=0;i<16000;i++){var d=Math.random();g.fillStyle=d<.6?'rgba(80,46,18,'+(Math.random()*.3+.08)+')':'rgba(255,226,180,'+(Math.random()*.2+.05)+')';g.beginPath();g.arc(Math.random()*512,Math.random()*512,Math.random()*1.8+.3,0,7);g.fill();}
+  var t=tex(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;
+  var x0=-7,x1=(N-1)*SP+7,y0=3.2,y1=-(MAXS+3.6),W=x1-x0,H=y0-y1;t.repeat.set(W/3,H/3);
+  var wall=new THREE.Mesh(new THREE.PlaneGeometry(W,H),new THREE.MeshStandardMaterial({map:t,roughness:1}));
+  wall.position.set((x0+x1)/2,(y0+y1)/2,0);wall.receiveShadow=true;scene.add(wall);
+  var wood=new THREE.MeshStandardMaterial({color:0x6b4423,roughness:.7});
+  [[(x0+x1)/2,y0+.27,W+1.1,.55],[(x0+x1)/2,y1-.27,W+1.1,.55],[x0-.27,(y0+y1)/2,.55,H],[x1+.27,(y0+y1)/2,.55,H]].forEach(function(f){
+    var m=new THREE.Mesh(new THREE.BoxGeometry(f[2],f[3],.35),wood);m.position.set(f[0],f[1],.12);m.castShadow=true;m.receiveShadow=true;scene.add(m);});}
 
-var loadMgr=new THREE.LoadingManager(), tl=new THREE.TextureLoader(loadMgr);
-function addPhoto(cx,cy,it){
-  tl.load(it.src,function(t){t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);buildPhoto(cx,cy,it,t,t.image.width/t.image.height);},undefined,function(){
-    var c=mk(640,400),g=c.getContext('2d');g.fillStyle=it.ph||'#2b2620';g.fillRect(0,0,640,400);g.fillStyle='#fff';g.font='900 64px Archivo, sans-serif';wrap(g,it.cap||'',560).forEach(function(l,i){g.fillText(l,40,120+i*70);});
-    buildPhoto(cx,cy,it,tex(c),1.6);});}
-function buildPhoto(cx,cy,it,t,a){
-  var w=it.w,h=w/a,m=.09,capH=it.cap?.44:m;
-  var g=new THREE.Group();
-  if(it.stack){var back=new THREE.Mesh(new THREE.PlaneGeometry(w+2*m,h+m+capH),new THREE.MeshStandardMaterial({color:0xf3efe4,roughness:.9}));back.position.set(.08,-(capH-m)/2-.05,-.02);back.rotation.z=.07;back.castShadow=true;g.add(back);}
-  var fc=mk(512,Math.round(512*(h+m+capH)/(w+2*m))),fg=fc.getContext('2d');
-  fg.fillStyle='#fdfbf5';fg.fillRect(0,0,fc.width,fc.height);
-  if(it.cap){var ps=fc.width/(w+2*m),fs=Math.round(.27*ps);fg.fillStyle='#2a221b';fg.font='700 '+fs+'px Caveat, cursive';var cap=it.cap;while(fg.measureText(cap).width>fc.width-m*ps*2&&fs>10){fs--;fg.font='700 '+fs+'px Caveat, cursive';}fg.fillText(cap,Math.round(m*ps),fc.height-Math.round(.14*ps));}
-  var frame=new THREE.Mesh(new THREE.PlaneGeometry(w+2*m,h+m+capH),new THREE.MeshStandardMaterial({map:tex(fc),roughness:.85}));
-  frame.position.y=-(capH-m)/2;frame.castShadow=true;g.add(frame);
-  var img=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:t,roughness:.5}));img.position.z=.004;g.add(img);
-  if(it.clip)addClip(g,-w/2+.25,h/2+.04,.0,0);else if(it.pin)addPin(g,0,h/2-.02,.0);else addTape(g,0,h/2+.02,0,.9,null,it.tape);
-  if(it.gh)ghTag(g,w/2-.45,-h/2-capH+.02,.0,it.gh);
-  place(g,cx,cy,it);}
-function addSticker(cx,cy,it){
-  tl.load(it.src,function(t){t.encoding=THREE.sRGBEncoding;var a=t.image.width/t.image.height;
-    var g=new THREE.Group(),m=new THREE.Mesh(new THREE.PlaneGeometry(it.w,it.w/a),new THREE.MeshStandardMaterial({map:t,transparent:true,alphaTest:.4,roughness:.6}));
-    g.add(m);place(g,cx,cy,it);});}
-function addReel(cx,cy,it){
-  var W=360,H=640,c=mk(W,H),g=c.getContext('2d');
-  g.fillStyle=it.bg;g.fillRect(0,0,W,H);
-  g.fillStyle='rgba(255,255,255,.12)';for(var i=0;i<6;i++){g.beginPath();g.moveTo(W/2,H*.42);g.arc(W/2,H*.42,520,i*1.05,i*1.05+.5);g.fill();}
-  g.font='900 50px Archivo, sans-serif';var y=H*.62;it.lines.forEach(function(l){var w=g.measureText(l).width;g.fillStyle=it.chip;g.fillRect(24,y-44,w+20,56);g.fillStyle='#1c1712';g.fillText(l,34,y);y+=62;});
-  g.fillStyle='rgba(255,255,255,.9)';g.beginPath();g.arc(W/2,H*.34,44,0,7);g.fill();g.fillStyle=it.bg;g.beginPath();g.moveTo(W/2-14,H*.34-22);g.lineTo(W/2+24,H*.34);g.lineTo(W/2-14,H*.34+22);g.fill();
-  g.fillStyle='rgba(0,0,0,.35)';g.fillRect(24,H-40,W-48,6);g.fillStyle='#fff';g.fillRect(24,H-40,(W-48)*.62,6);
-  g.font='700 22px "JetBrains Mono", monospace';g.fillStyle='#fff';g.fillText('@AKverseOfficial',24,H-58);
-  var t=tex(c),grp=new THREE.Group(),w=it.w,h=w*16/9;
-  var body=new THREE.Mesh(new THREE.BoxGeometry(w+.12,h+.24,.06),new THREE.MeshStandardMaterial({color:0x17130f,roughness:.4}));body.castShadow=true;grp.add(body);
-  var scr=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:t,roughness:.4,emissive:0xffffff,emissiveMap:t,emissiveIntensity:.25}));scr.position.z=.031;grp.add(scr);
-  if(it.cap){var cc=mk(512,96),cg=cc.getContext('2d');cg.fillStyle='#fdfbf5';cg.fillRect(0,0,512,96);cg.fillStyle='#1c1712';cg.font='700 58px Caveat, cursive';cg.textAlign='center';cg.fillText(it.cap,256,66);
-    var cm=new THREE.Mesh(new THREE.PlaneGeometry(w+.6,(w+.6)*96/512),new THREE.MeshStandardMaterial({map:tex(cc),roughness:.9}));cm.position.set(0,-h/2-.4,0);cm.rotation.z=.03;cm.castShadow=true;grp.add(cm);addPin(grp,0,-h/2-.4,0,0xc42132);}
+/* ---- art for card pictures: drawn here, so the board has no borrowed posters ---- */
+function chip(g,x,y,txt,bg,fg,size){g.font='700 '+(size||22)+'px "JetBrains Mono", monospace';var w=g.measureText(txt).width+26;g.fillStyle=bg;rr(g,x,y,w,(size||22)+20,10);g.fill();g.fillStyle=fg;g.fillText(txt,x+13,y+(size||22)+6);return w;}
+function arrow(g,x1,y1,x2,y2,col){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=5;g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();var a=Math.atan2(y2-y1,x2-x1);g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-16*Math.cos(a-.5),y2-16*Math.sin(a-.5));g.lineTo(x2-16*Math.cos(a+.5),y2-16*Math.sin(a+.5));g.fill();}
+function flow(g,x,y,w,h,steps,bg,box,fg,loop){
+  g.fillStyle=bg;g.fillRect(x,y,w,h);var n=steps.length,bw=(w-60-(n-1)*34)/n,bh=Math.min(110,h*.36),by=y+h/2-bh/2;
+  steps.forEach(function(s,i){var bx=x+30+i*(bw+34);g.fillStyle=box[i%box.length];rr(g,bx,by,bw,bh,16);g.fill();g.fillStyle=fg;g.font='800 '+Math.min(30,bw/5.2)+'px Archivo, sans-serif';g.textAlign='center';g.fillText(s,bx+bw/2,by+bh/2+10);g.textAlign='left';
+    if(i<n-1)arrow(g,bx+bw+4,by+bh/2,bx+bw+30,by+bh/2,'#f3e9d6');});
+  if(loop){var a=x+30+(n-2)*(bw+34)+bw/2,b=x+30+(n-3)*(bw+34)+bw/2;g.strokeStyle='#ffc20e';g.lineWidth=5;g.beginPath();g.moveTo(a,by+bh+8);g.bezierCurveTo(a,by+bh+70,b,by+bh+70,b,by+bh+12);g.stroke();arrow(g,b+1,by+bh+30,b,by+bh+10,'#ffc20e');
+    g.fillStyle='#ffc20e';g.font='700 34px Caveat, cursive';g.textAlign='center';g.fillText(loop,(a+b)/2,by+bh+78);g.textAlign='left';}}
+var ART={
+  skills:function(g,x,y,w,h){g.fillStyle='#17130f';g.fillRect(x,y,w,h);var L=[['Unity','#ffffff'],['C#','#a78bfa'],['Python','#ffd43b'],['Three.js','#ffffff'],['WebGL','#f87171'],['React','#61dafb'],['Blender','#f5792a'],['FastAPI','#34d399'],['RAG','#fbbf24'],['Supabase','#3ecf8e'],['ComfyUI','#c4b5fd'],['n8n','#fb7185'],['Docker','#60a5fa'],['MCP','#ffc20e']];
+    var cx=x+30,cy=y+34;L.forEach(function(s){g.font='700 30px "JetBrains Mono", monospace';var tw=g.measureText(s[0]).width+34;if(cx+tw>x+w-24){cx=x+30;cy+=66;}g.strokeStyle=s[1];g.lineWidth=3;rr(g,cx,cy,tw,50,25);g.stroke();g.fillStyle=s[1];g.fillText(s[0],cx+17,cy+35);cx+=tw+14;});},
+  hex:function(g,x,y,w,h){var sky=g.createLinearGradient(0,y,0,y+h);sky.addColorStop(0,'#bfe3f2');sky.addColorStop(1,'#e8f4f0');g.fillStyle=sky;g.fillRect(x,y,w,h);
+    var R=Math.min(w,h)/13,cx=x+w/2,cy=y+h/2+R*.6,cells=[];
+    for(var q=-4;q<=4;q++)for(var r=-4;r<=4;r++){var s=-q-r;if(Math.abs(s)>4)continue;var d=Math.max(Math.abs(q),Math.abs(r),Math.abs(s));
+      var n=Math.sin(q*1.7+r*.9)*.5+Math.cos(q*.6-r*1.3)*.5,hgt=d===4?0:Math.max(1,Math.round((3.4-d*.6+n*1.4)));cells.push({q:q,r:r,h:hgt,d:d});}
+    cells.sort(function(a,b){return (a.r+a.q/2)-(b.r+b.q/2);});
+    cells.forEach(function(c){var px=cx+R*1.5*c.q,py=cy+R*.86*(c.r+c.q/2)*1.0,top=py-c.h*R*.32;
+      var col=c.h===0?['#4aa3d8','#3a86b5']:c.h===1?['#f1d38a','#cfae63']:c.h<=3?['#7cc35a','#5a9a3f']:['#a3a3a3','#7d7d7d'];
+      function hexPath(oy){g.beginPath();for(var k=0;k<6;k++){var a=Math.PI/3*k;g.lineTo(px+R*Math.cos(a),oy+R*.58*Math.sin(a));}g.closePath();}
+      g.fillStyle=col[1];g.fillRect(px-R,top,2*R,py-top);hexPath(py);g.fill();hexPath(top);g.fillStyle=col[0];g.fill();g.strokeStyle='rgba(0,0,0,.18)';g.lineWidth=2;g.stroke();
+      if(c.h===3&&(c.q+c.r)%3===0){g.fillStyle='#2f6b2a';g.beginPath();g.moveTo(px,top-R*.9);g.lineTo(px-R*.32,top-R*.05);g.lineTo(px+R*.32,top-R*.05);g.fill();}});
+    g.fillStyle='rgba(23,19,15,.85)';rr(g,x+20,y+20,250,52,12);g.fill();g.fillStyle='#fff';g.font='700 24px "JetBrains Mono", monospace';g.fillText('160+ hex tiles',x+38,y+54);},
+  relay:function(g,x,y,w,h){g.fillStyle='#14202b';g.fillRect(x,y,w,h);var cx=x+w/2,cy=y+h/2+10;
+    g.fillStyle='#ffc20e';rr(g,cx-120,cy-46,240,92,18);g.fill();g.fillStyle=INK;g.font='900 30px Archivo, sans-serif';g.textAlign='center';g.fillText('relay',cx,cy-2);g.font='700 19px "JetBrains Mono", monospace';g.fillText('TCP + WS',cx,cy+28);
+    [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(function(p,i){var px=cx+p[0]*w*.33,py=cy+p[1]*h*.3;g.strokeStyle='#5fb3e4';g.lineWidth=4;g.setLineDash([10,8]);g.beginPath();g.moveTo(px,py);g.lineTo(cx+p[0]*120,cy+p[1]*30);g.stroke();g.setLineDash([]);
+      g.fillStyle='#e8f1f8';rr(g,px-64,py-30,128,60,14);g.fill();g.fillStyle=INK;g.font='800 24px Archivo, sans-serif';g.fillText('player '+(i+1),px,py+9);});g.textAlign='left';},
+  docs:function(g,x,y,w,h){g.fillStyle='#e9eef5';g.fillRect(x,y,w,h);for(var i=2;i>=0;i--){var px=x+w*.18+i*22,py=y+28+i*16;g.fillStyle=i?'#d6dee9':'#ffffff';g.fillRect(px,py,w*.62,h-70);}
+    var px=x+w*.18,py=y+28;g.fillStyle=INK;g.font='900 30px Archivo, sans-serif';g.fillText('Arthis Land Maker',px+28,py+52);g.font='600 22px Archivo, sans-serif';g.fillStyle='#4a4036';
+    ['01  Architecture','02  Data model','04  Land & terrain','05  Room generation','06  Furniture placement','07  Editor UI'].forEach(function(l,i){g.fillText(l,px+28,py+96+i*34);});},
+  app:function(g,x,y,w,h){g.fillStyle='#2b1a4f';g.fillRect(x,y,w,h);var pw=Math.min(h*.5,180),ph=h-36,px=x+w/2-pw/2,py=y+18;g.fillStyle='#0f0b18';rr(g,px,py,pw,ph,26);g.fill();
+    var cols=['#ffc20e','#ef4444','#22c55e','#3b82f6'];for(var i=0;i<3;i++){g.fillStyle=cols[i];rr(g,px+14,py+20+i*((ph-40)/3),pw-28,(ph-40)/3-12,14);g.fill();}
+    g.fillStyle='#fff';g.font='700 26px "JetBrains Mono", monospace';g.fillText('swipe ↑',x+w*.68,y+h*.45);g.fillText('60 fps',x+40,y+h*.45);},
+  gallery:function(g,x,y,w,h){g.fillStyle='#f4f1ea';g.fillRect(x,y,w,h);var cx=x+w/2,cy=y+h/2;for(var i=0;i<6;i++){var k=1-i*.15,rw=w*.9*k,rh=h*.9*k;g.strokeStyle='rgba(28,23,18,'+(.85-i*.12)+')';g.lineWidth=4-i*.4;g.strokeRect(cx-rw/2,cy-rh/2,rw,rh);}
+    g.fillStyle='#c42132';g.fillRect(cx-w*.08,cy-h*.12,w*.16,h*.2);g.fillStyle=INK;g.font='700 22px "JetBrains Mono", monospace';g.fillText('8 rooms · scroll to walk',x+24,y+h-22);},
+  avatar:function(g,x,y,w,h){g.fillStyle='#ede7fb';g.fillRect(x,y,w,h);var cx=x+w*.3,cy=y+h*.52;g.fillStyle='#f2c7a5';g.beginPath();g.arc(cx,cy,h*.26,0,7);g.fill();g.fillStyle='#3a2a20';g.beginPath();g.arc(cx,cy-h*.1,h*.27,Math.PI,0);g.fill();
+    g.fillStyle=INK;g.beginPath();g.arc(cx-h*.09,cy,9,0,7);g.arc(cx+h*.09,cy,9,0,7);g.fill();g.strokeStyle=INK;g.lineWidth=5;g.beginPath();g.arc(cx,cy+h*.08,h*.08,.2,Math.PI-.2);g.stroke();
+    var cs=['#f87171','#fbbf24','#34d399','#60a5fa','#a78bfa','#f472b6'];for(var i=0;i<6;i++){g.fillStyle=cs[i];rr(g,x+w*.56+(i%3)*(w*.13),y+h*.22+Math.floor(i/3)*(h*.32),w*.11,h*.26,12);g.fill();}},
+  factory:function(g,x,y,w,h){flow(g,x,y,w,h*.82,['idea','build','judge','ship'],'#2a1d10',['#f7b267','#ffc20e','#f87171','#86efac'],INK,'until it beats the catalog');},
+  reelf:function(g,x,y,w,h){flow(g,x,y,w,h*.82,['script','storyboard','Blender','reel'],'#101a2a',['#a2d4ea','#c4b5fd','#f5792a','#ffc20e'],INK,null);g.fillStyle='#101a2a';g.fillRect(x,y+h*.82,w,h*.18);g.fillStyle='#a2d4ea';g.font='700 34px Caveat, cursive';g.fillText('camera lands on the word the narrator says',x+30,y+h-26);},
+  clymora:function(g,x,y,w,h){flow(g,x,y,w,h,['GPT-2','RAG','FastAPI','ComfyUI'],'#18122b',['#c4b5fd','#fbbf24','#34d399','#f9a8d4'],INK,null);},
+  blender:function(g,x,y,w,h){g.fillStyle='#232323';g.fillRect(x,y,w,h);g.fillStyle='#3d3d3d';g.fillRect(x,y,w,50);g.fillStyle='#f5792a';g.font='800 26px Archivo, sans-serif';g.fillText('Add-ons · 28 enabled',x+24,y+34);
+    var L=[['lipsync_pro','v5'],['camera_animator_pro','v6'],['arthis_auto_pose','IK'],['asset_spawner_pro','pro'],['one_click_render_setup','1-click'],['smart_pose_interpolate','new']];
+    L.forEach(function(a,i){var ry=y+70+i*((h-84)/L.length);g.fillStyle=i%2?'#2b2b2b':'#303030';g.fillRect(x+12,ry,w-24,(h-84)/L.length-6);g.fillStyle='#4f8ff7';rr(g,x+26,ry+10,26,26,6);g.fill();g.strokeStyle='#fff';g.lineWidth=4;g.beginPath();g.moveTo(x+32,ry+23);g.lineTo(x+38,ry+29);g.lineTo(x+47,ry+16);g.stroke();
+      g.fillStyle='#e6e6e6';g.font='600 24px "JetBrains Mono", monospace';g.fillText(a[0],x+66,ry+31);g.fillStyle='#9a9a9a';g.textAlign='right';g.fillText(a[1],x+w-30,ry+31);g.textAlign='left';});},
+  diorama:function(g,x,y,w,h){g.fillStyle='#f6e7c8';g.fillRect(x,y,w,h);var cx=x+w/2,cy=y+h*.62,s=Math.min(w,h)*.3;
+    function quad(p,c){g.fillStyle=c;g.beginPath();g.moveTo(p[0][0],p[0][1]);for(var i=1;i<4;i++)g.lineTo(p[i][0],p[i][1]);g.closePath();g.fill();}
+    quad([[cx-s*1.6,cy],[cx,cy-s*.8],[cx+s*1.6,cy],[cx,cy+s*.8]],'#8bc34a');
+    quad([[cx-s,cy-s*.1],[cx,cy+s*.4],[cx,cy-s*.6],[cx-s,cy-s*1.1]],'#e9c08d');quad([[cx,cy+s*.4],[cx+s,cy-s*.1],[cx+s,cy-s*1.1],[cx,cy-s*.6]],'#d19a5e');
+    quad([[cx-s*1.1,cy-s*1.05],[cx,cy-s*.5],[cx,cy-s*1.5],[cx-s*.1,cy-s*1.9]],'#c0392b');quad([[cx,cy-s*.5],[cx+s*1.1,cy-s*1.05],[cx+s*.1,cy-s*1.9],[cx,cy-s*1.5]],'#962d22');
+    g.fillStyle='#5b3a1e';g.fillRect(cx+s*.35,cy-s*.55,s*.3,s*.5);g.fillStyle='#a2d4ea';g.fillRect(cx-s*.7,cy-s*.75,s*.3,s*.28);},
+  reel1:function(g,x,y,w,h){reelArt(g,x,y,w,h,'#e9a23b','#ffffff',['KALESHI','FAMILY']);},
+  reel2:function(g,x,y,w,h){reelArt(g,x,y,w,h,'#2b62d6','#ffc20e',['AAJ HUM','BANAYENGE!']);},
+  kit:function(g,x,y,w,h){g.fillStyle='#17130f';g.fillRect(x,y,w,h);var cw=(w-60-40)/3;[['#e9a23b','EP. NEXT','#fff','Kaleshi Family'],['#2b62d6','BUILD','#ffc20e','Diorama Builds'],['#2f8f5b','DR LODHA','#fff','Dr Lodha reels']].forEach(function(k,i){var bx=x+30+i*(cw+20),by=y+30,bh=cw*9/16;
+    g.fillStyle=k[0];rr(g,bx,by,cw,bh,12);g.fill();g.font='900 28px Archivo, sans-serif';var tw=g.measureText(k[1]).width;g.fillStyle=k[2];g.fillRect(bx+14,by+bh-50,tw+16,36);g.fillStyle=INK;g.fillText(k[1],bx+22,by+bh-22);
+    g.fillStyle='#efe6d4';g.font='600 24px Archivo, sans-serif';g.fillText(k[3],bx,by+bh+38);g.fillStyle='#6d6153';g.fillRect(bx,by+bh+54,cw*.6,10);});
+    g.fillStyle='#c42132';rr(g,x+30,y+h-78,210,52,26);g.fill();g.fillStyle='#fff';g.font='900 24px Archivo, sans-serif';g.fillText('SUBSCRIBE',x+70,y+h-44);g.fillStyle='#ffc20e';g.font='700 40px Caveat, cursive';g.fillText('@AKverseOfficial · 21.9K',x+270,y+h-40);},
+  mail:function(g,x,y,w,h){g.fillStyle='#c42132';g.fillRect(x,y,w,h);var ew=Math.min(w*.36,h*1.1),eh=ew*.62,ex=x+50,ey=y+h/2-eh/2;g.fillStyle=PAPER;g.fillRect(ex,ey,ew,eh);g.strokeStyle='#c9bfa8';g.lineWidth=5;g.beginPath();g.moveTo(ex,ey);g.lineTo(ex+ew/2,ey+eh*.55);g.lineTo(ex+ew,ey);g.stroke();
+    g.fillStyle='#fff';g.font='900 50px Archivo, sans-serif';g.fillText('Let’s build',ex+ew+50,y+h/2-14);g.fillText('something.',ex+ew+50,y+h/2+44);g.font='700 26px "JetBrains Mono", monospace';g.fillStyle='#ffe2a8';g.fillText('aayushkumarofficial21@gmail.com',ex+ew+50,y+h/2+96);},
+  ghc:function(g,x,y,w,h){g.fillStyle='#17130f';g.fillRect(x,y,w,h);var s=h*.5/24;g.save();g.translate(x+w/2-12*s,y+h*.12);g.scale(s,s);g.fillStyle='#fff';g.fill(new Path2D(GHPATH));g.restore();g.fillStyle='#ffc20e';g.font='700 28px "JetBrains Mono", monospace';g.textAlign='center';g.fillText('@itsAayush2004',x+w/2,y+h*.84);g.textAlign='left';},
+  yt:function(g,x,y,w,h){g.fillStyle='#fff4f2';g.fillRect(x,y,w,h);var bw=h*.62,bh=bw*.7,bx=x+w/2-bw/2,by=y+h*.12;g.fillStyle='#e62117';rr(g,bx,by,bw,bh,bh*.28);g.fill();g.fillStyle='#fff';g.beginPath();g.moveTo(bx+bw*.4,by+bh*.28);g.lineTo(bx+bw*.66,by+bh*.5);g.lineTo(bx+bw*.4,by+bh*.72);g.fill();
+    g.fillStyle=INK;g.font='800 28px Archivo, sans-serif';g.textAlign='center';g.fillText('21.9K subscribers',x+w/2,y+h*.88);g.textAlign='left';},
+  tiers:function(g,x,y,w,h){g.fillStyle='#14202b';g.fillRect(x,y,w,h);var T=[['Desktop','full 3D','soft shadows · 2×',1.6],['Tablet','balanced','light shadows · 1.5×',.75],['Phone','lite','no shadows · redraw on change',.46]];var cw=w/3;
+    T.forEach(function(t,i){var cx=x+cw*i+cw/2,dh=h*.42,dw=dh*t[3];if(dw>cw*.7){dw=cw*.7;dh=dw/t[3];}g.strokeStyle='#a2d4ea';g.lineWidth=5;rr(g,cx-dw/2,y+30+(h*.42-dh)/2,dw,dh,10);g.stroke();
+      g.fillStyle='#fff';g.font='900 32px Archivo, sans-serif';g.textAlign='center';g.fillText(t[0],cx,y+h*.68);g.fillStyle='#ffc20e';g.font='700 22px "JetBrains Mono", monospace';g.fillText(t[1],cx,y+h*.68+34);g.fillStyle='#a8b7c4';g.font='500 19px "JetBrains Mono", monospace';g.fillText(t[2],cx,y+h*.68+64);g.textAlign='left';});},
+  bars:function(g,x,y,w,h){g.fillStyle='#fbf3df';g.fillRect(x,y,w,h);var B=[['Game code, all builds',141000],['Blender suite · Python',27208],['HexaBed · C#',3705]],bw=w-460;
+    B.forEach(function(b,i){var by=y+40+i*((h-60)/3);g.fillStyle=INK;g.font='700 26px Archivo, sans-serif';g.fillText(b[0],x+30,by+30);g.fillStyle='#ffc20e';g.fillRect(x+330,by+8,Math.max(8,bw*b[1]/141000),30);g.strokeStyle=INK;g.lineWidth=3;g.strokeRect(x+330,by+8,Math.max(8,bw*b[1]/141000),30);
+      g.font='700 24px "JetBrains Mono", monospace';g.textAlign='right';g.fillText(b[1].toLocaleString('en-US'),x+w-30,by+32);g.textAlign='left';});},
+  explore:function(g,x,y,w,h){g.fillStyle='#ffc20e';g.fillRect(x,y,w,h);g.fillStyle=INK;g.font='900 46px Archivo, sans-serif';g.fillText('Explore the board',x+34,y+66);
+    var L=['ARTHIS.space','ARTHIS.land','Responsive UI','Engines','Apps & tools','AI','Blender','Reels'],cx=x+34,cy=y+100;L.forEach(function(s){g.font='700 24px "JetBrains Mono", monospace';var tw=g.measureText(s).width+32;if(cx+tw>x+w-30){cx=x+34;cy+=58;}g.fillStyle=INK;rr(g,cx,cy,tw,44,22);g.fill();g.fillStyle='#ffc20e';g.fillText(s,cx+16,cy+30);cx+=tw+12;});}
+};
+function reelArt(g,x,y,w,h,bg,chipc,lines){g.fillStyle=bg;g.fillRect(x,y,w,h);g.fillStyle='rgba(255,255,255,.14)';for(var i=0;i<7;i++){g.beginPath();g.moveTo(x+w/2,y+h/2);g.arc(x+w/2,y+h/2,w,i*.9,i*.9+.45);g.fill();}
+  var pw=h*.5,ph=h-30,px=x+w*.08,py=y+15;g.fillStyle='#17130f';rr(g,px,py,pw,ph,18);g.fill();g.fillStyle=bg;rr(g,px+8,py+8,pw-16,ph-16,12);g.fill();
+  g.fillStyle='rgba(255,255,255,.9)';g.beginPath();g.arc(px+pw/2,py+ph*.38,26,0,7);g.fill();g.fillStyle=bg;g.beginPath();g.moveTo(px+pw/2-8,py+ph*.38-13);g.lineTo(px+pw/2+14,py+ph*.38);g.lineTo(px+pw/2-8,py+ph*.38+13);g.fill();
+  g.font='900 52px Archivo, sans-serif';var ly=y+h*.42;lines.forEach(function(l){var tw=g.measureText(l).width;g.fillStyle=chipc;g.fillRect(px+pw+40,ly-46,tw+22,60);g.fillStyle=INK;g.fillText(l,px+pw+51,ly);ly+=72;});
+  g.fillStyle='#fff';g.font='700 22px "JetBrains Mono", monospace';g.fillText('40–50 s · Hinglish',px+pw+40,ly+14);}
+
+/* ---- the one card: picture slot, title, text, tags, Explore button ---- */
+var PPU=300,PAD=.09,FOOT=.25;
+function cardHeight(it){return it.slot+PAD*2+.06+.2+(it.lines||3)*.12+(it.chips?.16:0)+FOOT+.04;}
+function addCard(cx,cy,it,accent){
+  var W=it.w*PPU,H=it.h*PPU,c=mk(W,H),g=c.getContext('2d'),p=PAD*PPU,sw=W-2*p,sh=it.slot*PPU,sy=p+10;
+  g.fillStyle=PAPER;g.fillRect(0,0,W,H);for(var i=0;i<W*H/900;i++){g.fillStyle='rgba(0,0,0,'+Math.random()*.03+')';g.fillRect(Math.random()*W,Math.random()*H,2,2);}
+  g.fillStyle=accent;g.fillRect(0,0,W,10);
+  g.fillStyle='#e8e0cf';g.fillRect(p,sy,sw,sh);
+  if(it.art)ART[it.art](g,p,sy,sw,sh);
+  var y=sy+sh+60;g.fillStyle=INK;g.font='900 50px Archivo, sans-serif';g.fillText(it.title,p,y);
+  if(it.tag){var tw=g.measureText(it.title).width;g.font='700 17px "JetBrains Mono", monospace';var t2=g.measureText(it.tag).width+18;g.strokeStyle='#9c8f7a';g.lineWidth=2;rr(g,p+tw+16,y-28,t2,30,6);g.stroke();g.fillStyle='#7a6d5a';g.fillText(it.tag,p+tw+25,y-7);}
+  g.font='500 28px Archivo, sans-serif';g.fillStyle='#4a4036';var ln=wrap(g,it.text||'',sw),max=it.lines||3;
+  if(ln.length>max){ln=ln.slice(0,max);ln[max-1]=ln[max-1].replace(/\s*\S*$/,'')+'…';}ln.forEach(function(l){y+=36;g.fillText(l,p,y);});
+  if(it.chips){var chx=p,chy=p+10+sh+.06*PPU+.2*PPU+max*.12*PPU+10;it.chips.forEach(function(ch){g.font='700 18px "JetBrains Mono", monospace';var w=g.measureText(ch).width+22;g.strokeStyle=INK;g.lineWidth=2.5;rr(g,chx,chy,w,32,5);g.stroke();g.fillStyle=INK;g.fillText(ch,chx+11,chy+22);chx+=w+8;});}
+  var url=it.url||(it.gh?GH+it.gh:null),fy=H-FOOT*PPU-6;
+  g.strokeStyle='#e2d8c4';g.lineWidth=2;g.beginPath();g.moveTo(p,fy);g.lineTo(W-p,fy);g.stroke();
+  if(url){g.fillStyle='#ffc20e';rr(g,p,fy+14,190,48,24);g.fill();g.fillStyle=INK;g.font='800 23px Archivo, sans-serif';g.fillText('EXPLORE ↗',p+28,fy+46);
+    g.font='600 20px "JetBrains Mono", monospace';g.fillStyle='#7a6d5a';g.textAlign='right';var host=hostOf(it);g.fillText(host,W-p-(it.gh?44:0),fy+45);g.textAlign='left';
+    if(it.gh){g.save();g.translate(W-p-30,fy+24);g.scale(1.2,1.2);g.fillStyle=INK;g.fill(new Path2D(GHPATH));g.restore();}}
+  else{g.font='600 20px "JetBrains Mono", monospace';g.fillStyle='#9c8f7a';g.fillText(it.note||'',p,fy+45);}
+  var grp=new THREE.Group(),m=new THREE.Mesh(new THREE.BoxGeometry(it.w,it.h,.012),[0,0,0,0,new THREE.MeshStandardMaterial({map:tex(c),roughness:.88}),0].map(function(x){return x||new THREE.MeshStandardMaterial({color:0xf2ecdf,roughness:.9});}));
+  m.castShadow=true;grp.add(m);addPin(grp,0,it.h/2-.12,.006,new THREE.Color(accent).getHex());
+  if(it.img){var slotY=it.h/2-(PAD+10/PPU)-it.slot/2,swU=it.w-2*PAD;
+    tl.load(it.img,function(t){t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);var ia=t.image.width/t.image.height,sa=swU/it.slot,pw=swU,ph=it.slot;
+      if(it.fit==='contain'){if(it.pixel)t.magFilter=THREE.NearestFilter;ph=it.slot*.92;pw=ph*ia;if(pw>swU*.94){pw=swU*.94;ph=pw/ia;}var bg=new THREE.Mesh(new THREE.PlaneGeometry(swU,it.slot),new THREE.MeshStandardMaterial({color:new THREE.Color(it.bg||'#f2c14e'),roughness:.8}));bg.position.set(0,slotY,.0075);grp.add(bg);}
+      else if(ia>sa){t.repeat.x=sa/ia;t.offset.x=(1-t.repeat.x)/2;}else{t.repeat.y=ia/sa;t.offset.y=1-t.repeat.y;}
+      var im=new THREE.Mesh(new THREE.PlaneGeometry(pw,ph),new THREE.MeshStandardMaterial({map:t,roughness:.5,transparent:it.fit==='contain'}));im.position.set(0,slotY,.008);grp.add(im);dirty=2;});}
+  it.url=url;it.tip=url?('Explore '+(it.url[0]==='#'?'the board':hostOf(it))+' ↗'):'';
   place(grp,cx,cy,it);}
-function addKit(cx,cy,it){
-  var W=640,H=460,c=mk(W,H),g=c.getContext('2d');
-  g.fillStyle='#17130f';g.fillRect(0,0,W,H);
-  g.fillStyle='#ffc20e';g.font='700 62px Caveat, cursive';g.fillText('AKverse channel kit',30,72);
-  g.fillStyle='#bdb2a0';g.font='500 20px "JetBrains Mono", monospace';g.fillText('THUMBNAILS · TITLES · END SCREENS · SEO',30,108);
-  [['#e9a23b','EP. NEXT','#fff'],['#2b62d6','BUILD','#ffc20e'],['#2f8f5b','DR LODHA','#fff']].forEach(function(k,i){var x=30+i*197,y=140;g.fillStyle=k[0];g.fillRect(x,y,182,102);g.font='900 22px Archivo, sans-serif';var tw=g.measureText(k[1]).width;g.fillStyle=k[2];g.fillRect(x+8,y+66,tw+12,28);g.fillStyle='#17130f';g.fillText(k[1],x+14,y+88);
-    g.fillStyle='#efe6d4';g.fillRect(x,y+116,150,12);g.fillStyle='#6d6153';g.fillRect(x,y+136,100,10);});
-  g.fillStyle='#c42132';g.fillRect(30,330,220,58);g.fillStyle='#fff';g.font='900 26px Archivo, sans-serif';g.fillText('SUBSCRIBE',62,368);
-  g.fillStyle='#efe6d4';g.font='700 44px Caveat, cursive';g.fillText('21.9K subscribers',280,372);
-  var grp=new THREE.Group(),w=it.w,h=w*H/W,geo=new THREE.PlaneGeometry(w,h,10,10);curl(geo,w,h,.1);
-  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(c),roughness:.7,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);
-  addPin(grp,-w/2+.2,h/2-.2,.02,0xffc20e);addPin(grp,w/2-.2,h/2-.2,.02,0xffc20e);place(grp,cx,cy,it);}
-function addGhCard(cx,cy,it){
-  var W=640,H=380,c=mk(W,H),g=c.getContext('2d');g.fillStyle='#17130f';g.fillRect(0,0,W,H);
-  g.save();g.translate(40,40);g.scale(5,5);g.fillStyle='#fff';g.fill(new Path2D(GHPATH));g.restore();
-  g.fillStyle='#fff';g.font='900 54px Archivo, sans-serif';g.fillText('GitHub',190,100);
-  g.fillStyle='#ffc20e';g.font='700 30px "JetBrains Mono", monospace';g.fillText('@itsAayush2004',190,145);
-  g.fillStyle='#efe6d4';g.font='600 40px Caveat, cursive';g.fillText('20 repos · games, AI, 3D, tools',40,250);
-  g.fillStyle='#ffc20e';g.font='700 46px Caveat, cursive';g.fillText('click to open ↗',40,320);
-  var grp=new THREE.Group(),w=it.w,h=w*H/W,geo=new THREE.PlaneGeometry(w,h,8,8);curl(geo,w,h,.1);
-  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(c),roughness:.6,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);addPin(grp,0,h/2-.15,.02,0xffc20e);place(grp,cx,cy,it);}
+function addHeader(cx,cy,it,accent){
+  var W=5.4*PPU,H=.62*PPU,c=mk(W,H),g=c.getContext('2d');g.fillStyle='#17130f';g.fillRect(0,0,W,H);g.fillStyle=accent;g.fillRect(0,0,18,H);
+  g.fillStyle='#fff';g.font='900 82px Archivo, sans-serif';g.fillText(it.title,52,H/2+29);g.fillStyle=accent;g.font='700 30px "JetBrains Mono", monospace';g.textAlign='right';g.fillText(it.sub.toUpperCase(),W-40,H/2+11);
+  var grp=new THREE.Group(),m=new THREE.Mesh(new THREE.BoxGeometry(5.4,.62,.03),new THREE.MeshStandardMaterial({map:tex(c),roughness:.5}));m.castShadow=true;grp.add(m);place(grp,cx,cy,{x:0,y:it.y,z:.04});}
+function addStrip(cx,cy,y,text,accent){
+  var W=5.4*PPU,H=.34*PPU,c=mk(W,H),g=c.getContext('2d');g.fillStyle='#2a221b';g.fillRect(0,0,W,H);g.fillStyle=accent;g.font='700 36px "JetBrains Mono", monospace';g.fillText(text.toUpperCase(),28,H/2+13);
+  var m=new THREE.Mesh(new THREE.PlaneGeometry(5.4,.34),new THREE.MeshStandardMaterial({map:tex(c),roughness:.6}));m.position.set(cx,cy+y,.03);m.receiveShadow=true;scene.add(m);}
+function addStat(cx,cy,it,accent){
+  var W=it.w*PPU,H=it.h*PPU,c=mk(W,H),g=c.getContext('2d');g.fillStyle=PAPER;g.fillRect(0,0,W,H);g.fillStyle=accent;g.fillRect(0,0,W,10);
+  g.fillStyle=INK;g.font='900 130px Archivo, sans-serif';g.fillText(it.big,30,170);g.fillStyle='#5e5246';g.font='700 25px "JetBrains Mono", monospace';g.fillText(it.label.toUpperCase(),32,H-36);
+  var grp=new THREE.Group(),m=new THREE.Mesh(new THREE.BoxGeometry(it.w,it.h,.012),new THREE.MeshStandardMaterial({map:tex(c),roughness:.88}));m.castShadow=true;grp.add(m);addPin(grp,0,it.h/2-.12,.006,new THREE.Color(accent).getHex());
+  if(it.url){it.tip='Explore '+hostOf(it)+' ↗';}place(grp,cx,cy,it);}
+function addPoster(cx,cy,it,accent){
+  tl.load(it.img,function(t){t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);
+    var grp=new THREE.Group(),ih=it.w*t.image.height/t.image.width;
+    var c=mk(it.w*PPU,.34*PPU),g=c.getContext('2d');g.fillStyle=PAPER;g.fillRect(0,0,c.width,c.height);g.fillStyle=INK;g.font='800 30px Archivo, sans-serif';g.fillText(it.title,18,44);g.fillStyle='#c42132';g.font='800 22px Archivo, sans-serif';g.fillText('PLAY ↗',18,84);
+    var frame=new THREE.Mesh(new THREE.BoxGeometry(it.w+.1,ih+.1+.34,.012),new THREE.MeshStandardMaterial({color:0xfdfbf4,roughness:.85}));frame.position.y=-.17;frame.castShadow=true;grp.add(frame);
+    var im=new THREE.Mesh(new THREE.PlaneGeometry(it.w,ih),new THREE.MeshStandardMaterial({map:t,roughness:.5}));im.position.z=.008;grp.add(im);
+    var lab=new THREE.Mesh(new THREE.PlaneGeometry(it.w,.34),new THREE.MeshStandardMaterial({map:tex(c),roughness:.85}));lab.position.set(0,-ih/2-.17,.008);grp.add(lab);
+    addPin(grp,0,ih/2-.1,.006,new THREE.Color(accent).getHex());it.tip='Play '+it.title+' ↗';place(grp,cx,cy,it);});}
+function addDevice(cx,cy,it){
+  tl.load(it.img,function(t){t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);
+    var a=t.image.width/t.image.height,w=it.w,h=w/a,b=it.kind==='laptop'?.07:.07,grp=new THREE.Group();
+    var dark=new THREE.MeshStandardMaterial({color:0x1b1714,roughness:.35,metalness:.2});
+    var body=new THREE.Mesh(new THREE.BoxGeometry(w+2*b,h+2*b,.06),dark);body.castShadow=true;grp.add(body);
+    var scr=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:t,roughness:.3,emissive:0xffffff,emissiveMap:t,emissiveIntensity:.18}));scr.position.z=.031;grp.add(scr);
+    if(it.kind==='laptop'){var base=new THREE.Mesh(new THREE.BoxGeometry(w*1.16,.1,.08),new THREE.MeshStandardMaterial({color:0x9a958f,metalness:.6,roughness:.35}));base.position.set(0,-h/2-b-.05,.02);base.castShadow=true;grp.add(base);}
+    var c=mk(420,64),g=c.getContext('2d');g.fillStyle=PAPER;g.fillRect(0,0,420,64);g.fillStyle=INK;g.font='700 28px "JetBrains Mono", monospace';g.textAlign='center';g.fillText(it.cap,210,42);
+    var lab=new THREE.Mesh(new THREE.PlaneGeometry(1.1,1.1*64/420),new THREE.MeshStandardMaterial({map:tex(c),roughness:.85}));lab.position.set(0,-h/2-b-(it.kind==='laptop'?.3:.22),.0);lab.castShadow=true;grp.add(lab);
+    it.tip='Explore '+hostOf(it)+' ↗';place(grp,cx,cy,it);});}
 
 var GAMES=[["drift-car","Drift Car","s"],["trigger-runner","Trigger Runner","s"],["flappy-peacock","Peacock Glide","s"],["3072-merge","3072 Merge","s"],["fruit-blast","Fruit Blast","s"],["slime-shooter","Slime Shooter","s"],["pixel-snake","Pixel Snake","s"],["hole-eater","Hole Eater","s"],["farmer","Farmer","s"],["palace-vs-aliens","Palace vs Aliens","s"],["ball-eater","Ball Eater","s"],["space-invaders","Alien Ship Assault","s"],["asteroids-breaker","Space Rock Breaker","s"],["territory-expander","Territory Expander","s"],["perfect-circle","Perfect Circle","s"],["cube-solver","Cube Solver","s"],["sudoku","Sudoku","s"],["emoji-drawer","Emoji Drawer","s"],["memory-card","Memory Card","s"],["word-search","Word Search","s"],["ball-breaker","Ball Breaker","s"],["ball-runner","Ball Runner","s"],["solitaire","Solitaire","s"],["memory-number","Memory Number","s"],["balloon-ninja","Balloon Ninja","s"],["mini-clash","Mini Skirmish","s"],["custom-devil","Custom Devil","s"],["atlas-globe","Atlas Globe","s"],["dodge-circle-3d","Dodge Circle 3D","s"],["dodgeball","Dodgeball","s"],["egg-guard-3d","Egg Guard 3D","s"],["iron-tower","Iron Tower","s"],["skystack","Sky Stack","s"],["spinout","Spinout","s"],["sticker-siege","Sticker Siege","s"],["voxel-peak-climb","Voxel Peak Climb","s"],["voxel-vault","Voxel Vault","s"],["rooftop-rails","Bolt Belt","s"],["pottery-wheel","Pottery Wheel","s"],["arena-strike-3d","Arena Strike 3D","s"],["chip-rush","Chip Rush","s"],["jetpack-dash","Jetpack Dash","s"],["voxel-freerun","Voxel Freerun","s"],["land-grab-3d","Land Grab 3D","s"],["number-gates","Number Gates","s"],["balance-scales","Balance Scales","s"],["number-forge","Number Forge","s"],["prime-grid","Prime Grid","s"],["math-cages","Math Cages","s"],["mini-craft","Craft Isle","s"],["balling-ball","Balling Ball","s"],["paint-hide","Paint & Hide","s"],["pocket-prix","Pocket Prix","s"],["five-star-getaway","Five Star Getaway","s"],["critter-crew","Critter Crew","s"],["summer-lane","Summer Lane","s"],["claw-crane","Claw Crane","s"],["dehla-pakad","Dehla Pakad","s"],["matrix-mind","Matrix Mind","s"],["series-sense","Series Sense","s"],["fold-lab","Fold Lab","s"],["bigger-tic-tac-toe","Bigger Tic Tac Toe","m"],["table-tennis","Table Tennis","m"],["doodle-militia","Doodle Militia","m"],["boat-tagger","Boat Tagger","m"],["volleyball","Volleyball","m"],["foosball","Foosball","m"],["air-hockey","Air Hockey","m"],["8-ball","Pool Rummy","m"],["smile-ball","Smile Ball","m"],["stick-fighter","Stick Fighter","m"],["snake-and-ladder","Snake & Ladder","m"],["bluff-card","Bluff Card","m"],["housie","Housie","m"],["ono","4 Colour","m"],["ludo","Ludo","m"],["sumo-fighter","Sumo Fighter","m"],["chess","Chess","m"],["poker","Pixel Derby","m"],["5-vs-10","5 vs 10","m"],["four-in-line","Four in Line","m"],["business-tycoon","Business Tycoon","m"],["potato-pong","Potato Pong","m"],["zombie-fighter","Zombie Fighter","m"],["truth-and-dare","Truth & Dare","m"],["car-football","Car Football","m"],["slimy-guys","Slimy Guys","m"],["ant-colony","Ant Colony","m"],["8-ball-pool-3d","Pool 3D","m"],["fifa","Street Football","m"],["carrom-clash","Carrom Clash","m"],["doodle-duel","Doodle Duel","m"],["math-duel","Math Duel","m"],["tic-tac-push","Tic Tac Push","m"],["voxel-blitz-tdm","Voxel Blitz TDM","m"],["hand-cricket","Hand Cricket","m"],["bike-rush-3d","Bike Rush 3D","m"],["drive-mayhem","Drive Mayhem","m"],["hill-climb-rally","Ridge Rally","m"],["smash-kart-arena","Bumper Kart Arena","m"],["tennis-3d","Tennis 3D","m"],["bed-wars","Bed Brawl","m"],["number-line-hop","Number Line Hop","m"],["bowling-3d","Bowling 3D","m"],["toss-tac-toe","Toss Tac Toe","m"]],GCOLS=9,GROWS=12,NSINGLE=61;
-var Y='#f8dc6c',P='#f5a9bb',B='#a2d4ea',G='#b9dd92',O='#f7b267',Wh='#fbf7ec';
-var YT='https://www.youtube.com/@AKverseOfficial',SPACE='https://arthis.space',LAND='https://arthis.land';
-/* every column is 5.4 wide (x -2.7..2.7): full-width rows, or two 2.5-wide cells at x = ±1.35 */
-var BOARD=[
- [ {k:'dymo',text:'HELLO, I AM AAYUSH',y:2.08},
-   {k:'photo',src:'assets/dp.png',w:1.65,x:-1.8,y:.75,r:-1.2,cap:"that's me",url:GH.slice(0,-1),tip:'Open my GitHub profile ↗'},
-   {k:'note',color:Y,w:1.75,h:1.75,x:.15,y:.85,r:1,z:.14,label:'hello',title:"hi, I'm Aayush",text:'I build worlds, games & the tools behind them.',titleSize:66},
-   {k:'note',color:P,w:1.45,h:1.25,x:1.95,y:.95,r:-1,z:.14,label:'based in',title:'Jaipur, India',titleSize:62},
-   {k:'photo',src:'assets/art-01.jpg',w:3.0,x:-1.15,y:-1.55,r:.8,z:.1,cap:'Unity · Web 3D · AI · GitHub',clip:true},
-   {k:'card',w:2.05,h:1.5,x:1.65,y:-1.35,r:-.8,z:.1,title:'NIT Jaipur',lines:['B.Tech ECE · 2026','JEE Main 98.9 %ile'],chips:['AIR 8956']},
-   {k:'marker',text:'scroll down',arrow:'down',x:1.6,y:-2.75,w:2.0,r:-2} ],
- [ {k:'dymo',text:'BY THE NUMBERS',y:2.08},
-   {k:'photo',src:'assets/art-06.jpg',w:3.6,x:0,y:.4,r:-.6,cap:'counted, not estimated',pin:true},
-   {k:'note',color:Y,w:1.6,h:1.5,x:-1.8,y:-2.1,r:-1,z:.16,big:'154',bigSize:150,text:'interactive builds'},
-   {k:'note',color:O,w:1.6,h:1.5,x:0,y:-2.1,r:.8,z:.16,big:'141K',bigSize:124,text:'lines of game code'},
-   {k:'note',color:G,w:1.6,h:1.5,x:1.8,y:-2.1,r:-.6,z:.16,big:'43',bigSize:150,text:'Three.js 3D builds'},
-   {k:'note',color:P,w:1.6,h:1.5,x:-1.8,y:-3.85,r:.7,z:.16,big:'15',bigSize:150,text:'P2P multiplayer'},
-   {k:'note',color:Wh,w:1.6,h:1.5,x:0,y:-3.85,r:-.9,z:.16,big:'28',bigSize:150,text:'Blender add-ons'},
-   {k:'note',color:B,w:1.6,h:1.5,x:1.8,y:-3.85,r:.6,z:.16,big:'21.9K',bigSize:112,text:'YouTube subs',url:YT} ],
- [ {k:'dymo',text:'ARTHIS.SPACE',y:2.08},
-   {k:'photo',src:'assets/rs-space-desktop.jpg',w:3.3,x:-.95,y:.55,r:-.6,cap:'arthis.space today: rail, feed, ads',url:SPACE,gh:'arthis.space'},
-   {k:'sticker',src:'assets/logo-space.png',w:.95,x:1.95,y:1.45,r:2,z:.06,url:SPACE},
-   {k:'note',color:Y,w:1.5,h:1.35,x:1.95,y:-.1,r:1,z:.14,label:'players',title:'10,000 DAU',titleSize:62,text:'from 1 to 10K a day'},
-   {k:'photo',src:'assets/cover-fruit-blast.jpg',w:1.12,x:-2.0,y:-2.55,r:-.8,z:.1,cap:'Fruit Blast',pin:true,url:SPACE+'/minigame/single_player/fruit-blast'},
-   {k:'photo',src:'assets/cover-chess.jpg',w:1.12,x:-.67,y:-2.55,r:.6,z:.1,cap:'Chess',pin:true,url:SPACE+'/minigame/multiplayer/chess'},
-   {k:'photo',src:'assets/cover-table-tennis.jpg',w:1.12,x:.67,y:-2.55,r:-.5,z:.1,cap:'Table Tennis',pin:true,url:SPACE+'/minigame/multiplayer/table-tennis'},
-   {k:'photo',src:'assets/cover-doodle-militia.jpg',w:1.12,x:2.0,y:-2.55,r:.8,z:.1,cap:'Doodle Militia',pin:true,url:SPACE+'/minigame/multiplayer/doodle-militia'},
-   {k:'dymo',text:'ALL 105 GAMES · TAP ONE TO PLAY',y:-4.45,h:.26},
-   {k:'games',y:-4.95} ],
- [ {k:'dymo',text:'ARTHIS.LAND · THE WALL',y:2.08},
-   {k:'photo',src:'assets/land-wall.jpg',w:3.3,x:-.95,y:.55,r:-.6,cap:'arthis.land, a city of rooms',url:LAND,gh:'arthis.land'},
-   {k:'sticker',src:'assets/arthis-banner.png',w:1.45,x:1.95,y:1.45,r:2,z:.06,url:LAND},
-   {k:'note',color:G,w:1.5,h:1.35,x:1.95,y:-.1,r:1,z:.14,label:'multiplayer',title:'2–4 players',titleSize:62,text:'4-digit room codes'},
-   {k:'sticker',src:'assets/land-steps-title.png',w:2.5,x:-1.35,y:-1.85,r:-.5,z:.06,url:LAND},
-   {k:'sticker',src:'assets/land-step-1.png',w:2.4,x:-1.35,y:-2.85,r:.4,z:.06,url:LAND},
-   {k:'sticker',src:'assets/land-step-2.png',w:2.4,x:-1.35,y:-3.42,r:-.4,z:.06,url:LAND},
-   {k:'sticker',src:'assets/land-step-3.png',w:2.4,x:-1.35,y:-3.99,r:.4,z:.06,url:LAND},
-   {k:'photo',src:'assets/land-room.jpg',w:2.4,x:1.35,y:-2.55,r:.7,z:.1,cap:'the Akverse Room',url:LAND,pin:true},
-   {k:'card',w:2.5,h:2.25,x:-1.35,y:-6.0,r:-.5,z:.1,title:'Rooms on the wall',lines:['My Room · Aashna Room','Bindo + Pinky Room','Dada · Mummy Papa Room','Kitchen · Mandir'],url:LAND,clip:true},
-   {k:'photo',src:'assets/land-mobile.jpg',w:1.15,x:1.35,y:-5.75,r:.6,z:.1,cap:'on mobile',url:LAND,pin:true},
-   {k:'card',w:2.5,h:1.6,x:-1.35,y:-8.25,r:.5,z:.12,title:'arthisland-relay',lines:['TCP + WebSocket, one port','pure Python, 0 dependencies'],gh:'arthisland-relay'},
-   {k:'card',w:2.5,h:1.6,x:1.35,y:-8.25,r:-.5,z:.12,title:'Land Maker docs',lines:['11-chapter Unity tool spec','islands → rooms → props'],url:'https://itsaayush2004.github.io/arthis-land-maker-docs/',gh:'arthis-land-maker-docs'} ],
- [ {k:'dymo',text:'ONE UI, EVERY SCREEN',y:2.08},
-   {k:'device',kind:'laptop',src:'assets/rs-space-desktop.jpg',w:2.6,x:-1.3,y:.75,z:.08,cap:'desktop 1440',url:SPACE},
-   {k:'device',kind:'tablet',src:'assets/rs-space-tablet.jpg',w:1.1,x:.85,y:.75,z:.08,cap:'tablet 820',url:SPACE},
-   {k:'device',kind:'phone',src:'assets/rs-space-phone.jpg',w:.72,x:2.2,y:.7,z:.08,cap:'phone 390',url:SPACE},
-   {k:'dymo',text:'ARTHIS.SPACE',y:-.75,h:.2},
-   {k:'device',kind:'laptop',src:'assets/rs-land-about-desktop.jpg',w:2.9,x:-1.1,y:-2.5,z:.08,cap:'desktop 1440',url:LAND},
-   {k:'device',kind:'phone',src:'assets/rs-land-about-phone.jpg',w:.72,x:1.75,y:-2.55,z:.08,cap:'phone 390',url:LAND},
-   {k:'dymo',text:'ARTHIS.LAND · ABOUT PAGE',y:-4.0,h:.2},
-   {k:'card',w:4.6,h:1.95,x:0,y:-5.55,r:-.3,z:.1,title:'this page adapts too',lines:['desktop: full 3D, soft shadows, 2× render','tablet: lighter shadows, 1.5× render','phone: no shadows, redraws only on change'],clip:true} ],
- [ {k:'dymo',text:'GAME ENGINES & APPS',y:2.08},
-   {k:'photo',src:'assets/art-03.jpg',w:3.3,x:-.95,y:.5,r:-.6,cap:'HexaBed: Unity hex terrain engine'},
-   {k:'note',color:B,w:1.5,h:1.35,x:1.95,y:.95,r:1,z:.14,label:'hexabed',text:'14 scripts\n3,705 lines of C#',textSize:40},
-   {k:'photo',src:'assets/shot-hexgrid.jpg',w:2.5,x:-1.35,y:-2.45,r:.6,z:.1,cap:'HexGrid Architect',gh:'build-it-again-friend',ph:'#2f5f8f'},
-   {k:'note',color:G,w:2.3,h:1.75,x:1.35,y:-2.35,r:-.8,z:.14,label:'game app',title:'ARTHIS app',text:'Android · Expo · Skia · 60fps',gh:'game-reel-galaxy'} ],
- [ {k:'dymo',text:'WEB APPS & TOOLS',y:2.08},
-   {k:'photo',src:'assets/shot-hustiq.jpg',w:2.45,x:-1.35,y:.55,r:-.6,cap:'Hustiq: edit video by chat',gh:'editease-pro',ph:'#c42132'},
-   {k:'photo',src:'assets/shot-pomodoro.jpg',w:2.45,x:1.35,y:.55,r:.6,cap:'Work For it: pomodoro',gh:'daily-rest-flow',ph:'#2f8f5b'},
-   {k:'photo',src:'assets/shot-3dasset.jpg',w:2.45,x:-1.35,y:-1.95,r:.5,z:.1,cap:'3D asset viewer',gh:'3d-asset',ph:'#3b82c4'},
-   {k:'photo',src:'assets/shot-atlas.jpg',w:2.45,x:1.35,y:-1.95,r:-.5,z:.1,cap:'Travel Atlas, a 3D globe',url:'https://itsaayush2004.github.io/TravelDiary/',gh:'TravelAtlas',ph:'#0b3b5c'},
-   {k:'photo',src:'assets/gallery-poster.jpg',w:2.45,x:-1.35,y:-4.4,r:-.5,z:.1,cap:'my 3D gallery portfolio',url:'https://itsaayush2004.github.io/portfolio/',gh:'portfolio'},
-   {k:'card',w:2.45,h:1.6,x:1.35,y:-4.15,r:.5,z:.1,title:'Avatar Maker',lines:['presets or mix your own parts','saved to your account'],chips:['REACT','SUPABASE'],gh:'avatar-studio-maker'} ],
- [ {k:'dymo',text:'AI AUTOMATION',y:2.08},
-   {k:'photo',src:'assets/art-05.jpg',w:3.4,x:0,y:.4,r:.5,cap:'Clymora: systems & inference',clip:true},
-   {k:'note',color:O,w:2.45,h:1.55,x:-1.35,y:-2.3,r:-.7,z:.16,label:'system 01',title:'Game Factory',text:'idea in → AI judge loop → finished game',titleSize:64},
-   {k:'note',color:Wh,w:2.45,h:1.55,x:1.35,y:-2.3,r:.7,z:.16,label:'system 02',title:'Reel Factory',text:'script → storyboard → Blender render',titleSize:64},
-   {k:'card',w:2.45,h:1.5,x:-1.35,y:-4.15,r:.5,z:.12,title:'GPT-2 from scratch',lines:['transformer blocks','tokeniser + training loop']},
-   {k:'card',w:2.45,h:1.5,x:1.35,y:-4.15,r:-.5,z:.12,title:'23 ComfyUI flows',lines:['Flux · SDXL · Hunyuan3D','WAN VACE · LTX-2']} ],
- [ {k:'dymo',text:'BLENDER ADD-ONS',y:2.08},
-   {k:'photo',src:'assets/art-04.jpg',w:3.4,x:0,y:.45,r:-.5,cap:'28 add-ons, 27,208 lines of Python',pin:true},
-   {k:'card',w:2.45,h:1.8,x:-1.35,y:-2.25,r:.6,z:.12,title:'favourites',lines:['lipsync_pro (v5)','camera_animator_pro','arthis_auto_pose']},
-   {k:'note',color:Y,w:2.45,h:1.8,x:1.35,y:-2.25,r:-.6,z:.14,label:'dioramas',text:'houses, clinics, dhabas & trucks, all matte low-poly',textSize:42} ],
- [ {k:'dymo',text:'REELS & YOUTUBE',y:2.08},
-   {k:'reel',bg:'#e9a23b',chip:'#ffffff',lines:['KALESHI','FAMILY'],w:1.1,x:-2.0,y:.6,r:-.8,z:.1,cap:'reel 01',url:YT},
-   {k:'reel',bg:'#2b62d6',chip:'#ffc20e',lines:['AAJ HUM','BANAYENGE!'],w:1.1,x:-.55,y:.6,r:.8,z:.1,cap:'reel 02',url:YT},
-   {k:'kit',w:2.2,x:1.55,y:1.0,r:.6,z:.1,url:YT},
-   {k:'note',color:P,w:2.2,h:1.0,x:1.55,y:-.55,r:-.6,z:.14,label:'channel',title:'@AKverseOfficial',titleSize:58,url:YT},
-   {k:'card',w:3.6,h:1.25,x:0,y:-2.3,r:.4,z:.12,title:'more AKverse series',lines:['Dr Lodha · Friends On Stand-Up · school eps'],url:YT} ],
- [ {k:'dymo',text:'SAY HI',y:2.08},
-   {k:'photo',src:'assets/art-07.jpg',w:3.0,x:-1.0,y:.55,r:.5,cap:'say hi'},
-   {k:'gh',w:2.0,x:1.6,y:.85,r:-.6,z:.14,url:GH.slice(0,-1),tip:'Open github.com/itsAayush2004 ↗'},
-   {k:'note',color:Y,w:3.0,h:1.05,x:-1.0,y:-1.75,r:-.4,z:.16,label:'email',title:'aayushkumarofficial21@gmail.com',titleSize:44},
-   {k:'marker',text:'open to roles from 2026',x:1.55,y:-1.0,w:2.1,r:-2,under:true} ]
+function addGames(cx,cy,top,accent){
+  var P_=.6,S=.52,x0=-2.4;
+  function block(list,offset,label,y){addStrip(cx,cy,y,label,accent);y-=.36;
+    list.forEach(function(g,j){var k=offset+j,col=k%GCOLS,row=Math.floor(k/GCOLS);
+      var u0=col/GCOLS,u1=(col+1)/GCOLS,v1=1-row/GROWS,v0=1-(row+1)/GROWS;
+      var geo=new THREE.PlaneGeometry(S,S);geo.setAttribute('uv',new THREE.Float32BufferAttribute([u0,v1,u1,v1,u0,v0,u1,v0],2));
+      var grp=new THREE.Group(),back=new THREE.Mesh(new THREE.BoxGeometry(S+.05,S+.05,.01),paperMat);back.castShadow=true;grp.add(back);
+      var ic=new THREE.Mesh(geo,atlasMat);ic.position.z=.007;grp.add(ic);
+      place(grp,cx,cy,{x:x0+(j%GCOLS)*P_,y:y-.3-Math.floor(j/GCOLS)*P_,z:.05,url:SPACE+'/minigame/'+(g[2]==='s'?'single_player':'multiplayer')+'/'+g[0],tip:'Play '+g[1]+' ↗'});});
+    return y-Math.ceil(list.length/GCOLS)*P_-.1;}
+  var paperMat=new THREE.MeshStandardMaterial({color:0xfdfbf5,roughness:.85}),atlasMat=new THREE.MeshStandardMaterial({roughness:.55});
+  tl.load('assets/games-atlas.jpg',function(t){t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);atlasMat.map=t;atlasMat.needsUpdate=true;dirty=2;});
+  var y=block(GAMES.slice(0,NSINGLE),0,'All 105 games · single player · '+NSINGLE,top);
+  return block(GAMES.slice(NSINGLE),NSINGLE,'Multiplayer, same device · '+(GAMES.length-NSINGLE),y-.15);}
+
+/* ---- the board, section by section. Every column is 5.4 wide: wide cards, two cards (x ±1.425),
+        three stat tiles or four posters per row. Rows stack top-down with even gaps. ---- */
+var C2=2.55,WIDE=5.4,S2=1.33,SW=2.2;
+var SECTIONS=[
+ {accent:'#ffc20e',title:'Aayush Kumar',sub:'games · AI · 3D',rows:[
+   [{img:'assets/dp.png',fit:'contain',pixel:true,bg:'#f2c14e',title:'Hi, I’m Aayush',text:'Game developer and AI / backend engineer from Jaipur. NIT Jaipur, B.Tech ECE, graduating 2026.',chips:['JEE MAIN 98.9','AIR 8956'],url:GH.slice(0,-1)},
+    {art:'skills',title:'What I work with',text:'Engines, web 3D, AI backends and the Blender pipelines behind a YouTube channel.',url:GH.slice(0,-1)}],
+   [{art:'explore',slot:.95,title:'Start exploring',text:'Scroll down, or tap a card to open the project it shows.',lines:2,url:'#space'}]]},
+ {accent:'#f7b267',title:'By the numbers',sub:'counted, not estimated',rows:[
+   {stats:[{big:'154',label:'interactive builds'},{big:'141K',label:'lines of game code'},{big:'43',label:'Three.js builds'}]},
+   {stats:[{big:'15',label:'P2P multiplayer'},{big:'28',label:'Blender add-ons'},{big:'21.9K',label:'YouTube subs',url:YT}]},
+   [{art:'bars',slot:1.25,title:'Code volume',text:'Lines of code across every build, the Blender suite and HexaBed.',lines:1}]]},
+ {accent:'#ffc20e',title:'ARTHIS.space',sub:'website · 105 games',rows:[
+   [{img:'assets/rs-space-desktop.jpg',slot:SW,title:'ARTHIS.space',text:'A TikTok-style feed of 105 mini-games: open it and you are already playing. Backend scaled from 1 to 10,000 daily players.',lines:2,chips:['REACT','SUPABASE','MCP AGENTS'],url:SPACE,gh:'arthis.space'}],
+   {posters:[{img:'assets/cover-fruit-blast.jpg',title:'Fruit Blast',url:SPACE+'/minigame/single_player/fruit-blast'},{img:'assets/cover-chess.jpg',title:'Chess',url:SPACE+'/minigame/multiplayer/chess'},{img:'assets/cover-table-tennis.jpg',title:'Table Tennis',url:SPACE+'/minigame/multiplayer/table-tennis'},{img:'assets/cover-doodle-militia.jpg',title:'Doodle Militia',url:SPACE+'/minigame/multiplayer/doodle-militia'}]},
+   {games:true}]},
+ {accent:'#e5484d',title:'ARTHIS.land',sub:'website · The Wall',rows:[
+   [{img:'assets/land-wall.jpg',slot:SW,title:'ARTHIS.land, The Wall',text:'A city of rooms in the browser. Unity shipped to WebGL, with 2–4 people sharing a room in real time.',lines:2,chips:['UNITY','WEBGL','C#'],url:LAND,gh:'arthis.land'}],
+   [{img:'assets/land-room.jpg',title:'Rooms on the wall',text:'My Room, Aashna, Bindo + Pinky, Dada, Mummy Papa, Kitchen and Mandir.',url:LAND},
+    {img:'assets/land-steps-title.png',fit:'contain',bg:'#fff1d6',title:'Build in 3 steps',text:'1. Build your bed. 2. Create your avatar. 3. Edit the blocks.',url:LAND}],
+   [{art:'relay',title:'arthisland-relay',text:'TCP and WebSocket on one port, written from scratch in pure Python.',chips:['PYTHON','0 DEPS'],gh:'arthisland-relay'},
+    {art:'docs',title:'Land Maker docs',text:'An 11-chapter spec for a Unity tool that builds islands, rooms and furniture.',url:'https://itsaayush2004.github.io/arthis-land-maker-docs/',gh:'arthis-land-maker-docs'}]]},
+ {accent:'#5fb3e4',title:'Responsive UI',sub:'one UI, every screen',rows:[
+   {devices:[{kind:'laptop',img:'assets/rs-space-desktop.jpg',w:2.6,x:-1.3,cap:'desktop 1440',url:SPACE},{kind:'tablet',img:'assets/rs-space-tablet.jpg',w:1.1,x:.85,cap:'tablet 820',url:SPACE},{kind:'phone',img:'assets/rs-space-phone.jpg',w:.72,x:2.2,cap:'phone 390',url:SPACE}],h:2.25,label:'ARTHIS.space at three widths'},
+   {devices:[{kind:'laptop',img:'assets/rs-land-about-desktop.jpg',w:2.9,x:-1.1,cap:'desktop 1440',url:LAND},{kind:'phone',img:'assets/rs-land-about-phone.jpg',w:.72,x:1.75,cap:'phone 390',url:LAND}],h:2.4,label:'ARTHIS.land at two widths'},
+   [{art:'tiers',slot:1.5,title:'This page adapts too',text:'Desktop gets full 3D; tablets get lighter shadows; phones drop shadows and redraw only when something moves.',lines:2,url:'#responsive'}]]},
+ {accent:'#4caf50',title:'Engines & apps',sub:'the tools under the games',rows:[
+   [{art:'hex',title:'HexaBed',text:'A procedural hex terrain engine in Unity with a road generator and a custom editor.',chips:['UNITY','3,705 LINES'],note:'Unity · source not public'},
+    {img:'assets/shot-hexgrid.jpg',title:'HexGrid Architect',tag:'private',text:'A 3D hex-grid builder: pick ground, press Build, stack houses and roofs.',gh:'build-it-again-friend'}],
+   [{art:'app',slot:1.3,title:'ARTHIS mini-games app',text:'The ARTHIS feed as an Android app: Expo, React Native, Skia graphics and a 60fps rule.',lines:2,gh:'game-reel-galaxy'}]]},
+ {accent:'#a78bfa',title:'Web apps & tools',sub:'shipped end to end',rows:[
+   [{img:'assets/shot-hustiq.jpg',title:'Hustiq',tag:'private',text:'A video editor you drive by chatting, with FFmpeg export in the browser.',gh:'editease-pro'},
+    {img:'assets/shot-pomodoro.jpg',title:'Work For it',tag:'private',text:'A Pomodoro timer with focus stats and tasks, packaged for desktop.',gh:'daily-rest-flow'}],
+   [{img:'assets/shot-3dasset.jpg',title:'3D asset viewer',tag:'private',text:'A Three.js viewer for ARTHIS furniture with info panels and downloads.',gh:'3d-asset'},
+    {img:'assets/shot-atlas.jpg',title:'Travel Atlas',text:'A Three.js globe charting 30+ places I’ve been and the ones I dream of.',url:'https://itsaayush2004.github.io/TravelDiary/',gh:'TravelAtlas'}],
+   [{art:'gallery',title:'3D gallery portfolio',text:'My CV as eight toon-shaded rooms you walk through by scrolling.',url:'https://itsaayush2004.github.io/portfolio/',gh:'portfolio'},
+    {art:'avatar',title:'Avatar Maker',tag:'private',text:'Design an avatar from presets or mix your own parts, saved to your account.',gh:'avatar-studio-maker'}]]},
+ {accent:'#f97316',title:'AI automation',sub:'a sentence in, a shipped thing out',rows:[
+   [{art:'factory',title:'Game Factory',text:'Ask for a game; it builds one, then an AI judge loops until it beats the catalog.',url:'#ai'},
+    {art:'reelf',title:'Reel Factory',text:'Script to storyboard to Blender render in one go, driven over MCP.',url:'#ai'}],
+   [{art:'clymora',slot:1.25,title:'Systems & inference at Clymora',text:'GPT-2 from scratch, RAG pipelines, async FastAPI inference and 23 ComfyUI workflows.',lines:2,chips:['PYTORCH','FASTAPI','RAG']}]]},
+ {accent:'#f5792a',title:'Blender add-ons',sub:'28 add-ons · 27,208 lines',rows:[
+   [{art:'blender',slot:1.9,title:'The add-on suite',text:'Lip-sync, camera rigs, IK auto-posing and one-click renders, written to ship a channel.',lines:2,chips:['PYTHON','BLENDER API']}],
+   [{art:'diorama',slot:1.4,title:'Dioramas',text:'Low-poly Indian houses, clinics, dhabas and trucks, matte and chunky, exported as GLB and FBX into Unity and Three.js.',lines:2,url:YT}]]},
+ {accent:'#f472b6',title:'Reels & YouTube',sub:'@AKverseOfficial',rows:[
+   [{art:'reel1',title:'Kaleshi Family',text:'A Hinglish mini-drama in my dioramas with a cliffhanger every episode.',url:YT},
+    {art:'reel2',title:'Diorama Build Shorts',text:'Tilu calls it, then a Blender diorama builds itself piece by piece.',url:YT}],
+   [{art:'kit',slot:1.7,title:'YouTube UI system',text:'Thumbnails, title type, series colours, end screens and an SEO pack for every upload.',lines:2,url:YT}]]},
+ {accent:'#e5484d',title:'Say hi',sub:'open to roles from 2026',rows:[
+   [{art:'mail',slot:1.5,title:'Let’s build something',text:'aayushkumarofficial21@gmail.com · channel and business: akversebusiness@gmail.com',lines:2,url:'#contact'}],
+   [{art:'ghc',title:'GitHub',text:'Every public repo, from ARTHIS to Travel Atlas.',url:GH.slice(0,-1),lines:2},
+    {art:'yt',title:'YouTube',text:'Kaleshi Family, Diorama Builds and more on AKverse.',url:YT,lines:2}]]}
 ];
 
-/* device mock-ups: a dark body with the real screenshot as its screen */
-function addDevice(cx,cy,it){
-  tl.load(it.src,function(t){t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);
-    var a=t.image.width/t.image.height,w=it.w,h=w/a,b=it.kind==='laptop'?.07:it.kind==='tablet'?.08:.06,grp=new THREE.Group();
-    var dark=new THREE.MeshStandardMaterial({color:0x1b1714,roughness:.35,metalness:.2});
-    var body=new THREE.Mesh(new THREE.BoxGeometry(w+2*b,h+2*b+(it.kind==='phone'?.08:0),.06),dark);body.castShadow=true;grp.add(body);
-    var scr=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:t,roughness:.3,emissive:0xffffff,emissiveMap:t,emissiveIntensity:.18}));scr.position.z=.031;grp.add(scr);
-    if(it.kind==='laptop'){var base=new THREE.Mesh(new THREE.BoxGeometry(w*1.18,.1,.08),new THREE.MeshStandardMaterial({color:0x9a958f,metalness:.6,roughness:.35}));base.position.set(0,-h/2-b-.05,.02);base.castShadow=true;grp.add(base);}
-    if(it.cap){var cc=mk(512,72),cg=cc.getContext('2d');cg.fillStyle='rgba(0,0,0,0)';cg.clearRect(0,0,512,72);cg.fillStyle='#fff6e0';cg.font='700 50px Caveat, cursive';cg.textAlign='center';cg.fillText(it.cap,256,52);
-      var cm=new THREE.Mesh(new THREE.PlaneGeometry(1.6,1.6*72/512),new THREE.MeshBasicMaterial({map:tex(cc),transparent:true,depthWrite:false}));cm.position.set(0,-h/2-b-(it.kind==='laptop'?.32:.24),-.03);grp.add(cm);}
-    place(grp,cx,cy,it);},undefined,function(){});}
+/* lay the columns out once, so SPAN (how far the camera pans per section) comes from real heights */
+var SPAN=[],TOP=1.52,GAP=.3;
+SECTIONS.forEach(function(sec,i){var y=TOP;sec.layout=[];
+  sec.rows.forEach(function(row){
+    if(Array.isArray(row)){var two=row.length===2,h=0;row.forEach(function(it,k){it.w=two?C2:WIDE;it.slot=it.slot||(two?S2:SW);it.lines=it.lines||3;it.h=cardHeight(it);h=Math.max(h,it.h);it.x=two?(k?1.425:-1.425):0;});
+      row.forEach(function(it){it.y=y-it.h/2;sec.layout.push(['card',it]);});y-=h+GAP;}
+    else if(row.stats){row.stats.forEach(function(it,k){it.w=1.6;it.h=1.15;it.x=-1.9+k*1.9;it.y=y-.575;sec.layout.push(['stat',it]);});y-=1.15+GAP;}
+    else if(row.posters){row.posters.forEach(function(it,k){it.w=1.2;it.x=-2.1+k*1.4;it.y=y-1.07;sec.layout.push(['poster',it]);});y-=2.48+GAP;}
+    else if(row.devices){sec.layout.push(['strip',{y:y-.17,text:row.label}]);y-=.34+.25;row.devices.forEach(function(it){it.y=y-row.h/2+.25;sec.layout.push(['device',it]);});y-=row.h+GAP;}
+    else if(row.games){var rows=Math.ceil(NSINGLE/GCOLS)+Math.ceil((GAMES.length-NSINGLE)/GCOLS);sec.layout.push(['games',{y:y-.17}]);y-=.34*2+.36+.25+rows*.6+.3;}
+  });
+  SPAN[i]=Math.max(0,-.3-(y+GAP)-2.55);});
 
-/* the ARTHIS.space wall: 105 icon tiles from one sprite sheet, single-player then multiplayer */
-function addGames(cx,cy,it){
-  tl.load('assets/games-atlas.jpg',function(t){
-    t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);
-    var mat=new THREE.MeshStandardMaterial({map:t,roughness:.55}),paper=new THREE.MeshStandardMaterial({color:0xfdfbf5,roughness:.85});
-    var P_=.6,S=.52,x0=-2.4,y=it.y;
-    function block(list,offset,label,top){
-      addDymo(cx,cy,{text:label,y:top,h:.2,z:.03});
-      list.forEach(function(g,j){var k=offset+j,col=k%GCOLS,row=Math.floor(k/GCOLS);
-        var u0=col/GCOLS,u1=(col+1)/GCOLS,v1=1-row/GROWS,v0=1-(row+1)/GROWS;
-        var geo=new THREE.PlaneGeometry(S,S);geo.setAttribute('uv',new THREE.Float32BufferAttribute([u0,v1,u1,v1,u0,v0,u1,v0],2));
-        var grp=new THREE.Group(),back=new THREE.Mesh(new THREE.PlaneGeometry(S+.05,S+.05),paper);back.castShadow=true;grp.add(back);
-        var ic=new THREE.Mesh(geo,mat);ic.position.z=.004;grp.add(ic);
-        var url=SPACE+'/minigame/'+(g[2]==='s'?'single_player':'multiplayer')+'/'+g[0];
-        place(grp,cx,cy,{x:x0+(j%GCOLS)*P_,y:top-.45-Math.floor(j/GCOLS)*P_,r:(Math.random()-.5)*1.6,z:.05,url:url,tip:'Play '+g[1]+' ↗'});});
-      return top-.45-Math.ceil(list.length/GCOLS)*P_;}
-    var end=block(GAMES.slice(0,NSINGLE),0,'SINGLE PLAYER · '+NSINGLE,y);
-    block(GAMES.slice(NSINGLE),NSINGLE,'MULTIPLAYER · '+(GAMES.length-NSINGLE),end-.1);
-  });}
-
-function buildString(){
-  var pts=[];
-  anchors.forEach(function(a,i){var p=new THREE.Vector3(a.x+2.85,a.y+2.55,.03);
-    if(i>0){var q=pts[pts.length-1];pts.push(new THREE.Vector3((q.x+p.x)/2,Math.min(q.y,p.y)-2.6,.035));}
-    pts.push(p);});
-  var curve=new THREE.CatmullRomCurve3(pts,false,'centripetal');
-  var s=new THREE.Mesh(new THREE.TubeGeometry(curve,500,.014,6,false),new THREE.MeshStandardMaterial({color:0xb3261e,roughness:.7}));
-  s.castShadow=true;scene.add(s);
-  var g=new THREE.Group();anchors.forEach(function(a){addPin(g,a.x+2.85,a.y+2.55,0,0xc42132);});scene.add(g);}
 function build(){
-  var F={device:addDevice,games:addGames,note:addNote,photo:addPhoto,sticker:addSticker,reel:addReel,kit:addKit,card:addCard,dymo:addDymo,marker:addMarker,ring:addRing,gh:addGhCard};
-  BOARD.forEach(function(list,i){var a=anchors[i];list.forEach(function(it){F[it.k](a.x,a.y,it);});});
-  buildString();}
+  buildBoard(Math.max.apply(null,SPAN));
+  SECTIONS.forEach(function(sec,i){var a=anchors[i];
+    addHeader(a.x,a.y,{title:sec.title,sub:sec.sub,y:2.15},sec.accent);
+    sec.layout.forEach(function(L){var it=L[1];
+      if(L[0]==='card')addCard(a.x,a.y,it,sec.accent);else if(L[0]==='stat')addStat(a.x,a.y,it,sec.accent);
+      else if(L[0]==='poster')addPoster(a.x,a.y,it,sec.accent);else if(L[0]==='device')addDevice(a.x,a.y,it);
+      else if(L[0]==='strip')addStrip(a.x,a.y,it.y,it.text,sec.accent);else if(L[0]==='games')addGames(a.x,a.y,it.y,sec.accent);});});
+  /* one tidy red string across the tops of the columns */
+  var pts=[];anchors.forEach(function(a,i){var p=new THREE.Vector3(a.x,2.78,.05);if(i>0){var q=pts[pts.length-1];pts.push(new THREE.Vector3((q.x+p.x)/2,2.35,.05));}pts.push(p);});
+  var s=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),400,.013,6,false),new THREE.MeshStandardMaterial({color:0xb3261e,roughness:.7}));s.castShadow=TIER!=='lite';scene.add(s);
+  var pg=new THREE.Group();anchors.forEach(function(a){addPin(pg,a.x,2.78,0,0xc42132);});scene.add(pg);}
 
-var fontsReady=document.fonts?Promise.race([Promise.all(['700 40px Caveat','500 40px Caveat','900 40px Archivo','700 20px "JetBrains Mono"'].map(function(f){return document.fonts.load(f);})),new Promise(function(r){setTimeout(r,2500);})]):Promise.resolve();
+var loadMgr=new THREE.LoadingManager(),tl=new THREE.TextureLoader(loadMgr);
+var fontsReady=document.fonts?Promise.race([Promise.all(['700 40px Caveat','900 40px Archivo','800 40px Archivo','500 28px Archivo','700 20px "JetBrains Mono"'].map(function(f){return document.fonts.load(f);})),new Promise(function(r){setTimeout(r,2500);})]):Promise.resolve();
 fontsReady.then(build);
 loadMgr.onLoad=function(){dirty=3;setTimeout(hideLoader,150);};loadMgr.onProgress=function(){dirty=2;};
 setTimeout(hideLoader,5000);
@@ -910,21 +884,22 @@ var ray=new THREE.Raycaster(),ptr=new THREE.Vector2(),hot=null,tip=document.getE
 function pick(cx,cy){ptr.set(cx/innerWidth*2-1,-(cy/innerHeight)*2+1);ray.setFromCamera(ptr,camera);
   var hit=ray.intersectObjects(clickables,true)[0];if(!hit)return null;var o=hit.object;while(o&&!(o.userData&&o.userData.url))o=o.parent;return o;}
 function overCard(cx,cy){var el=document.elementFromPoint(cx,cy);return el&&el!==canvas&&!el.classList.contains('cork-bg');}
+function go(u){if(u[0]==='#'){var el=document.getElementById(u.slice(1));if(el)el.scrollIntoView({behavior:reduce?'auto':'smooth'});}else openUrl(u);}
 addEventListener('pointermove',function(e){
   mouse.x=e.clientX/innerWidth-.5;mouse.y=e.clientY/innerHeight-.5;
   var o=(e.pointerType==='mouse'&&!overCard(e.clientX,e.clientY))?pick(e.clientX,e.clientY):null;
-  hot=o;canvas.classList.toggle('hot',!!o);
+  if(o!==hot)dirty=2;hot=o;canvas.classList.toggle('hot',!!o);
   if(o){tip.hidden=false;tip.textContent=o.userData.tip;tip.style.left=e.clientX+'px';tip.style.top=e.clientY+'px';}else tip.hidden=true;
 },{passive:true});
 addEventListener('pointerdown',function(e){downAt=[e.clientX,e.clientY];},{passive:true});
 addEventListener('click',function(e){
   if(!downAt||Math.abs(e.clientX-downAt[0])+Math.abs(e.clientY-downAt[1])>8)return;
   if(overCard(e.clientX,e.clientY))return;
-  var o=pick(e.clientX,e.clientY);if(o)openUrl(o.userData.url);});
+  var o=pick(e.clientX,e.clientY);if(o)go(o.userData.url);});
 
 /* camera */
 var cur=0;
-function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);dirty=2;camera.aspect=w/h;camera.updateProjectionMatrix();measure();}
+function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();measure();dirty=2;}
 addEventListener('resize',resize);resize();
 function ease(f){return f*f*f*(f*(f*6-15)+10);}
 var slow=0,last=0,acc=0,cnt=0,lastCam=new THREE.Vector3(),watch=TIER!=='lite';
@@ -942,21 +917,21 @@ function frame(t){
   if(f<=.5||i===N-1){var pan=Math.min(1,f*2);ax=anchors[i].x;ay=anchors[i].y-.3-SPAN[i]*ease(pan);}
   else{var e=ease((f-.5)*2),A=anchors[i],B=anchors[i+1];ax=A.x+(B.x-A.x)*e;ay=(A.y-.3-SPAN[i])+((B.y-.3)-(A.y-.3-SPAN[i]))*e;swoop=Math.sin(Math.PI*e);dir=B.x-A.x;}
   var asp=camera.aspect,z,ox=0,oy=0;
-  if(asp>=.9){z=Math.max(7.9,9.6/(2*FOVT*asp));ox=-2*z*FOVT*asp*.19;}
+  if(asp>=.9){z=Math.max(8.1,9.6/(2*FOVT*asp));ox=-2*z*FOVT*asp*.175;}
   else{z=6.1/(2*FOVT*asp);oy=-2*z*FOVT*.22;}
   z+=2.2*swoop;
-  var px=SWAY?mouse.x*.35:0,py=SWAY?-mouse.y*.25:0;
+  var px=SWAY?mouse.x*.25:0,py=SWAY?-mouse.y*.18:0;
   camera.position.set(ax+ox+px,ay+oy+py,z);
   camera.lookAt(ax+ox+dir*.03*swoop,ay+oy,0);
   var moving=camera.position.distanceToSquared(lastCam)>1e-7;lastCam.copy(camera.position);
   if(moving){sun.position.set(camera.position.x-7,camera.position.y+9,7);sun.target.position.set(camera.position.x,camera.position.y,0);}
   var lifting=false;
   floaters.forEach(function(g){var u=g.userData,goal=g===hot?1:0;
-    if(Math.abs(goal-u.lift)>.002){u.lift+=(goal-u.lift)*.18;lifting=true;g.position.z=u.z0+u.lift*.22;g.scale.setScalar(1+u.lift*.04);}
-    if(SWAY){g.rotation.z=u.base+Math.sin(t*.7+u.ph)*.01;g.rotation.y=Math.sin(t*.5+u.ph)*.025;}});
+    if(Math.abs(goal-u.lift)>.002){u.lift+=(goal-u.lift)*.2;lifting=true;g.position.z=u.z0+u.lift*.18;}});
   if(TIER==='full'||SWAY||moving||lifting||dirty>0){renderer.render(scene,camera);if(dirty>0)dirty--;}
 }
 requestAnimationFrame(frame);
+
 })();
 </script>
 </body>
