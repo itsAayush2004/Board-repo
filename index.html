@@ -2,197 +2,586 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Aayush — Portfolio Board</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aayush Kumar Board</title>
+<meta name="description" content="Aayush Kumar — game developer, AI &amp; backend engineer. A 3D corkboard portfolio: ARTHIS.space, ARTHIS.land, HexaBed, AI automation, Blender add-ons and AKverse reels.">
+<link rel="icon" href="assets/dp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Caveat:wght@500;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+<style>
+/* Layout: a fixed WebGL corkboard behind the page; the camera travels the board as you scroll,
+   while paper cards carrying the words ride up the left column. */
+:root{
+  color-scheme: light;
+  --cork:#b98551;      /* board */
+  --wood:#4a2e17;      /* frame + deep ground */
+  --paper:#fbf7ec;     /* cards */
+  --ink:#1c1712;       /* text */
+  --muted:#5e5246;     /* secondary text on paper */
+  --red:#c42132;       /* ARTHIS red, pins + string */
+  --yellow:#ffc20e;    /* ARTHIS.space yellow */
+  --note-y:#f8dc6c; --note-p:#f5a9bb; --note-b:#a2d4ea; --note-g:#b9dd92;
+  --f-display:'Archivo', 'Arial Narrow', system-ui, sans-serif;
+  --f-hand:'Caveat', 'Comic Sans MS', cursive;
+  --f-mono:'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--wood);color:var(--ink);font-family:var(--f-display);font-size:16px;line-height:1.5;font-variation-settings:'wdth' 100}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--paper);padding:8px 12px;z-index:50}
+.skip:focus{left:8px}
+
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+.nogl #gl{display:none}
+.nogl body,.nogl{background-color:var(--cork)}
+.cork-bg{position:fixed;inset:0;z-index:-1;background-color:var(--cork);
+  background-image:radial-gradient(rgba(70,40,15,.35) 1px,transparent 1.6px),radial-gradient(rgba(255,236,200,.22) 1px,transparent 1.8px);
+  background-size:7px 7px,11px 11px}
+
+/* header */
+.top{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(env(safe-area-inset-top,0px) + 12px) clamp(16px,4vw,48px) 12px;display:flex;align-items:center;justify-content:space-between;gap:16px;pointer-events:none}
+.top > *{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;background:var(--paper);padding:6px 14px 6px 6px;border-radius:40px;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+.brand img{width:34px;height:34px;border-radius:50%;image-rendering:pixelated;background:#eee}
+.brand b{font-weight:800;font-size:15px;letter-spacing:-.01em}
+.brand span{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.nav{display:flex;gap:4px;background:var(--ink);padding:5px;border-radius:40px;flex-wrap:wrap;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+.nav a{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#efe6d4;text-decoration:none;padding:7px 11px;border-radius:30px}
+.nav a:hover{background:#3a3027}
+.nav a.on{background:var(--yellow);color:var(--ink)}
+@media (max-width:900px){.nav{display:none}}
+
+/* scroll progress: a strip of red string on the right edge */
+.thread{position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);z-index:15;display:flex;flex-direction:column;gap:14px;align-items:center}
+.thread::before{content:"";position:absolute;top:6px;bottom:6px;left:50%;width:2px;margin-left:-1px;background:var(--red);opacity:.85}
+.thread a{position:relative;width:14px;height:14px;border-radius:50%;background:var(--paper);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+.thread a.on{background:var(--red);transform:scale(1.3)}
+.thread a span{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;background:var(--ink);color:var(--paper);padding:3px 7px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .2s}
+.thread a:hover span,.thread a:focus-visible span{opacity:1}
+@media (max-width:700px){.thread{display:none}}
+
+/* sections */
+main{position:relative;z-index:5}
+.sec{min-height:100vh;padding:clamp(96px,14vh,150px) clamp(16px,6vw,96px) 12vh;display:flex;align-items:center}
+.sec + .sec{margin-top:18vh}
+.card{position:relative;width:min(470px,100%);background:var(--paper);padding:34px 32px 28px;box-shadow:0 2px 2px rgba(0,0,0,.18),0 26px 40px -14px rgba(30,15,3,.65);transform:rotate(var(--r,-.6deg))}
+.card::before{content:"";position:absolute;top:-13px;left:50%;width:120px;height:28px;margin-left:-60px;background:rgba(246,238,214,.78);box-shadow:0 1px 2px rgba(0,0,0,.18);transform:rotate(-2deg)}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);display:flex;gap:10px;align-items:center}
+.eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:inset -2px -2px 0 rgba(0,0,0,.3)}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1{font-size:clamp(64px,10vw,112px);font-weight:900;line-height:.86;letter-spacing:-.035em;font-variation-settings:'wdth' 75;margin-top:10px}
+h1 i{font-style:normal;color:var(--red)}
+h2{font-size:clamp(34px,4.4vw,48px);font-weight:900;line-height:.95;letter-spacing:-.025em;font-variation-settings:'wdth' 78;margin-top:10px}
+h3{font-size:22px;font-weight:800;letter-spacing:-.01em;font-variation-settings:'wdth' 85;display:flex;align-items:center;gap:10px}
+h3 img{width:28px;height:28px;object-fit:contain}
+.hand{font-family:var(--f-hand);font-size:26px;line-height:1.1;color:var(--muted);margin:10px 0 0}
+p{margin:12px 0 0;max-width:62ch}
+.lede{font-size:17px}
+.stack{display:flex;flex-direction:column;gap:22px;margin-top:22px}
+.item{border-top:1.5px dashed #cdbfa6;padding-top:18px}
+ul.ticks{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
+ul.ticks li{padding-left:18px;position:relative}
+ul.ticks li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;background:var(--red);transform:rotate(45deg)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tags span{font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;border:1.5px solid var(--ink);padding:3px 7px;border-radius:4px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:44px;font-weight:800;font-size:14px;text-decoration:none;background:var(--ink);color:var(--paper);border:0;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--red)}
+.btn.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn.alt:hover{background:var(--yellow)}
+.btn svg{width:16px;height:16px}
+.meta{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em;margin-top:14px}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 14px;margin-top:22px}
+.stat b{display:block;font-size:40px;font-weight:900;line-height:1;letter-spacing:-.03em;font-variation-settings:'wdth' 70;font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.bars{margin-top:22px;display:flex;flex-direction:column;gap:9px;font-size:13px}
+.bar{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center}
+.bar i{display:block;height:10px;background:var(--yellow);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.bar em{font-style:normal;font-family:var(--f-mono);font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:460px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.bar{grid-template-columns:110px 1fr 56px}}
+
+.yt{margin-top:16px;background:var(--ink);color:#efe6d4;border-radius:10px;padding:14px}
+.yt-head{display:flex;align-items:center;gap:10px}
+.yt-head img{width:36px;height:36px;border-radius:50%;image-rendering:pixelated;background:#fff}
+.yt-head b{color:#fff}
+.yt-head span{font-size:12px;color:#bdb2a0;display:block}
+.yt-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.thumb{aspect-ratio:16/9;max-width:100%;border-radius:5px;display:flex;align-items:flex-end;padding:5px}
+.thumb b{font-size:11px;font-weight:900;background:#fff;color:var(--ink);padding:1px 4px;line-height:1.2}
+.thumb.t1{background:#e9a23b}.thumb.t2{background:#2b62d6}.thumb.t2 b{background:var(--yellow)}.thumb.t3{background:#2f8f5b}
+.yt-grid small{display:block;font-size:11px;color:#bdb2a0;margin-top:4px}
+
+.mail{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:16px}
+.mail code{font-family:var(--f-mono);font-size:14px;background:#efe6d0;padding:9px 12px;border-radius:6px;user-select:all;overflow-wrap:anywhere}
+.copied{font-family:var(--f-hand);font-size:22px;color:var(--red)}
+
+/* images inside cards only when the 3D board cannot run */
+.fallback{display:none;margin-top:14px;width:100%;border:8px solid #fff;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
+.nogl .fallback{display:block}
+
+footer{position:relative;z-index:5;padding:18vh 16px calc(40px + env(safe-area-inset-bottom,0px));text-align:center;color:#f4ead6;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em}
+footer a{color:var(--yellow)}
+
+/* loader */
+.loader{position:fixed;inset:0;z-index:40;background:var(--wood);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:#f4ead6;transition:opacity .6s}
+.loader.gone{opacity:0;pointer-events:none}
+.loader p{font-family:var(--f-hand);font-size:30px;margin:0}
+.loader .pin{width:22px;height:22px;border-radius:50%;background:var(--red);box-shadow:inset -4px -4px 0 rgba(0,0,0,.3);animation:bob 1s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-10px)}}
+@media (prefers-reduced-motion: reduce){.loader .pin{animation:none}}
+
+/* phones: the board shows in the top half of each screen, the card scrolls up underneath */
+@media (max-aspect-ratio: 9/10){
+  .sec{align-items:flex-start;padding-top:56vh}
+  .sec + .sec{margin-top:6vh}
+  .card{padding:30px 22px 24px}
+}
+</style>
 </head>
 <body>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=Archivo:wght@500;700;900&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0;background:#3b2412;min-height:100vh;display:flex;justify-content:center;overflow:auto}
-.wrap{padding:24px;transform-origin:top center}
-a{color:#1d3f8f}a:hover{color:#0f2559}
-.cork{background-color:#c4925c;background-image:radial-gradient(rgba(90,52,20,.35) 1px,transparent 1.6px),radial-gradient(rgba(255,236,200,.25) 1px,transparent 1.8px),radial-gradient(rgba(70,40,15,.22) 2px,transparent 2.6px);background-size:7px 7px,11px 11px,23px 23px;background-position:0 0,3px 5px,9px 2px}
-.note{position:absolute;box-sizing:border-box;box-shadow:0 1px 1px rgba(0,0,0,.18),0 10px 18px -6px rgba(40,20,5,.45)}
-.pin{position:absolute;top:-9px;left:50%;width:20px;height:20px;margin-left:-10px;border-radius:50%;box-shadow:inset -3px -4px 0 rgba(0,0,0,.28),0 4px 4px rgba(0,0,0,.35)}
-.tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;margin-left:-55px;background:rgba(250,245,225,.72);box-shadow:0 1px 2px rgba(0,0,0,.15)}
-.hand{font-family:'Caveat',cursive}
-.mono{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
-.tag{display:inline-block;padding:3px 7px;border:1.5px solid currentColor;border-radius:4px;margin:0 4px 4px 0}
-</style>
-<div class="wrap"><div class="cork" style="position: relative; width: 1680px; height: 1180px; box-sizing: border-box; border: 22px solid #5e3a1c; border-radius: 10px; overflow: hidden; font-family: 'Archivo', sans-serif; color: #1f1a14">
+<a class="skip" href="#hello">Skip to content</a>
+<div class="cork-bg" aria-hidden="true"></div>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="loader" id="loader" aria-hidden="true"><div class="pin"></div><p>pinning things up…</p></div>
 
-<svg width="1636" height="1136" viewBox="0 0 1636 1136" style="position: absolute; left: 0; top: 0; pointer-events: none" aria-hidden="true">
-<g fill="none" stroke="#b3261e" stroke-width="2.4" stroke-linecap="round">
-<path d="M818 64 Q 520 140 180 92"></path>
-<path d="M818 64 Q 640 210 452 122"></path>
-<path d="M818 64 Q 1020 140 1236 92"></path>
-<path d="M818 64 Q 1200 220 1498 122"></path>
-<path d="M818 64 Q 760 260 690 302"></path>
-<path d="M818 64 Q 900 250 948 282"></path>
-<path d="M690 302 Q 400 520 180 540"></path>
-<path d="M690 302 Q 560 520 452 570"></path>
-<path d="M948 282 Q 1150 470 1372 540"></path>
-<path d="M948 282 Q 870 520 818 618"></path>
-<path d="M818 618 Q 818 800 818 912"></path>
-</g>
-</svg>
+<header class="top">
+  <a class="brand" href="#hello"><img src="assets/dp.png" alt="" width="34" height="34"><div><b>Aayush Kumar</b><br><span>Games · AI · 3D</span></div></a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#web">Websites</a><a href="#games">Games</a><a href="#ai">AI systems</a><a href="#blender">Blender</a><a href="#reels">Reels &amp; YouTube</a><a href="#contact">Contact</a>
+  </nav>
+</header>
+<nav class="thread" aria-label="Board progress" id="thread"></nav>
 
-<!-- ID CARD -->
-<div class="note" style="left: 548px; top: 46px; width: 540px; height: 210px; background: #fbf8ef; transform: rotate(-1deg); padding: 30px 32px 22px; display: flex; gap: 24px; align-items: center">
-<div class="pin" style="background: #d6402b"></div>
-<div style="width: 120px; height: 140px; flex-shrink: 0; background: #2a2622; border: 6px solid #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; transform: rotate(3deg)">
-<span class="hand" style="font-size: 26px; color: #f6d86b; text-align: center; line-height: 1">[YOUR PHOTO]</span>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<span class="mono" style="color: #8a4b1c">Portfolio · 2026</span>
-<h1 style="margin: 0; font-size: 50px; font-weight: 900; letter-spacing: -0.02em; line-height: 0.95">Aayush<span style="color: #d6402b">.</span></h1>
-<p class="hand" style="margin: 0; font-size: 27px; line-height: 1.05; color: #3a2f25">I build games, websites, AI pipelines &amp; the reels that show them off — under <b>AKVerse</b> &amp; <b>ARTHIS</b>.</p>
-</div>
-</div>
+<main>
+<section class="sec" id="hello" data-label="Hello">
+  <div class="card" style="--r:-1deg">
+    <div class="eyebrow">Jaipur, India · NIT Jaipur, B.Tech ECE ’26</div>
+    <h1>Aayush<i>.</i></h1>
+    <p class="hand">I build worlds, games &amp; the tools behind them.</p>
+    <p class="lede">Game developer and AI / backend engineer. I make the ARTHIS universe, a feed of multiplayer mini-games and a Unity vertical city, and the AKverse channel that tells stories in my own Blender dioramas.</p>
+    <p>Most of what I make is a system that makes other things easier to make: a hex terrain generator so level design stops being manual, a lip-sync add-on so animation stops being frame-by-frame, an agent layer so a game can start from a sentence.</p>
+    <img class="fallback" src="assets/art-01.jpg" alt="Aayush's pixel avatar with Unity, Web 3D, AI and GitHub stickers" loading="lazy">
+    <div class="links">
+      <a class="btn" href="#numbers">Scroll the board <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <a class="btn alt" href="https://arthis.space" target="_blank" rel="noopener">Play ARTHIS.space</a>
+    </div>
+    <p class="meta">Open to game development, graphics and AI engineering roles from 2026.</p>
+  </div>
+</section>
 
-<!-- 01 WEBSITES -->
-<div class="mono" style="position: absolute; left: 60px; top: 30px; background: #1f1a14; color: #f6d86b; padding: 6px 10px; transform: rotate(-2deg)">01 · Websites</div>
-<div class="note" style="left: 50px; top: 80px; width: 260px; height: 250px; background: #f6d86b; transform: rotate(-3deg); padding: 26px 22px 18px">
-<div class="pin" style="background: #2b62d6"></div>
-<div class="mono" style="color: #7a5a00">Website · 01</div>
-<h2 class="hand" style="margin: 6px 0 4px; font-size: 38px; font-weight: 700; line-height: 1">ARTHIS.space</h2>
-<p style="margin: 0 0 10px; font-size: 14px; line-height: 1.4">A home for my browser games — every title rebuilt to one house style kit, phone-scaled and tested at 5 screen sizes.</p>
-<div class="mono" style="color: #5b4300"><span class="tag">Web</span><span class="tag">Games hub</span></div>
-<a class="hand" href="https://arthis.space" style="font-size: 22px; font-weight: 700">visit →</a>
-</div>
-<div class="note" style="left: 330px; top: 108px; width: 260px; height: 250px; background: #9fd3e8; transform: rotate(2.5deg); padding: 26px 22px 18px">
-<div class="pin" style="background: #d6402b"></div>
-<div class="mono" style="color: #134a60">Website · 02</div>
-<h2 class="hand" style="margin: 6px 0 4px; font-size: 38px; font-weight: 700; line-height: 1">[SITE #2 NAME]</h2>
-<p style="margin: 0 0 10px; font-size: 14px; line-height: 1.4">[One line on what it does and who it is for — e.g. the AKVerse channel home with episodes &amp; characters.]</p>
-<div class="mono" style="color: #134a60"><span class="tag">Web</span><span class="tag">[STACK]</span></div>
-<a class="hand" href="#" style="font-size: 22px; font-weight: 700">visit →</a>
-</div>
+<section class="sec" id="numbers" data-label="Numbers">
+  <div class="card" style="--r:.8deg">
+    <div class="eyebrow">By the numbers</div>
+    <h2>Counted, not estimated.</h2>
+    <div class="stats">
+      <div class="stat"><b>154</b><span>interactive builds</span></div>
+      <div class="stat"><b>141K</b><span>lines of game code</span></div>
+      <div class="stat"><b>43</b><span>Three.js 3D builds</span></div>
+      <div class="stat"><b>15</b><span>P2P multiplayer games</span></div>
+      <div class="stat"><b>28</b><span>Blender add-ons</span></div>
+      <div class="stat"><b>21.9K</b><span>YouTube subscribers</span></div>
+    </div>
+    <div class="bars" aria-label="Code volume in lines">
+      <div class="bar"><span>Game code, all builds</span><i style="width:100%"></i><em>141,000</em></div>
+      <div class="bar"><span>Blender suite · Python</span><i style="width:19.3%"></i><em>27,208</em></div>
+      <div class="bar"><span>HexaBed · C#</span><i style="width:2.6%"></i><em>3,705</em></div>
+    </div>
+  </div>
+</section>
 
-<!-- 02 GAME APPS -->
-<div class="mono" style="position: absolute; left: 1140px; top: 30px; background: #1f1a14; color: #b5db8f; padding: 6px 10px; transform: rotate(1.5deg)">02 · Game apps</div>
-<div class="note" style="left: 1110px; top: 80px; width: 250px; height: 262px; background: #b5db8f; transform: rotate(2deg); padding: 26px 22px 18px">
-<div class="pin" style="background: #f2b134"></div>
-<div class="mono" style="color: #2f5512">Game · 01</div>
-<h2 class="hand" style="margin: 6px 0 4px; font-size: 38px; font-weight: 700; line-height: 1">Arthis.Land</h2>
-<p style="margin: 0 0 10px; font-size: 14px; line-height: 1.4">A hex-tile world game with voxel wild animals — each with temperament, rarity, habitat &amp; prey — living in a jungle ecology.</p>
-<div class="mono" style="color: #2f5512"><span class="tag">Hex</span><span class="tag">Voxel</span><span class="tag">Ecology</span></div>
-</div>
-<div class="note" style="left: 1378px; top: 108px; width: 250px; height: 262px; background: #f4a7b9; transform: rotate(-2.5deg); padding: 26px 22px 18px">
-<div class="pin" style="background: #2b62d6"></div>
-<div class="mono" style="color: #7a1d36">Game · 02</div>
-<h2 class="hand" style="margin: 6px 0 4px; font-size: 38px; font-weight: 700; line-height: 1">ARTHIS App</h2>
-<p style="margin: 0 0 10px; font-size: 14px; line-height: 1.4">The Android game app (Expo + React Native) — Reanimated motion, Skia graphics, a motion-token system and a 60fps rule.</p>
-<div class="mono" style="color: #7a1d36"><span class="tag">Android</span><span class="tag">Skia</span></div>
-</div>
+<section class="sec" id="web" data-label="Websites">
+  <div class="card" style="--r:-.7deg">
+    <div class="eyebrow">Two live websites</div>
+    <h2>The ARTHIS universe, on the open web.</h2>
+    <div class="stack">
+      <div class="item">
+        <h3><img src="assets/logo-space.png" alt="" width="28" height="28">ARTHIS.space</h3>
+        <p>A mini-games platform with a TikTok-style vertical feed. Open it and you are already playing; swipe up for the next game.</p>
+        <ul class="ticks">
+          <li>Infinite feed; each card is a complete mini-game loaded on demand</li>
+          <li>AI agents generate gameplay logic and 3D web content from prompts via MCP tools</li>
+          <li>Backend scaled from 1 to 10,000 daily active users</li>
+        </ul>
+        <img class="fallback" src="assets/space-feed.jpg" alt="ARTHIS.space feed showing Trigger Runner game cards" loading="lazy">
+        <div class="links"><a class="btn" href="https://arthis.space" target="_blank" rel="noopener">arthis.space ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.space" target="_blank" rel="noopener">Showcase repo</a></div>
+      </div>
+      <div class="item">
+        <h3><img src="assets/logo-land.png" alt="" width="28" height="28">ARTHIS.land — The Wall</h3>
+        <p>A handcrafted vertical city you climb in the browser. Unity shipped to WebGL, with 2–4 people sharing a space in real time.</p>
+        <ul class="ticks">
+          <li>40+ live rooms on the wall, from Halcyon to Xeno Garden</li>
+          <li>Host a room and invite friends with a 4-digit code</li>
+          <li>Runs on arthisland-relay, my zero-dependency TCP + WebSocket relay in pure Python</li>
+        </ul>
+        <img class="fallback" src="assets/land-wall.jpg" alt="ARTHIS.land, a grid of rooms on The Wall" loading="lazy">
+        <div class="tags"><span>Unity</span><span>WebGL</span><span>C#</span><span>Python relay</span></div>
+        <div class="links"><a class="btn" href="https://arthis.land" target="_blank" rel="noopener">arthis.land ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthisland-relay" target="_blank" rel="noopener">Relay source</a></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- 03 AI AUTOMATION -->
-<div class="mono" style="position: absolute; left: 600px; top: 290px; background: #1f1a14; color: #f7b267; padding: 6px 10px; transform: rotate(-1deg)">03 · AI automation</div>
-<div class="note" style="left: 570px; top: 318px; width: 240px; height: 270px; background: #f7b267; transform: rotate(-2deg); padding: 26px 20px 18px">
-<div class="pin" style="background: #1f1a14"></div>
-<div class="mono" style="color: #6b3300">System · 01</div>
-<h2 class="hand" style="margin: 6px 0 4px; font-size: 34px; font-weight: 700; line-height: 1">Game Factory</h2>
-<p style="margin: 0 0 8px; font-size: 13.5px; line-height: 1.4">“Make me game X” → asks 2D/3D, complexity, look &amp; 5 palettes → builds → an AI judge loops it until it beats the catalog.</p>
-<p class="hand" style="margin: 0; font-size: 21px; color: #6b3300">idea in → finished game out</p>
-</div>
-<div class="note" style="left: 830px; top: 300px; width: 240px; height: 270px; background: #fbf8ef; transform: rotate(1.8deg); padding: 26px 20px 18px">
-<div class="pin" style="background: #d6402b"></div>
-<div class="mono" style="color: #8a4b1c">System · 02</div>
-<h2 class="hand" style="margin: 6px 0 4px; font-size: 34px; font-weight: 700; line-height: 1">Reel Factory</h2>
-<p style="margin: 0 0 8px; font-size: 13.5px; line-height: 1.4">Script → storyboard → Blender render, in one go. Script-directed camera: whatever the narrator names lands on that exact word.</p>
-<div class="mono" style="color: #8a4b1c"><span class="tag">Blender MCP</span><span class="tag">Scripts</span></div>
-</div>
+<section class="sec" id="games" data-label="Game apps">
+  <div class="card" style="--r:.6deg">
+    <div class="eyebrow">Two game apps</div>
+    <h2>Engines I built, then games on top.</h2>
+    <div class="stack">
+      <div class="item">
+        <h3>HexaBed</h3>
+        <p>A procedural hex-grid terrain engine in Unity, plus the editor tooling that lets a designer build a world without opening a script.</p>
+        <ul class="ticks">
+          <li>160+ hex tiles generated into one playable world with varied heights</li>
+          <li>Road generator picks straight, turn, ramp or pit pieces from neighbouring tile heights</li>
+          <li>HexTileEditor: a custom inspector with 60° snapping and GLB export (25+ world meshes)</li>
+        </ul>
+        <img class="fallback" src="assets/art-03.jpg" alt="HexaBed editor with a generated hex island" loading="lazy">
+        <div class="tags"><span>Unity</span><span>C#</span><span>14 scripts</span><span>3,705 lines</span></div>
+      </div>
+      <div class="item">
+        <h3>ARTHIS mini-games app</h3>
+        <p>The ARTHIS feed as a phone app for Android, built with Expo and React Native. Reanimated motion, Skia graphics and a strict 60fps rule.</p>
+        <p class="hand">Inside: Trigger Runner, Fruit Blast, Doodle Militia, Flappy Fird, 3072, Sudoku…</p>
+        <div class="tags"><span>Android</span><span>Expo</span><span>Skia</span><span>Multiplayer</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- 04 REELS -->
-<div class="mono" style="position: absolute; left: 60px; top: 500px; background: #1f1a14; color: #f4a7b9; padding: 6px 10px; transform: rotate(1deg)">04 · Reels</div>
-<div class="note" style="left: 50px; top: 545px; width: 260px; height: 300px; background: #ffffff; padding: 14px 14px 16px; transform: rotate(-2deg)">
-<div class="tape"></div>
-<div style="height: 170px; background: #e9a23b; display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box">
-<span style="font-weight: 900; font-size: 26px; line-height: 0.95; color: #1f1a14; background: #ffffff; padding: 2px 6px">KALESHI<br>FAMILY</span>
-</div>
-<p class="hand" style="margin: 10px 2px 2px; font-size: 25px; font-weight: 700; line-height: 1">Kaleshi Family</p>
-<p style="margin: 0 2px; font-size: 13px; line-height: 1.35">40–50s Hinglish mini-drama · Panchayat × TMKOC energy, cliffhanger every episode.</p>
-</div>
-<div class="note" style="left: 330px; top: 572px; width: 260px; height: 300px; background: #ffffff; padding: 14px 14px 16px; transform: rotate(2.5deg)">
-<div class="tape"></div>
-<div style="height: 170px; background: #2b62d6; display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box">
-<span style="font-weight: 900; font-size: 26px; line-height: 0.95; color: #1f1a14; background: #f6d86b; padding: 2px 6px">AAJ HUM<br>BANAYENGE!</span>
-</div>
-<p class="hand" style="margin: 10px 2px 2px; font-size: 25px; font-weight: 700; line-height: 1">Diorama Build Shorts</p>
-<p style="margin: 0 2px; font-size: 13px; line-height: 1.35">Tilu calls it, then a Blender diorama builds itself while the characters hop in.</p>
-</div>
+<section class="sec" id="ai" data-label="AI systems">
+  <div class="card" style="--r:-.5deg">
+    <div class="eyebrow">AI automation</div>
+    <h2>Pipelines that turn a sentence into a shipped thing.</h2>
+    <div class="stack">
+      <div class="item">
+        <h3>Game Factory</h3>
+        <p>Ask for “a fishing game” and it asks 2D or 3D, complexity and look, offers five palettes, builds the game, then runs an AI judge loop until the result beats the existing catalog.</p>
+      </div>
+      <div class="item">
+        <h3>Reel Factory</h3>
+        <p>Script to storyboard to Blender render in one go, driven over MCP. The camera follows the script: whatever the narrator names is on screen on that exact word.</p>
+      </div>
+      <div class="item">
+        <h3>Systems &amp; inference at Clymora</h3>
+        <p>Six months as an AI backend engineering intern.</p>
+        <ul class="ticks">
+          <li>GPT-2 built from scratch: transformer blocks, tokenisation, training loop</li>
+          <li>RAG pipelines with vector-database retrieval</li>
+          <li>Async FastAPI inference endpoints for low-latency workloads</li>
+          <li>23 ComfyUI workflows: Flux, SDXL, Hunyuan3D, WAN VACE, LTX-2</li>
+        </ul>
+        <img class="fallback" src="assets/art-05.jpg" alt="Systems and Inference poster: GPT-2, RAG, FastAPI, ComfyUI" loading="lazy">
+        <div class="tags"><span>FastAPI</span><span>RAG</span><span>MCP</span><span>ComfyUI</span><span>n8n</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- TOOLBOX -->
-<div class="note" style="left: 640px; top: 620px; width: 360px; height: 270px; background: #fbf8ef; transform: rotate(-0.8deg); padding: 26px 26px 18px; background-image: repeating-linear-gradient(#fbf8ef 0 27px, #c9dceb 27px 28px)">
-<div class="pin" style="background: #2f8f5b"></div>
-<div class="mono" style="color: #8a4b1c; margin-bottom: 6px">Toolbox · what I can do</div>
-<ul class="hand" style="margin: 0; padding-left: 18px; font-size: 22px; line-height: 28px">
-<li>Blender — my own addons: Camera Animator Pro, Object Animator Pro, ARTHIS lighting, LipSync</li>
-<li>Low-poly Indian dioramas — houses, clinics, dhabas, trucks</li>
-<li>HTML5 multiplayer games, Unity UI, React Native</li>
-<li>Hinglish scripts + full SEO packs</li>
-</ul>
-</div>
+<section class="sec" id="blender" data-label="Blender">
+  <div class="card" style="--r:.7deg">
+    <div class="eyebrow">Pipeline tooling</div>
+    <h2>28 Blender add-ons, written to ship a channel.</h2>
+    <p>Python add-ons that automate the animation and rendering behind AKverse.</p>
+    <ul class="ticks">
+      <li><b>lipsync_pro</b>: phoneme-driven lip-sync, Rhubarb to bone animation, five versions</li>
+      <li><b>camera_animator_pro</b>: a cinematic camera rig tool, six major versions</li>
+      <li><b>quick_bone_animator / arthis_auto_pose</b>: drag-based IK rigging and auto-posing</li>
+      <li><b>asset_spawner_pro</b>, <b>one_click_render_setup</b>, <b>smart_pose_interpolate</b></li>
+    </ul>
+    <img class="fallback" src="assets/art-04.jpg" alt="Blender logo next to Aayush's pixel avatar" loading="lazy">
+    <p class="hand">Plus low-poly Indian dioramas: houses, clinics, dhabas, trucks, all matte and chunky.</p>
+    <div class="tags"><span>Blender Python API</span><span>27,208 lines</span><span>GLB / FBX</span></div>
+  </div>
+</section>
 
-<!-- 05 YOUTUBE UI SYSTEM -->
-<div class="mono" style="position: absolute; left: 1130px; top: 445px; background: #1f1a14; color: #9fd3e8; padding: 6px 10px; transform: rotate(-1.5deg)">05 · YouTube UI system</div>
-<div class="note" style="left: 1110px; top: 482px; width: 500px; height: 380px; background: #1f1a14; color: #fbf8ef; transform: rotate(1deg); padding: 26px 24px 20px">
-<div class="pin" style="background: #f6d86b"></div>
-<div style="display: flex; justify-content: space-between; align-items: baseline">
-<h2 class="hand" style="margin: 0; font-size: 38px; font-weight: 700; color: #f6d86b">AKVerse channel kit</h2>
-<span class="mono" style="color: #9fd3e8">UI system</span>
-</div>
-<p style="margin: 4px 0 14px; font-size: 13.5px; line-height: 1.4; color: #d9d2c3">One system for every upload: thumbnail grid, title type, series colours, end screens and the SEO pack behind each video.</p>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
-<div style="display: flex; flex-direction: column; gap: 5px">
-<div style="height: 78px; background: #e9a23b; border-radius: 6px; padding: 6px; box-sizing: border-box; display: flex; align-items: flex-end"><span style="font-weight: 900; font-size: 13px; color: #1f1a14; background: #fff; padding: 1px 4px">EP. [N]</span></div>
-<span style="font-size: 11.5px; color: #d9d2c3">Kaleshi Family</span>
-</div>
-<div style="display: flex; flex-direction: column; gap: 5px">
-<div style="height: 78px; background: #2b62d6; border-radius: 6px; padding: 6px; box-sizing: border-box; display: flex; align-items: flex-end"><span style="font-weight: 900; font-size: 13px; color: #1f1a14; background: #f6d86b; padding: 1px 4px">BUILD</span></div>
-<span style="font-size: 11.5px; color: #d9d2c3">Diorama Builds</span>
-</div>
-<div style="display: flex; flex-direction: column; gap: 5px">
-<div style="height: 78px; background: #2f8f5b; border-radius: 6px; padding: 6px; box-sizing: border-box; display: flex; align-items: flex-end"><span style="font-weight: 900; font-size: 13px; color: #1f1a14; background: #fff; padding: 1px 4px">DR LODHA</span></div>
-<span style="font-size: 11.5px; color: #d9d2c3">Dr Lodha reels</span>
-</div>
-</div>
-<div style="display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap">
-<span class="mono tag" style="color: #f6d86b">Thumbnails</span>
-<span class="mono tag" style="color: #9fd3e8">Title type</span>
-<span class="mono tag" style="color: #f4a7b9">End screens</span>
-<span class="mono tag" style="color: #b5db8f">SEO pack</span>
-</div>
-</div>
+<section class="sec" id="reels" data-label="Reels & YouTube">
+  <div class="card" style="--r:-.8deg">
+    <div class="eyebrow">AKverse on YouTube</div>
+    <h2>Two reel series and the system behind every upload.</h2>
+    <div class="stack">
+      <div class="item">
+        <h3>Kaleshi Family</h3>
+        <p>A 40–50 second Hinglish mini-drama with Panchayat-meets-TMKOC energy, played by my characters in my dioramas. Cold open, title card, a deadpan beat, a twist and a cliffhanger every episode.</p>
+      </div>
+      <div class="item">
+        <h3>Diorama Build Shorts</h3>
+        <p>Tilu says “Aaj hum banayenge…!”, then a Blender diorama builds itself piece by piece while the characters hop in.</p>
+      </div>
+      <div class="item">
+        <h3>YouTube UI system</h3>
+        <p>One kit for the whole channel: thumbnail grid, title type, series colours, end screens and a full SEO pack per video.</p>
+        <div class="yt" aria-label="AKverse channel kit preview">
+          <div class="yt-head"><img src="assets/dp.png" alt="" width="36" height="36"><div><b>AKverse</b><span>@AKverseOfficial · 21.9K subscribers</span></div></div>
+          <div class="yt-grid">
+            <div><div class="thumb t1"><b>EP. NEXT</b></div><small>Kaleshi Family</small></div>
+            <div><div class="thumb t2"><b>BUILD</b></div><small>Diorama Builds</small></div>
+            <div><div class="thumb t3"><b>DR LODHA</b></div><small>Dr Lodha reels</small></div>
+          </div>
+        </div>
+        <div class="links"><a class="btn" href="https://www.youtube.com/@AKverseOfficial" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- STYLE RULES -->
-<div class="note" style="left: 1150px; top: 905px; width: 290px; height: 200px; background: #b5db8f; transform: rotate(-2deg); padding: 24px 22px 16px">
-<div class="pin" style="background: #d6402b"></div>
-<div class="mono" style="color: #2f5512">My house style</div>
-<p class="hand" style="margin: 6px 0 0; font-size: 24px; line-height: 1.1">Flat colour. Chunky silhouettes. Matte low-poly. Nothing floats, nothing overlaps. 60fps or it doesn’t ship.</p>
-</div>
+<section class="sec" id="contact" data-label="Contact">
+  <div class="card" style="--r:.5deg">
+    <div class="eyebrow">Unfolded</div>
+    <h2>Let’s build something.</h2>
+    <p>Game development, graphics and AI engineering roles from 2026, or a collab on the channel.</p>
+    <div class="mail"><code id="email">aayushkumarofficial21@gmail.com</code><button class="btn" type="button" id="copy">Copy email</button><span class="copied" id="copied" aria-live="polite"></span></div>
+    <p class="meta">Channel &amp; business: akversebusiness@gmail.com</p>
+    <img class="fallback" src="assets/art-07.jpg" alt="Mail me" loading="lazy">
+    <div class="links">
+      <a class="btn alt" href="https://github.com/itsAayush2004" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn alt" href="https://www.youtube.com/@AKverseOfficial" target="_blank" rel="noopener">YouTube</a>
+      <a class="btn alt" href="https://itsaayush2004.github.io/portfolio/" target="_blank" rel="noopener">3D gallery portfolio</a>
+      <a class="btn alt" href="https://itsaayush2004.github.io/TravelDiary/" target="_blank" rel="noopener">Travel Atlas</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>© 2026 Aayush Kumar · Pinned up in the browser with Three.js · <a href="https://github.com/itsAayush2004/Board-repo">source</a></footer>
 
-<!-- NOW BUILDING -->
-<div class="note" style="left: 70px; top: 905px; width: 330px; height: 200px; background: #f6d86b; transform: rotate(1.5deg); padding: 24px 22px 16px">
-<div class="pin" style="background: #2b62d6"></div>
-<div class="mono" style="color: #7a5a00">On the desk right now</div>
-<p class="hand" style="margin: 6px 0 0; font-size: 24px; line-height: 1.15">[Next Kaleshi Family episode]<br>[Next ARTHIS game]<br>[Anything else you’re shipping]</p>
-</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+'use strict';
+var secs=[].slice.call(document.querySelectorAll('.sec'));
+var loader=document.getElementById('loader');
+function hideLoader(){loader.classList.add('gone');}
 
-<!-- CONTACT -->
-<div class="note" style="left: 600px; top: 925px; width: 440px; height: 170px; background: #d6402b; color: #fbf8ef; transform: rotate(-1deg); padding: 24px 28px 18px; display: flex; flex-direction: column; gap: 10px">
-<div class="pin" style="background: #fbf8ef"></div>
-<h2 class="hand" style="margin: 0; font-size: 40px; font-weight: 700; line-height: 1">Let’s build something.</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 15px; font-weight: 700">
-<a href="mailto:[YOUR EMAIL]" style="color: #fbf8ef">[YOUR EMAIL]</a>
-<a href="https://youtube.com/@[AKVERSE HANDLE]" style="color: #fbf8ef">YouTube · AKVerse</a>
-<a href="https://github.com/itsaayush2004" style="color: #fbf8ef">GitHub</a>
-</div>
-</div>
+/* side thread + nav state */
+var thread=document.getElementById('thread');
+secs.forEach(function(s){var a=document.createElement('a');a.href='#'+s.id;a.innerHTML='<span>'+s.dataset.label+'</span>';a.setAttribute('aria-label',s.dataset.label);thread.appendChild(a);});
+var dots=[].slice.call(thread.children), navs=[].slice.call(document.querySelectorAll('.nav a'));
+function markActive(i){dots.forEach(function(d,k){d.classList.toggle('on',k===i);});var id=secs[i].id;navs.forEach(function(n){n.classList.toggle('on',n.getAttribute('href')==='#'+id);});}
 
-</div>
-</div>
-<script>function fit(){var w=document.querySelector(".wrap");var k=Math.min(1,(innerWidth-8)/1728);w.style.transform="scale("+k+")";w.style.height=(1228*k)+"px"}addEventListener("resize",fit);fit();</script>
+/* copy email */
+document.getElementById('copy').addEventListener('click',function(){
+  var t=document.getElementById('email').textContent, out=document.getElementById('copied');
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('email'));var s=getSelection();s.removeAllRanges();s.addRange(r);out.textContent='selected, press copy';}
+  try{navigator.clipboard.writeText(t).then(function(){out.textContent='copied!';},sel);}catch(e){sel();}
+});
+
+/* scroll → board position (fractional section index) */
+var centers=[];
+function measure(){centers=secs.map(function(s){var r=s.getBoundingClientRect();return Math.max(0,r.top+scrollY-innerHeight*.12);});}
+function progress(){var y=scrollY,c=centers,n=c.length;if(y<=c[0])return 0;for(var i=0;i<n-1;i++){if(y<c[i+1])return i+(y-c[i])/(c[i+1]-c[i]);}return n-1;}
+measure();addEventListener('resize',measure);addEventListener('load',measure);
+var lastActive=-1;
+function syncActive(p){var i=Math.round(p);if(i!==lastActive){lastActive=i;markActive(i);}}
+addEventListener('scroll',function(){syncActive(progress());},{passive:true});
+syncActive(0);
+
+/* ---------- 3D board ---------- */
+var canvas=document.getElementById('gl'), renderer;
+try{ if(!window.THREE) throw 0; renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true}); }
+catch(e){ document.documentElement.classList.add('nogl'); hideLoader(); return; }
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
+renderer.outputEncoding=THREE.sRGBEncoding;
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+var scene=new THREE.Scene();scene.background=new THREE.Color(0x4a2e17);
+var camera=new THREE.PerspectiveCamera(40,1,0.1,200);
+var FOVT=Math.tan(THREE.MathUtils.degToRad(20));
+
+scene.add(new THREE.HemisphereLight(0xfff3df,0x6b4420,0.72));
+var sun=new THREE.DirectionalLight(0xfff0d8,0.78);
+sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+var sc=sun.shadow.camera;sc.left=-14;sc.right=14;sc.top=10;sc.bottom=-10;sc.near=1;sc.far=40;sun.shadow.bias=-0.0006;sun.shadow.radius=4;
+scene.add(sun);scene.add(sun.target);
+
+var SP=11, N=secs.length;
+var anchors=secs.map(function(_,i){return new THREE.Vector2(i*SP,(i%2?-1:1)*1.1);});
+
+/* cork wall */
+function corkTexture(){
+  var c=document.createElement('canvas');c.width=c.height=512;var g=c.getContext('2d');
+  g.fillStyle='#b98551';g.fillRect(0,0,512,512);
+  for(var i=0;i<16000;i++){var x=Math.random()*512,y=Math.random()*512,r=Math.random()*1.9+.3,d=Math.random();
+    g.fillStyle=d<.6?'rgba(80,46,18,'+(Math.random()*.35+.1)+')':'rgba(255,226,180,'+(Math.random()*.22+.05)+')';
+    g.beginPath();g.arc(x,y,r,0,7);g.fill();}
+  var t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
+var wallW=(N-1)*SP+60, ct=corkTexture();ct.repeat.set(wallW/3,40/3);
+var wall=new THREE.Mesh(new THREE.PlaneGeometry(wallW,40),new THREE.MeshStandardMaterial({map:ct,roughness:1}));
+wall.position.set((N-1)*SP/2,0,0);wall.receiveShadow=true;scene.add(wall);
+
+var floaters=[];
+var pinCols=[0xc42132,0x2b62d6,0xffc20e,0x2f8f5b,0x1c1712];
+function addPin(group,x,y,z,col){
+  var head=new THREE.Mesh(new THREE.SphereGeometry(.075,18,14),new THREE.MeshStandardMaterial({color:col,roughness:.35,metalness:.1}));
+  head.position.set(x,y,z+.07);head.castShadow=true;group.add(head);
+  var needle=new THREE.Mesh(new THREE.CylinderGeometry(.008,.008,.12,6),new THREE.MeshStandardMaterial({color:0xbbbbbb,metalness:.8,roughness:.3}));
+  needle.rotation.x=Math.PI/2;needle.position.set(x,y,z+.01);group.add(needle);}
+function curl(geo,w,h,amt){
+  var p=geo.attributes.position;
+  for(var i=0;i<p.count;i++){var u=p.getX(i)/w+.5,v=p.getY(i)/h+.5;
+    var a=Math.max(0,(u-.55)/.45),b=Math.max(0,(.45-v)/.45);
+    p.setZ(i,amt*a*a*b*b+.02*Math.sin(u*Math.PI));}
+  geo.computeVertexNormals();}
+function place(group,cx,cy,it){
+  group.position.set(cx+it.x,cy+it.y,it.z||.08);group.rotation.z=THREE.MathUtils.degToRad(it.r||0);
+  group.userData={base:group.rotation.z,ph:Math.random()*6};floaters.push(group);scene.add(group);}
+
+/* canvas-drawn paper */
+function wrap(g,text,max){var w=text.split(' '),lines=[],l='';w.forEach(function(x){var t=l?l+' '+x:x;if(g.measureText(t).width>max&&l){lines.push(l);l=x;}else l=t;});if(l)lines.push(l);return lines;}
+function noteTex(it){
+  var W=512,H=Math.round(512*it.h/it.w),c=document.createElement('canvas');c.width=W;c.height=H;var g=c.getContext('2d');
+  g.fillStyle=it.color;g.fillRect(0,0,W,H);
+  g.fillStyle='rgba(0,0,0,.05)';g.fillRect(0,0,W,46);
+  var gr=g.createLinearGradient(W*.5,H*.5,W,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.12)');g.fillStyle=gr;g.fillRect(0,0,W,H);
+  var ink=it.ink||'#1c1712',y=64;g.fillStyle=ink;
+  if(it.label){g.font='700 22px "JetBrains Mono", monospace';g.globalAlpha=.7;g.fillText(it.label.toUpperCase(),36,y);g.globalAlpha=1;y+=22;}
+  if(it.big){g.font='900 '+(it.bigSize||130)+'px Archivo, sans-serif';y+=(it.bigSize||130)*.85;g.fillText(it.big,32,y);y+=10;}
+  if(it.title){var ts=it.titleSize||74;g.font='700 '+ts+'px Caveat, cursive';wrap(g,it.title,W-64).forEach(function(l){y+=ts*.92;g.fillText(l,34,y);});y+=6;}
+  if(it.text){var s=it.textSize||46;g.font='500 '+s+'px Caveat, cursive';it.text.split('\n').forEach(function(par){wrap(g,par,W-64).forEach(function(l){y+=s*.98;g.fillText(l,34,y);});});}
+  var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
+function addNote(cx,cy,it){
+  var g=new THREE.Group(),geo=new THREE.PlaneGeometry(it.w,it.h,12,12);curl(geo,it.w,it.h,.16);
+  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:noteTex(it),roughness:.92,side:THREE.DoubleSide}));
+  m.castShadow=true;g.add(m);addPin(g,0,it.h/2-.16,.02,pinCols[(Math.random()*pinCols.length)|0]);place(g,cx,cy,it);}
+
+var loadMgr=new THREE.LoadingManager(), tl=new THREE.TextureLoader(loadMgr);
+function addPhoto(cx,cy,it){
+  tl.load(it.src,function(tex){
+    tex.encoding=THREE.sRGBEncoding;tex.anisotropy=8;
+    var a=tex.image.width/tex.image.height,w=it.w,h=w/a,m=.09,capH=it.cap?.42:m;
+    var g=new THREE.Group();
+    var fc=document.createElement('canvas');fc.width=512;fc.height=Math.round(512*(h+m+capH)/(w+2*m));var fg=fc.getContext('2d');
+    fg.fillStyle='#fdfbf5';fg.fillRect(0,0,fc.width,fc.height);
+    if(it.cap){var ps=fc.width/(w+2*m);fg.fillStyle='#2a221b';fg.font='700 '+Math.round(.26*ps)+'px Caveat, cursive';fg.fillText(it.cap,Math.round(m*ps),fc.height-Math.round(.13*ps));}
+    var ft=new THREE.CanvasTexture(fc);ft.encoding=THREE.sRGBEncoding;
+    var frame=new THREE.Mesh(new THREE.PlaneGeometry(w+2*m,h+m+capH),new THREE.MeshStandardMaterial({map:ft,roughness:.85}));
+    frame.position.y=-(capH-m)/2;frame.castShadow=true;g.add(frame);
+    var img=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:tex,roughness:.55}));
+    img.position.z=.004;g.add(img);
+    var tape=new THREE.Mesh(new THREE.PlaneGeometry(.9,.26),new THREE.MeshStandardMaterial({color:0xf3ead2,transparent:true,opacity:.78,roughness:.9}));
+    tape.position.set(0,h/2+.02,.012);tape.rotation.z=(Math.random()-.5)*.25;g.add(tape);
+    place(g,cx,cy,it);});}
+function addSticker(cx,cy,it){
+  tl.load(it.src,function(tex){tex.encoding=THREE.sRGBEncoding;var a=tex.image.width/tex.image.height;
+    var g=new THREE.Group(),m=new THREE.Mesh(new THREE.PlaneGeometry(it.w,it.w/a),new THREE.MeshStandardMaterial({map:tex,transparent:true,alphaTest:.4,roughness:.6}));
+    g.add(m);place(g,cx,cy,it);});}
+function addReel(cx,cy,it){
+  var W=360,H=640,c=document.createElement('canvas');c.width=W;c.height=H;var g=c.getContext('2d');
+  g.fillStyle=it.bg;g.fillRect(0,0,W,H);
+  g.fillStyle='rgba(255,255,255,.12)';for(var i=0;i<6;i++){g.beginPath();g.moveTo(W/2,H*.42);g.arc(W/2,H*.42,520,i*1.05,i*1.05+.5);g.fill();}
+  g.font='900 50px Archivo, sans-serif';var y=H*.62;it.lines.forEach(function(l){var w=g.measureText(l).width;g.fillStyle=it.chip;g.fillRect(24,y-44,w+20,56);g.fillStyle='#1c1712';g.fillText(l,34,y);y+=62;});
+  g.fillStyle='rgba(255,255,255,.9)';g.beginPath();g.arc(W/2,H*.34,44,0,7);g.fill();g.fillStyle=it.bg;g.beginPath();g.moveTo(W/2-14,H*.34-22);g.lineTo(W/2+24,H*.34);g.lineTo(W/2-14,H*.34+22);g.fill();
+  g.fillStyle='rgba(0,0,0,.35)';g.fillRect(24,H-40,W-48,6);g.fillStyle='#fff';g.fillRect(24,H-40,(W-48)*.62,6);
+  g.font='700 22px "JetBrains Mono", monospace';g.fillStyle='#fff';g.fillText('@AKverseOfficial',24,H-58);
+  var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;
+  var grp=new THREE.Group(),w=it.w,h=w*16/9;
+  var body=new THREE.Mesh(new THREE.BoxGeometry(w+.12,h+.24,.06),new THREE.MeshStandardMaterial({color:0x17130f,roughness:.4}));body.castShadow=true;grp.add(body);
+  var scr=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:t,roughness:.4,emissive:0xffffff,emissiveMap:t,emissiveIntensity:.25}));scr.position.z=.031;grp.add(scr);
+  if(it.cap){addCaption(grp,it.cap,-h/2-.38,w+.6);}
+  place(grp,cx,cy,it);}
+function addCaption(grp,text,y,w){
+  var c=document.createElement('canvas');c.width=512;c.height=96;var g=c.getContext('2d');g.fillStyle='#fdfbf5';g.fillRect(0,0,512,96);g.fillStyle='#1c1712';g.font='700 58px Caveat, cursive';g.textAlign='center';g.fillText(text,256,66);
+  var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;
+  var m=new THREE.Mesh(new THREE.PlaneGeometry(w,w*96/512),new THREE.MeshStandardMaterial({map:t,roughness:.9}));m.position.set(0,y,.0);m.rotation.z=.03;m.castShadow=true;grp.add(m);addPin(grp,0,y,.0,0xc42132);}
+function addKit(cx,cy,it){
+  var W=640,H=460,c=document.createElement('canvas');c.width=W;c.height=H;var g=c.getContext('2d');
+  g.fillStyle='#17130f';g.fillRect(0,0,W,H);
+  g.fillStyle='#ffc20e';g.font='700 62px Caveat, cursive';g.fillText('AKverse channel kit',30,72);
+  g.fillStyle='#bdb2a0';g.font='500 20px "JetBrains Mono", monospace';g.fillText('THUMBNAILS · TITLES · END SCREENS · SEO',30,108);
+  var cols=[['#e9a23b','EP. NEXT','#fff'],['#2b62d6','BUILD','#ffc20e'],['#2f8f5b','DR LODHA','#fff']];
+  cols.forEach(function(k,i){var x=30+i*197,y=140;g.fillStyle=k[0];g.fillRect(x,y,182,102);g.font='900 22px Archivo, sans-serif';var tw=g.measureText(k[1]).width;g.fillStyle=k[2];g.fillRect(x+8,y+66,tw+12,28);g.fillStyle='#17130f';g.fillText(k[1],x+14,y+88);
+    g.fillStyle='#efe6d4';g.fillRect(x,y+116,150,12);g.fillStyle='#6d6153';g.fillRect(x,y+136,100,10);});
+  g.fillStyle='#c42132';g.fillRect(30,330,220,58);g.fillStyle='#fff';g.font='900 26px Archivo, sans-serif';g.fillText('SUBSCRIBE',62,368);
+  g.fillStyle='#efe6d4';g.font='700 44px Caveat, cursive';g.fillText('21.9K subscribers',280,372);
+  var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;
+  var grp=new THREE.Group(),w=it.w,h=w*H/W,geo=new THREE.PlaneGeometry(w,h,10,10);curl(geo,w,h,.1);
+  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:t,roughness:.7,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);
+  addPin(grp,-w/2+.2,h/2-.2,.02,0xffc20e);addPin(grp,w/2-.2,h/2-.2,.02,0xffc20e);place(grp,cx,cy,it);}
+
+var Y='#f8dc6c',P='#f5a9bb',B='#a2d4ea',G='#b9dd92',O='#f7b267',Wh='#fbf7ec';
+var BOARD=[
+ [ {k:'photo',src:'assets/dp.png',w:1.8,x:-1.5,y:.75,r:-6,cap:"that's me"},
+   {k:'photo',src:'assets/art-01.jpg',w:3.1,x:1.2,y:-.7,r:3,z:.1,cap:'Unity · Web 3D · AI'},
+   {k:'note',color:Y,w:1.9,h:1.9,x:1.75,y:1.55,r:6,z:.16,label:'hello',title:"hi, I'm Aayush",text:'I build worlds, games & the tools behind them.'},
+   {k:'note',color:P,w:1.6,h:1.25,x:-1.7,y:-1.55,r:-4,label:'based in',title:'Jaipur, India',titleSize:66} ],
+ [ {k:'photo',src:'assets/art-06.jpg',w:3.6,x:.2,y:.1,r:-2,cap:'counted, not estimated'},
+   {k:'note',color:Y,w:1.35,h:1.35,x:-2.3,y:1.55,r:-7,z:.18,big:'154',bigSize:150,text:'interactive builds'},
+   {k:'note',color:B,w:1.35,h:1.35,x:2.35,y:1.65,r:5,z:.18,big:'21.9K',bigSize:110,text:'YouTube subs'},
+   {k:'note',color:G,w:1.35,h:1.35,x:2.3,y:-1.75,r:-4,z:.18,big:'28',bigSize:150,text:'Blender add-ons'} ],
+ [ {k:'photo',src:'assets/space-feed.jpg',w:2.9,x:-1.15,y:.85,r:-3,cap:'arthis.space, the feed'},
+   {k:'photo',src:'assets/land-wall.jpg',w:3.0,x:1.25,y:-.95,r:2.5,z:.12,cap:'arthis.land, The Wall'},
+   {k:'sticker',src:'assets/logo-space.png',w:.9,x:2.15,y:1.45,r:8,z:.06},
+   {k:'sticker',src:'assets/logo-land.png',w:.95,x:-2.45,y:-1.45,r:-6,z:.06},
+   {k:'note',color:Y,w:1.3,h:1.15,x:-1.0,y:-1.75,r:4,z:.2,label:'arthis.space',title:'10,000 DAU',titleSize:62} ],
+ [ {k:'photo',src:'assets/art-03.jpg',w:3.2,x:-.55,y:.6,r:-2,cap:'HexaBed, 160+ hex tiles'},
+   {k:'photo',src:'assets/space-fruit.jpg',w:1.35,x:2.05,y:-.6,r:5,z:.13,cap:'Fruit Blast'},
+   {k:'photo',src:'assets/space-doodle.jpg',w:1.1,x:-2.3,y:-1.3,r:-6,z:.13,cap:'Doodle Militia'},
+   {k:'note',color:G,w:1.65,h:1.45,x:1.95,y:1.75,r:4,z:.18,label:'game app 02',title:'ARTHIS app',text:'Expo · Skia · 60fps'},
+   {k:'note',color:B,w:1.5,h:1.1,x:-.2,y:-1.85,r:-3,z:.18,label:'unity',text:'14 scripts\n3,705 lines of C#',textSize:40} ],
+ [ {k:'photo',src:'assets/art-05.jpg',w:3.3,x:.2,y:.25,r:2,cap:'Clymora: systems & inference'},
+   {k:'note',color:O,w:1.75,h:1.6,x:-2.15,y:1.45,r:-5,z:.18,label:'system 01',title:'Game Factory',text:'idea in → AI judge loop → finished game'},
+   {k:'note',color:Wh,w:1.75,h:1.6,x:2.25,y:-1.55,r:4,z:.18,label:'system 02',title:'Reel Factory',text:'script → storyboard → Blender render'},
+   {k:'note',color:Y,w:1.3,h:1.1,x:-1.9,y:-1.6,r:3,z:.18,label:'built',title:'GPT-2 from scratch',titleSize:52} ],
+ [ {k:'photo',src:'assets/art-04.jpg',w:3.2,x:0,y:.55,r:-2,cap:'28 Blender add-ons'},
+   {k:'note',color:Y,w:2.0,h:1.6,x:1.75,y:-1.45,r:3,z:.18,label:'favourites',text:'lipsync_pro\ncamera_animator_pro\narthis_auto_pose',textSize:42},
+   {k:'note',color:P,w:1.5,h:1.2,x:-1.85,y:-1.5,r:-5,z:.18,big:'27,208',bigSize:84,text:'lines of Python'} ],
+ [ {k:'reel',bg:'#e9a23b',chip:'#ffffff',lines:['KALESHI','FAMILY'],w:1.15,x:-1.95,y:.35,r:-5,z:.1,cap:'reel 01'},
+   {k:'reel',bg:'#2b62d6',chip:'#ffc20e',lines:['AAJ HUM','BANAYENGE!'],w:1.15,x:-.25,y:.55,r:4,z:.1,cap:'reel 02'},
+   {k:'kit',w:2.5,x:2.05,y:1.0,r:2,z:.1},
+   {k:'note',color:P,w:1.6,h:1.2,x:1.85,y:-1.45,r:-4,z:.18,label:'youtube',title:'@AKverseOfficial',titleSize:56} ],
+ [ {k:'photo',src:'assets/art-07.jpg',w:3.2,x:.35,y:.45,r:2,cap:'say hi'},
+   {k:'photo',src:'assets/gallery-poster.jpg',w:1.9,x:-2.1,y:1.45,r:-6,z:.12,cap:'my 3D gallery'},
+   {k:'note',color:Y,w:2.4,h:1.25,x:-1.2,y:-1.65,r:-2,z:.18,label:'email',title:'aayushkumarofficial21@gmail.com',titleSize:40} ]
+];
+
+/* red string: through a lead pin in each cluster, sagging between them */
+function buildString(){
+  var pts=[];
+  anchors.forEach(function(a,i){var p=new THREE.Vector3(a.x-2.9,a.y+2.25,.03);
+    if(i>0){var q=pts[pts.length-1];pts.push(new THREE.Vector3((q.x+p.x)/2,Math.min(q.y,p.y)-1.6,.035));}
+    pts.push(p);});
+  var curve=new THREE.CatmullRomCurve3(pts,false,'centripetal');
+  var s=new THREE.Mesh(new THREE.TubeGeometry(curve,400,.014,6,false),new THREE.MeshStandardMaterial({color:0xb3261e,roughness:.7}));
+  s.castShadow=true;scene.add(s);
+  var g=new THREE.Group();anchors.forEach(function(a){addPin(g,a.x-2.9,a.y+2.25,.0,0xc42132);});scene.add(g);}
+
+function build(){
+  BOARD.forEach(function(list,i){var a=anchors[i];list.forEach(function(it){
+    ({note:addNote,photo:addPhoto,sticker:addSticker,reel:addReel,kit:addKit})[it.k](a.x,a.y,it);});});
+  buildString();}
+
+var fontsReady=document.fonts?Promise.race([Promise.all(['700 40px Caveat','500 40px Caveat','900 40px Archivo','700 20px "JetBrains Mono"'].map(function(f){return document.fonts.load(f);})),new Promise(function(r){setTimeout(r,2500);})]):Promise.resolve();
+var built=false;
+fontsReady.then(function(){build();built=true;});
+loadMgr.onLoad=function(){setTimeout(hideLoader,150);};
+setTimeout(hideLoader,4500);
+
+/* camera */
+var mouse={x:0,y:0},cur=0;
+addEventListener('pointermove',function(e){mouse.x=e.clientX/innerWidth-.5;mouse.y=e.clientY/innerHeight-.5;},{passive:true});
+function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();measure();}
+addEventListener('resize',resize);resize();
+function ease(f){if(f<.12)return 0;if(f>.88)return 1;f=(f-.12)/.76;return f*f*f*(f*(f*6-15)+10);}
+function frame(t){
+  t*=.001;
+  var target=progress();cur+=(target-cur)*(reduce?1:.08);
+  var i=Math.min(Math.floor(cur),N-2),f=ease(cur-i),A=anchors[i],B=anchors[i+1];
+  var ax=A.x+(B.x-A.x)*f,ay=A.y+(B.y-A.y)*f,swoop=Math.sin(Math.PI*f);
+  var asp=camera.aspect,z,ox=0,oy=0;
+  if(asp>=.9){z=Math.max(9,11.2/(2*FOVT*asp));ox=-2*z*FOVT*asp*.2;}
+  else{z=6.4/(2*FOVT*asp);oy=-2*z*FOVT*.22;}
+  z+=2.4*swoop;
+  var px=reduce?0:mouse.x*.45,py=reduce?0:-mouse.y*.3;
+  camera.position.set(ax+ox+px,ay+oy+py,z);
+  camera.lookAt(ax+ox+(B.x-A.x)*.04*swoop,ay+oy,0);
+  sun.position.set(camera.position.x-7,camera.position.y+9,7);sun.target.position.set(camera.position.x,camera.position.y,0);
+  if(!reduce)floaters.forEach(function(g){var u=g.userData;g.rotation.z=u.base+Math.sin(t*.7+u.ph)*.012;g.rotation.y=Math.sin(t*.5+u.ph)*.03;});
+  renderer.render(scene,camera);
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
