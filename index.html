@@ -4,24 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aayush Kumar Board</title>
-<meta name="description" content="Aayush Kumar — game developer, AI &amp; backend engineer. A 3D corkboard portfolio: ARTHIS.space, ARTHIS.land, HexaBed, AI automation, Blender add-ons and AKverse reels.">
+<meta name="description" content="Aayush Kumar — game developer, AI &amp; backend engineer. A 3D corkboard portfolio: ARTHIS.space, ARTHIS.land, game apps, web tools, AI automation, Blender add-ons and AKverse reels.">
 <link rel="icon" href="assets/dp.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Caveat:wght@500;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
 <style>
-/* Layout: a fixed WebGL corkboard behind the page; the camera travels the board as you scroll,
-   while paper cards carrying the words ride up the left column. */
+/* Layout: a fixed WebGL corkboard behind the page. Each section owns a column of pinned work;
+   the camera pans down that column while its paper card scrolls on the left, then swoops to the next. */
 :root{
   color-scheme: light;
   --cork:#b98551;      /* board */
-  --wood:#4a2e17;      /* frame + deep ground */
+  --wood:#3d2613;      /* frame + deep ground */
   --paper:#fbf7ec;     /* cards */
   --ink:#1c1712;       /* text */
   --muted:#5e5246;     /* secondary text on paper */
-  --red:#c42132;       /* ARTHIS red, pins + string */
+  --rule:#d6c9b0;      /* dashed dividers */
+  --red:#c42132;       /* ARTHIS red: pins + string */
   --yellow:#ffc20e;    /* ARTHIS.space yellow */
-  --note-y:#f8dc6c; --note-p:#f5a9bb; --note-b:#a2d4ea; --note-g:#b9dd92;
   --f-display:'Archivo', 'Arial Narrow', system-ui, sans-serif;
   --f-hand:'Caveat', 'Comic Sans MS', cursive;
   --f-mono:'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
@@ -35,27 +35,32 @@ a{color:inherit}
 .skip{position:absolute;left:-999px;top:8px;background:var(--paper);padding:8px 12px;z-index:50}
 .skip:focus{left:8px}
 
-#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;touch-action:pan-y}
+#gl.hot{cursor:pointer}
 .nogl #gl{display:none}
-.nogl body,.nogl{background-color:var(--cork)}
 .cork-bg{position:fixed;inset:0;z-index:-1;background-color:var(--cork);
   background-image:radial-gradient(rgba(70,40,15,.35) 1px,transparent 1.6px),radial-gradient(rgba(255,236,200,.22) 1px,transparent 1.8px);
   background-size:7px 7px,11px 11px}
+.tip{position:fixed;z-index:30;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;padding:6px 10px;border-radius:6px;transform:translate(14px,14px);white-space:nowrap;box-shadow:0 6px 14px -4px rgba(0,0,0,.5)}
 
 /* header */
-.top{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(env(safe-area-inset-top,0px) + 12px) clamp(16px,4vw,48px) 12px;display:flex;align-items:center;justify-content:space-between;gap:16px;pointer-events:none}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(env(safe-area-inset-top,0px) + 12px) clamp(16px,4vw,48px) 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}
 .top > *{pointer-events:auto}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;background:var(--paper);padding:6px 14px 6px 6px;border-radius:40px;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
 .brand img{width:34px;height:34px;border-radius:50%;image-rendering:pixelated;background:#eee}
 .brand b{font-weight:800;font-size:15px;letter-spacing:-.01em}
 .brand span{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.nav{display:flex;gap:4px;background:var(--ink);padding:5px;border-radius:40px;flex-wrap:wrap;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
-.nav a{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#efe6d4;text-decoration:none;padding:7px 11px;border-radius:30px}
+.right{display:flex;gap:8px;align-items:center}
+.nav{display:flex;gap:2px;background:var(--ink);padding:5px;border-radius:40px;flex-wrap:wrap;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+.nav a{font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:#efe6d4;text-decoration:none;padding:7px 10px;border-radius:30px}
 .nav a:hover{background:#3a3027}
 .nav a.on{background:var(--yellow);color:var(--ink)}
-@media (max-width:900px){.nav{display:none}}
+.gh{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:44px;background:var(--paper);color:var(--ink);text-decoration:none;font-weight:800;font-size:14px;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+.gh:hover{background:var(--yellow)}
+.gh svg{width:18px;height:18px}
+@media (max-width:1180px){.nav{display:none}}
 
-/* scroll progress: a strip of red string on the right edge */
+/* scroll progress: red string on the right edge */
 .thread{position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);z-index:15;display:flex;flex-direction:column;gap:14px;align-items:center}
 .thread::before{content:"";position:absolute;top:6px;bottom:6px;left:50%;width:2px;margin-left:-1px;background:var(--red);opacity:.85}
 .thread a{position:relative;width:14px;height:14px;border-radius:50%;background:var(--paper);box-shadow:0 2px 3px rgba(0,0,0,.4)}
@@ -66,35 +71,40 @@ a{color:inherit}
 
 /* sections */
 main{position:relative;z-index:5}
-.sec{min-height:100vh;padding:clamp(96px,14vh,150px) clamp(16px,6vw,96px) 12vh;display:flex;align-items:center}
-.sec + .sec{margin-top:18vh}
-.card{position:relative;width:min(470px,100%);background:var(--paper);padding:34px 32px 28px;box-shadow:0 2px 2px rgba(0,0,0,.18),0 26px 40px -14px rgba(30,15,3,.65);transform:rotate(var(--r,-.6deg))}
-.card::before{content:"";position:absolute;top:-13px;left:50%;width:120px;height:28px;margin-left:-60px;background:rgba(246,238,214,.78);box-shadow:0 1px 2px rgba(0,0,0,.18);transform:rotate(-2deg)}
+.sec{min-height:100vh;padding:clamp(96px,14vh,140px) clamp(16px,5vw,80px) 10vh}
+.sec + .sec{margin-top:22vh}
+.card{position:relative;width:min(510px,100%);background:var(--paper);padding:36px 34px 30px;box-shadow:0 2px 2px rgba(0,0,0,.18),0 26px 40px -14px rgba(30,15,3,.65);transform:rotate(var(--r,-.6deg))}
+.card::before{content:"";position:absolute;top:-13px;left:50%;width:120px;height:28px;margin-left:-60px;background:rgba(246,238,214,.8);box-shadow:0 1px 2px rgba(0,0,0,.18);transform:rotate(-2deg)}
 .eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);display:flex;gap:10px;align-items:center}
 .eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:inset -2px -2px 0 rgba(0,0,0,.3)}
 h1,h2,h3{margin:0;text-wrap:balance}
 h1{font-size:clamp(64px,10vw,112px);font-weight:900;line-height:.86;letter-spacing:-.035em;font-variation-settings:'wdth' 75;margin-top:10px}
 h1 i{font-style:normal;color:var(--red)}
-h2{font-size:clamp(34px,4.4vw,48px);font-weight:900;line-height:.95;letter-spacing:-.025em;font-variation-settings:'wdth' 78;margin-top:10px}
-h3{font-size:22px;font-weight:800;letter-spacing:-.01em;font-variation-settings:'wdth' 85;display:flex;align-items:center;gap:10px}
+h2{font-size:clamp(32px,4.2vw,46px);font-weight:900;line-height:.95;letter-spacing:-.025em;font-variation-settings:'wdth' 78;margin-top:10px}
+h3{font-size:21px;font-weight:800;letter-spacing:-.01em;font-variation-settings:'wdth' 85;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 h3 img{width:28px;height:28px;object-fit:contain}
+.priv{font-family:var(--f-mono);font-size:9.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);padding:2px 6px;border-radius:3px}
 .hand{font-family:var(--f-hand);font-size:26px;line-height:1.1;color:var(--muted);margin:10px 0 0}
-p{margin:12px 0 0;max-width:62ch}
+p{margin:10px 0 0;max-width:62ch}
 .lede{font-size:17px}
-.stack{display:flex;flex-direction:column;gap:22px;margin-top:22px}
-.item{border-top:1.5px dashed #cdbfa6;padding-top:18px}
+.stack{display:flex;flex-direction:column;gap:20px;margin-top:20px}
+.item{border-top:1.5px dashed var(--rule);padding-top:18px}
 ul.ticks{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
 ul.ticks li{padding-left:18px;position:relative}
 ul.ticks li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;background:var(--red);transform:rotate(45deg)}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .tags span{font-family:var(--f-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;border:1.5px solid var(--ink);padding:3px 7px;border-radius:4px}
-.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:44px;font-weight:800;font-size:14px;text-decoration:none;background:var(--ink);color:var(--paper);border:0;cursor:pointer;font-family:inherit}
 .btn:hover{background:var(--red)}
 .btn.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
 .btn.alt:hover{background:var(--yellow)}
-.btn svg{width:16px;height:16px}
+.btn svg{width:16px;height:16px;flex-shrink:0}
 .meta{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em;margin-top:14px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+.facts div{border:1.5px solid var(--ink);padding:8px 10px}
+.facts b{display:block;font-size:20px;font-weight:900;font-variation-settings:'wdth' 75;line-height:1.05}
+.facts span{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 14px;margin-top:22px}
 .stat b{display:block;font-size:40px;font-weight:900;line-height:1;letter-spacing:-.03em;font-variation-settings:'wdth' 70;font-variant-numeric:tabular-nums}
@@ -103,7 +113,7 @@ ul.ticks li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;he
 .bar{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center}
 .bar i{display:block;height:10px;background:var(--yellow);box-shadow:inset 0 0 0 1.5px var(--ink)}
 .bar em{font-style:normal;font-family:var(--f-mono);font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
-@media (max-width:460px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.bar{grid-template-columns:110px 1fr 56px}}
+@media (max-width:460px){.stats,.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.bar{grid-template-columns:110px 1fr 56px}}
 
 .yt{margin-top:16px;background:var(--ink);color:#efe6d4;border-radius:10px;padding:14px}
 .yt-head{display:flex;align-items:center;gap:10px}
@@ -120,14 +130,12 @@ ul.ticks li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;he
 .mail code{font-family:var(--f-mono);font-size:14px;background:#efe6d0;padding:9px 12px;border-radius:6px;user-select:all;overflow-wrap:anywhere}
 .copied{font-family:var(--f-hand);font-size:22px;color:var(--red)}
 
-/* images inside cards only when the 3D board cannot run */
 .fallback{display:none;margin-top:14px;width:100%;border:8px solid #fff;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
 .nogl .fallback{display:block}
 
 footer{position:relative;z-index:5;padding:18vh 16px calc(40px + env(safe-area-inset-bottom,0px));text-align:center;color:#f4ead6;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em}
 footer a{color:var(--yellow)}
 
-/* loader */
 .loader{position:fixed;inset:0;z-index:40;background:var(--wood);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:#f4ead6;transition:opacity .6s}
 .loader.gone{opacity:0;pointer-events:none}
 .loader p{font-family:var(--f-hand);font-size:30px;margin:0}
@@ -135,25 +143,30 @@ footer a{color:var(--yellow)}
 @keyframes bob{to{transform:translateY(-10px)}}
 @media (prefers-reduced-motion: reduce){.loader .pin{animation:none}}
 
-/* phones: the board shows in the top half of each screen, the card scrolls up underneath */
+/* phones: the board shows in the top half, the card scrolls up underneath */
 @media (max-aspect-ratio: 9/10){
-  .sec{align-items:flex-start;padding-top:56vh}
-  .sec + .sec{margin-top:6vh}
+  .sec{padding-top:58vh}
+  .sec + .sec{margin-top:8vh}
   .card{padding:30px 22px 24px}
 }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol></svg>
 <a class="skip" href="#hello">Skip to content</a>
 <div class="cork-bg" aria-hidden="true"></div>
 <canvas id="gl" aria-hidden="true"></canvas>
+<div class="tip" id="tip" hidden></div>
 <div class="loader" id="loader" aria-hidden="true"><div class="pin"></div><p>pinning things up…</p></div>
 
 <header class="top">
   <a class="brand" href="#hello"><img src="assets/dp.png" alt="" width="34" height="34"><div><b>Aayush Kumar</b><br><span>Games · AI · 3D</span></div></a>
-  <nav class="nav" aria-label="Sections">
-    <a href="#web">Websites</a><a href="#games">Games</a><a href="#ai">AI systems</a><a href="#blender">Blender</a><a href="#reels">Reels &amp; YouTube</a><a href="#contact">Contact</a>
-  </nav>
+  <div class="right">
+    <nav class="nav" aria-label="Sections">
+      <a href="#web">Websites</a><a href="#games">Games</a><a href="#apps">Apps &amp; tools</a><a href="#ai">AI</a><a href="#blender">Blender</a><a href="#reels">Reels</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="gh" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a>
+  </div>
 </header>
 <nav class="thread" aria-label="Board progress" id="thread"></nav>
 
@@ -165,12 +178,17 @@ footer a{color:var(--yellow)}
     <p class="hand">I build worlds, games &amp; the tools behind them.</p>
     <p class="lede">Game developer and AI / backend engineer. I make the ARTHIS universe, a feed of multiplayer mini-games and a Unity vertical city, and the AKverse channel that tells stories in my own Blender dioramas.</p>
     <p>Most of what I make is a system that makes other things easier to make: a hex terrain generator so level design stops being manual, a lip-sync add-on so animation stops being frame-by-frame, an agent layer so a game can start from a sentence.</p>
+    <div class="facts">
+      <div><b>98.9 %ile</b><span>JEE Main</span></div>
+      <div><b>AIR 8956</b><span>JEE Advanced</span></div>
+      <div><b>2026</b><span>graduating</span></div>
+    </div>
     <img class="fallback" src="assets/art-01.jpg" alt="Aayush's pixel avatar with Unity, Web 3D, AI and GitHub stickers" loading="lazy">
     <div class="links">
       <a class="btn" href="#numbers">Scroll the board <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
-      <a class="btn alt" href="https://arthis.space" target="_blank" rel="noopener">Play ARTHIS.space</a>
+      <a class="btn alt" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>github.com/itsAayush2004</a>
     </div>
-    <p class="meta">Open to game development, graphics and AI engineering roles from 2026.</p>
+    <p class="meta">Tip: everything pinned on the board is clickable.</p>
   </div>
 </section>
 
@@ -191,12 +209,13 @@ footer a{color:var(--yellow)}
       <div class="bar"><span>Blender suite · Python</span><i style="width:19.3%"></i><em>27,208</em></div>
       <div class="bar"><span>HexaBed · C#</span><i style="width:2.6%"></i><em>3,705</em></div>
     </div>
+    <p class="meta">The 154 builds: 43 Three.js / WebGL 3D · 15 peer-to-peer multiplayer · 96 other engines &amp; 2D.</p>
   </div>
 </section>
 
 <section class="sec" id="web" data-label="Websites">
   <div class="card" style="--r:-.7deg">
-    <div class="eyebrow">Two live websites</div>
+    <div class="eyebrow">Live websites</div>
     <h2>The ARTHIS universe, on the open web.</h2>
     <div class="stack">
       <div class="item">
@@ -208,7 +227,7 @@ footer a{color:var(--yellow)}
           <li>Backend scaled from 1 to 10,000 daily active users</li>
         </ul>
         <img class="fallback" src="assets/space-feed.jpg" alt="ARTHIS.space feed showing Trigger Runner game cards" loading="lazy">
-        <div class="links"><a class="btn" href="https://arthis.space" target="_blank" rel="noopener">arthis.space ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.space" target="_blank" rel="noopener">Showcase repo</a></div>
+        <div class="links"><a class="btn" href="https://arthis.space" target="_blank" rel="noopener">arthis.space ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.space" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
       </div>
       <div class="item">
         <h3><img src="assets/logo-land.png" alt="" width="28" height="28">ARTHIS.land — The Wall</h3>
@@ -216,11 +235,19 @@ footer a{color:var(--yellow)}
         <ul class="ticks">
           <li>40+ live rooms on the wall, from Halcyon to Xeno Garden</li>
           <li>Host a room and invite friends with a 4-digit code</li>
-          <li>Runs on arthisland-relay, my zero-dependency TCP + WebSocket relay in pure Python</li>
         </ul>
         <img class="fallback" src="assets/land-wall.jpg" alt="ARTHIS.land, a grid of rooms on The Wall" loading="lazy">
-        <div class="tags"><span>Unity</span><span>WebGL</span><span>C#</span><span>Python relay</span></div>
-        <div class="links"><a class="btn" href="https://arthis.land" target="_blank" rel="noopener">arthis.land ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthisland-relay" target="_blank" rel="noopener">Relay source</a></div>
+        <div class="links"><a class="btn" href="https://arthis.land" target="_blank" rel="noopener">arthis.land ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis.land" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
+        <h3>arthisland-relay</h3>
+        <p>The multiplayer backend behind The Wall: TCP and WebSocket on one port, handshake and framing written from scratch, zero dependencies (Python stdlib only). Docker-ready.</p>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/arthisland-relay" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
+        <h3>Arthis Land Maker docs</h3>
+        <p>An 11-chapter design spec for a Unity editor tool that generates islands, lays out rooms and places furniture, grounded in the real ARTHIS asset library.</p>
+        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/arthis-land-maker-docs/" target="_blank" rel="noopener">Read the docs ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/arthis-land-maker-docs" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
       </div>
     </div>
   </div>
@@ -228,25 +255,74 @@ footer a{color:var(--yellow)}
 
 <section class="sec" id="games" data-label="Game apps">
   <div class="card" style="--r:.6deg">
-    <div class="eyebrow">Two game apps</div>
+    <div class="eyebrow">Games &amp; game engines</div>
     <h2>Engines I built, then games on top.</h2>
     <div class="stack">
       <div class="item">
         <h3>HexaBed</h3>
-        <p>A procedural hex-grid terrain engine in Unity, plus the editor tooling that lets a designer build a world without opening a script.</p>
+        <p>A procedural hex-grid terrain engine in Unity, plus editor tooling so a designer can build a world without opening a script.</p>
         <ul class="ticks">
           <li>160+ hex tiles generated into one playable world with varied heights</li>
           <li>Road generator picks straight, turn, ramp or pit pieces from neighbouring tile heights</li>
-          <li>HexTileEditor: a custom inspector with 60° snapping and GLB export (25+ world meshes)</li>
+          <li>HexTileEditor inspector with 60° snapping and GLB export (25+ world meshes)</li>
         </ul>
         <img class="fallback" src="assets/art-03.jpg" alt="HexaBed editor with a generated hex island" loading="lazy">
         <div class="tags"><span>Unity</span><span>C#</span><span>14 scripts</span><span>3,705 lines</span></div>
       </div>
       <div class="item">
+        <h3>HexGrid Architect <span class="priv">private repo</span></h3>
+        <p>A 3D hex-grid builder in the browser: pick a foundation tile, then stack roofs and props in an orthographic side view. React Three Fiber with custom GLB hex pieces.</p>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/build-it-again-friend" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
+        <h3>Panda <span class="priv">private repo</span></h3>
+        <p>A stage-by-stage story game starring a pixel panda, with video scenes between stages and an eating-panda and bye-bye-panda ending.</p>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/stage-play" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
         <h3>ARTHIS mini-games app</h3>
-        <p>The ARTHIS feed as a phone app for Android, built with Expo and React Native. Reanimated motion, Skia graphics and a strict 60fps rule.</p>
-        <p class="hand">Inside: Trigger Runner, Fruit Blast, Doodle Militia, Flappy Fird, 3072, Sudoku…</p>
-        <div class="tags"><span>Android</span><span>Expo</span><span>Skia</span><span>Multiplayer</span></div>
+        <p>The ARTHIS feed as an Android app, built with Expo and React Native. Reanimated motion, Skia graphics and a strict 60fps rule.</p>
+        <p class="hand">Playable inside: Trigger Runner, Fruit Blast, Doodle Militia, Flappy Fird, 3072, Sudoku…</p>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/game-reel-galaxy" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>Feed prototype</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="apps" data-label="Apps & tools">
+  <div class="card" style="--r:-.6deg">
+    <div class="eyebrow">Web apps &amp; tools</div>
+    <h2>Small products, each one shipped end to end.</h2>
+    <div class="stack">
+      <div class="item">
+        <h3><img src="assets/logo-hustiq.png" alt="" width="56" height="28" style="width:56px">Hustiq <span class="priv">private repo</span></h3>
+        <p>A video editor you drive by chatting. Timeline, captions, clip effects, audio waveform and background panels, with FFmpeg running in the browser for export. Supabase accounts.</p>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/editease-pro" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
+        <h3>Avatar Maker <span class="priv">private repo</span></h3>
+        <p>Design a custom avatar from presets or mix your own parts, saved to your account. A lighter version, Avatar Studio Lite, sits beside it.</p>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/avatar-studio-maker" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
+        <h3>3D asset viewer <span class="priv">private repo</span></h3>
+        <p>A Three.js model viewer for ARTHIS furniture and props, with info panels, 3D slider controls and a download page.</p>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/3d-asset" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
+        <h3>Daily Rest Flow <span class="priv">private repo</span></h3>
+        <p>“Work For it”: a Pomodoro timer with focus-time, streak and task stats, a task list with estimated pomodoros, packaged as a Windows desktop app with Electron.</p>
+        <div class="links"><a class="btn alt" href="https://github.com/itsAayush2004/daily-rest-flow" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
+        <h3>Travel Atlas</h3>
+        <p>A Three.js globe with an antique parchment texture charting 30+ places I've been and the ones I still dream of, with a logbook and a progress ring.</p>
+        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/TravelDiary/" target="_blank" rel="noopener">Spin the globe ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/TravelAtlas" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
+      </div>
+      <div class="item">
+        <h3>3D gallery portfolio</h3>
+        <p>My CV as rooms you walk through: scroll moves the camera through eight toon-shaded rooms, with playable arcade cabinets on the walls.</p>
+        <div class="links"><a class="btn" href="https://itsaayush2004.github.io/portfolio/" target="_blank" rel="noopener">Walk through ↗</a><a class="btn alt" href="https://github.com/itsAayush2004/portfolio" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a></div>
       </div>
     </div>
   </div>
@@ -272,9 +348,9 @@ footer a{color:var(--yellow)}
           <li>GPT-2 built from scratch: transformer blocks, tokenisation, training loop</li>
           <li>RAG pipelines with vector-database retrieval</li>
           <li>Async FastAPI inference endpoints for low-latency workloads</li>
-          <li>23 ComfyUI workflows: Flux, SDXL, Hunyuan3D, WAN VACE, LTX-2</li>
+          <li>23 ComfyUI workflows: Flux, SDXL, Hunyuan3D, WAN VACE, LTX-2, VibeVoice</li>
         </ul>
-        <img class="fallback" src="assets/art-05.jpg" alt="Systems and Inference poster: GPT-2, RAG, FastAPI, ComfyUI" loading="lazy">
+        <img class="fallback" src="assets/art-05.jpg" alt="Systems and Inference poster" loading="lazy">
         <div class="tags"><span>FastAPI</span><span>RAG</span><span>MCP</span><span>ComfyUI</span><span>n8n</span></div>
       </div>
     </div>
@@ -313,7 +389,7 @@ footer a{color:var(--yellow)}
       </div>
       <div class="item">
         <h3>YouTube UI system</h3>
-        <p>One kit for the whole channel: thumbnail grid, title type, series colours, end screens and a full SEO pack per video.</p>
+        <p>One kit for the whole channel: thumbnail grid, title type, series colours, end screens and a full SEO pack per video. It also covers Dr Lodha reels, Friends On Stand-Up sets and school episodes.</p>
         <div class="yt" aria-label="AKverse channel kit preview">
           <div class="yt-head"><img src="assets/dp.png" alt="" width="36" height="36"><div><b>AKverse</b><span>@AKverseOfficial · 21.9K subscribers</span></div></div>
           <div class="yt-grid">
@@ -330,27 +406,29 @@ footer a{color:var(--yellow)}
 
 <section class="sec" id="contact" data-label="Contact">
   <div class="card" style="--r:.5deg">
-    <div class="eyebrow">Unfolded</div>
+    <div class="eyebrow">Say hi</div>
     <h2>Let’s build something.</h2>
     <p>Game development, graphics and AI engineering roles from 2026, or a collab on the channel.</p>
     <div class="mail"><code id="email">aayushkumarofficial21@gmail.com</code><button class="btn" type="button" id="copy">Copy email</button><span class="copied" id="copied" aria-live="polite"></span></div>
     <p class="meta">Channel &amp; business: akversebusiness@gmail.com</p>
     <img class="fallback" src="assets/art-07.jpg" alt="Mail me" loading="lazy">
     <div class="links">
-      <a class="btn alt" href="https://github.com/itsAayush2004" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://github.com/itsAayush2004" target="_blank" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a>
       <a class="btn alt" href="https://www.youtube.com/@AKverseOfficial" target="_blank" rel="noopener">YouTube</a>
-      <a class="btn alt" href="https://itsaayush2004.github.io/portfolio/" target="_blank" rel="noopener">3D gallery portfolio</a>
-      <a class="btn alt" href="https://itsaayush2004.github.io/TravelDiary/" target="_blank" rel="noopener">Travel Atlas</a>
+      <a class="btn alt" href="https://arthis.space" target="_blank" rel="noopener">arthis.space</a>
+      <a class="btn alt" href="https://arthis.land" target="_blank" rel="noopener">arthis.land</a>
     </div>
   </div>
 </section>
 </main>
-<footer>© 2026 Aayush Kumar · Pinned up in the browser with Three.js · <a href="https://github.com/itsAayush2004/Board-repo">source</a></footer>
+<footer>© 2026 Aayush Kumar · Pinned up in the browser with Three.js · <a href="https://github.com/itsAayush2004/Board-repo" target="_blank" rel="noopener">source on GitHub</a></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
 'use strict';
+var GH='https://github.com/itsAayush2004/';
+var GHPATH='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12';
 var secs=[].slice.call(document.querySelectorAll('.sec'));
 var loader=document.getElementById('loader');
 function hideLoader(){loader.classList.add('gone');}
@@ -361,20 +439,33 @@ secs.forEach(function(s){var a=document.createElement('a');a.href='#'+s.id;a.inn
 var dots=[].slice.call(thread.children), navs=[].slice.call(document.querySelectorAll('.nav a'));
 function markActive(i){dots.forEach(function(d,k){d.classList.toggle('on',k===i);});var id=secs[i].id;navs.forEach(function(n){n.classList.toggle('on',n.getAttribute('href')==='#'+id);});}
 
-/* copy email */
 document.getElementById('copy').addEventListener('click',function(){
   var t=document.getElementById('email').textContent, out=document.getElementById('copied');
   function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('email'));var s=getSelection();s.removeAllRanges();s.addRange(r);out.textContent='selected, press copy';}
   try{navigator.clipboard.writeText(t).then(function(){out.textContent='copied!';},sel);}catch(e){sel();}
 });
 
-/* scroll → board position (fractional section index) */
-var centers=[];
-function measure(){centers=secs.map(function(s){var r=s.getBoundingClientRect();return Math.max(0,r.top+scrollY-innerHeight*.12);});}
-function progress(){var y=scrollY,c=centers,n=c.length;if(y<=c[0])return 0;for(var i=0;i<n-1;i++){if(y<c[i+1])return i+(y-c[i])/(c[i+1]-c[i]);}return n-1;}
+function openUrl(u){var a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();}
+
+/* each section: the camera pans its column while the card is read, then travels */
+var SPAN=[1.1,1.6,4.6,5.6,6.2,2.6,1.9,1.6,0.8];
+var keys=[];
+function measure(){
+  var ih=innerHeight;keys=[];
+  secs.forEach(function(s,i){var r=s.getBoundingClientRect(),top=r.top+scrollY;
+    var a=Math.max(0,top-ih*.15),b=Math.max(a+ih*.5,top+r.height-ih*.95);keys.push([a,b]);});
+  for(var i=0;i<keys.length-1;i++){var nxt=keys[i+1][0];if(keys[i][1]>nxt-ih*.25)keys[i][1]=Math.max(keys[i][0]+1,nxt-ih*.25);}
+  keys[0][0]=0;}
+/* returns {i, pan(0..1), travel(0..1)} as one float: i + pan*0.5 inside a section, i+0.5+travel*0.5 between */
+function progress(){
+  var y=scrollY,n=keys.length;
+  for(var i=0;i<n;i++){var k=keys[i];
+    if(y<k[0]){if(i===0)return 0;var p=keys[i-1][1];return (i-1)+.5+.5*(y-p)/(k[0]-p);}
+    if(y<=k[1])return i+.5*(y-k[0])/(k[1]-k[0]);}
+  return n-1+.5;}
 measure();addEventListener('resize',measure);addEventListener('load',measure);
 var lastActive=-1;
-function syncActive(p){var i=Math.round(p);if(i!==lastActive){lastActive=i;markActive(i);}}
+function syncActive(p){var i=Math.min(secs.length-1,Math.floor(p+.25));if(i!==lastActive){lastActive=i;markActive(i);}}
 addEventListener('scroll',function(){syncActive(progress());},{passive:true});
 syncActive(0);
 
@@ -386,198 +477,321 @@ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
 renderer.outputEncoding=THREE.sRGBEncoding;
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-var scene=new THREE.Scene();scene.background=new THREE.Color(0x4a2e17);
+var scene=new THREE.Scene();scene.background=new THREE.Color(0x2e1d0f);
 var camera=new THREE.PerspectiveCamera(40,1,0.1,200);
 var FOVT=Math.tan(THREE.MathUtils.degToRad(20));
+var maxAniso=renderer.capabilities.getMaxAnisotropy();
 
-scene.add(new THREE.HemisphereLight(0xfff3df,0x6b4420,0.72));
-var sun=new THREE.DirectionalLight(0xfff0d8,0.78);
+scene.add(new THREE.HemisphereLight(0xfff3df,0x6b4420,0.7));
+var sun=new THREE.DirectionalLight(0xfff0d8,0.8);
 sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
-var sc=sun.shadow.camera;sc.left=-14;sc.right=14;sc.top=10;sc.bottom=-10;sc.near=1;sc.far=40;sun.shadow.bias=-0.0006;sun.shadow.radius=4;
+var sc=sun.shadow.camera;sc.left=-10;sc.right=10;sc.top=9;sc.bottom=-9;sc.near=1;sc.far=40;sun.shadow.bias=-0.0006;sun.shadow.radius=4;
 scene.add(sun);scene.add(sun.target);
 
-var SP=11, N=secs.length;
-var anchors=secs.map(function(_,i){return new THREE.Vector2(i*SP,(i%2?-1:1)*1.1);});
+var SP=12, N=secs.length, MAXS=Math.max.apply(null,SPAN);
+var anchors=secs.map(function(_,i){return new THREE.Vector2(i*SP,0);});
+function tex(c){var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);return t;}
+function mk(w,h){var c=document.createElement('canvas');c.width=w;c.height=h;return c;}
 
-/* cork wall */
-function corkTexture(){
-  var c=document.createElement('canvas');c.width=c.height=512;var g=c.getContext('2d');
-  g.fillStyle='#b98551';g.fillRect(0,0,512,512);
-  for(var i=0;i<16000;i++){var x=Math.random()*512,y=Math.random()*512,r=Math.random()*1.9+.3,d=Math.random();
+/* cork + wooden frame */
+(function(){
+  var c=mk(512,512),g=c.getContext('2d');g.fillStyle='#b98551';g.fillRect(0,0,512,512);
+  for(var i=0;i<18000;i++){var x=Math.random()*512,y=Math.random()*512,r=Math.random()*1.9+.3,d=Math.random();
     g.fillStyle=d<.6?'rgba(80,46,18,'+(Math.random()*.35+.1)+')':'rgba(255,226,180,'+(Math.random()*.22+.05)+')';
     g.beginPath();g.arc(x,y,r,0,7);g.fill();}
-  var t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
-var wallW=(N-1)*SP+60, ct=corkTexture();ct.repeat.set(wallW/3,40/3);
-var wall=new THREE.Mesh(new THREE.PlaneGeometry(wallW,40),new THREE.MeshStandardMaterial({map:ct,roughness:1}));
-wall.position.set((N-1)*SP/2,0,0);wall.receiveShadow=true;scene.add(wall);
+  var t=tex(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;
+  var x0=-7,x1=(N-1)*SP+7,y0=3.9,y1=-(MAXS+3.9),W=x1-x0,H=y0-y1;t.repeat.set(W/3,H/3);
+  var wall=new THREE.Mesh(new THREE.PlaneGeometry(W,H),new THREE.MeshStandardMaterial({map:t,roughness:1}));
+  wall.position.set((x0+x1)/2,(y0+y1)/2,0);wall.receiveShadow=true;scene.add(wall);
+  var wc=mk(256,64),wg=wc.getContext('2d');wg.fillStyle='#6b4423';wg.fillRect(0,0,256,64);
+  for(var k=0;k<40;k++){wg.strokeStyle='rgba('+(Math.random()<.5?'40,22,8':'150,100,60')+','+(Math.random()*.4+.1)+')';wg.lineWidth=Math.random()*2+.5;wg.beginPath();var yy=Math.random()*64;wg.moveTo(0,yy);wg.bezierCurveTo(80,yy+Math.random()*6-3,170,yy+Math.random()*6-3,256,yy+Math.random()*4-2);wg.stroke();}
+  var wt=tex(wc);wt.wrapS=THREE.RepeatWrapping;
+  var wm=function(rep){var tt=wt.clone();tt.needsUpdate=true;tt.repeat.set(rep,1);return new THREE.MeshStandardMaterial({map:tt,roughness:.75});};
+  var T=.55,D=.35;
+  [[ (x0+x1)/2,y0+T/2,W+2*T,T,true],[(x0+x1)/2,y1-T/2,W+2*T,T,true]].forEach(function(f){var m=new THREE.Mesh(new THREE.BoxGeometry(f[2],f[3],D),wm(f[2]/3));m.position.set(f[0],f[1],D/2-.05);m.castShadow=true;m.receiveShadow=true;scene.add(m);});
+  [[x0-T/2],[x1+T/2]].forEach(function(f){var m=new THREE.Mesh(new THREE.BoxGeometry(T,H,D),wm(1));m.rotation.z=0;m.position.set(f[0],(y0+y1)/2,D/2-.05);m.castShadow=true;scene.add(m);});
+})();
 
-var floaters=[];
-var pinCols=[0xc42132,0x2b62d6,0xffc20e,0x2f8f5b,0x1c1712];
+var floaters=[], clickables=[];
+var pinCols=[0xc42132,0x2b62d6,0xffc20e,0x2f8f5b,0xf2f2f2];
+var metal=new THREE.MeshStandardMaterial({color:0xc9ccd1,metalness:.85,roughness:.28});
 function addPin(group,x,y,z,col){
-  var head=new THREE.Mesh(new THREE.SphereGeometry(.075,18,14),new THREE.MeshStandardMaterial({color:col,roughness:.35,metalness:.1}));
-  head.position.set(x,y,z+.07);head.castShadow=true;group.add(head);
-  var needle=new THREE.Mesh(new THREE.CylinderGeometry(.008,.008,.12,6),new THREE.MeshStandardMaterial({color:0xbbbbbb,metalness:.8,roughness:.3}));
-  needle.rotation.x=Math.PI/2;needle.position.set(x,y,z+.01);group.add(needle);}
+  if(col==null)col=pinCols[(Math.random()*pinCols.length)|0];
+  var mat=new THREE.MeshStandardMaterial({color:col,roughness:.3,metalness:.05});
+  var base=new THREE.Mesh(new THREE.CylinderGeometry(.075,.085,.05,20),mat);base.rotation.x=Math.PI/2;base.position.set(x,y,z+.03);base.castShadow=true;group.add(base);
+  var neck=new THREE.Mesh(new THREE.CylinderGeometry(.035,.05,.09,14),mat);neck.rotation.x=Math.PI/2;neck.position.set(x,y,z+.1);neck.castShadow=true;group.add(neck);
+  var head=new THREE.Mesh(new THREE.SphereGeometry(.07,18,14),mat);head.scale.z=.7;head.position.set(x,y,z+.16);head.castShadow=true;group.add(head);}
+function addClip(group,x,y,z,rot){
+  var p=[[0,-.02],[0,.44],[.06,.5],[.12,.44],[.12,.06],[.17,0],[.22,.06],[.22,.56],[.15,.63],[.07,.56],[.07,.14]];
+  var curve=new THREE.CatmullRomCurve3(p.map(function(q){return new THREE.Vector3(q[0]-.11,q[1]-.3,0);}));
+  var m=new THREE.Mesh(new THREE.TubeGeometry(curve,80,.011,6,false),metal);m.position.set(x,y,z+.02);m.rotation.z=rot||0;m.castShadow=true;group.add(m);}
+function addTape(group,x,y,z,w,rot,col){
+  var m=new THREE.Mesh(new THREE.PlaneGeometry(w||.9,.26),new THREE.MeshStandardMaterial({color:col||0xf3ead2,transparent:true,opacity:.8,roughness:.9}));
+  m.position.set(x,y,z+.012);m.rotation.z=rot==null?(Math.random()-.5)*.25:rot;group.add(m);}
 function curl(geo,w,h,amt){
   var p=geo.attributes.position;
   for(var i=0;i<p.count;i++){var u=p.getX(i)/w+.5,v=p.getY(i)/h+.5;
     var a=Math.max(0,(u-.55)/.45),b=Math.max(0,(.45-v)/.45);
     p.setZ(i,amt*a*a*b*b+.02*Math.sin(u*Math.PI));}
   geo.computeVertexNormals();}
+function linkOf(it){return it.url||(it.gh?GH+it.gh:null);}
+function tipOf(it){if(it.tip)return it.tip;if(it.url){try{return 'Open '+new URL(it.url).host.replace('www.','')+' ↗';}catch(e){}}if(it.gh)return 'Open '+it.gh+' on GitHub ↗';return '';}
 function place(group,cx,cy,it){
-  group.position.set(cx+it.x,cy+it.y,it.z||.08);group.rotation.z=THREE.MathUtils.degToRad(it.r||0);
-  group.userData={base:group.rotation.z,ph:Math.random()*6};floaters.push(group);scene.add(group);}
+  var z=it.z||.08;group.position.set(cx+it.x,cy+it.y,z);group.rotation.z=THREE.MathUtils.degToRad(it.r||0);
+  group.userData={base:group.rotation.z,ph:Math.random()*6,z0:z,lift:0,url:linkOf(it),tip:tipOf(it)};
+  floaters.push(group);if(group.userData.url)clickables.push(group);scene.add(group);}
+function ghTag(group,x,y,z,label){
+  var c=mk(512,112),g=c.getContext('2d');g.fillStyle='#17130f';g.beginPath();if(g.roundRect)g.roundRect(0,0,512,112,22);else g.rect(0,0,512,112);g.fill();
+  g.save();g.translate(28,22);g.scale(2.8,2.8);g.fillStyle='#ffffff';g.fill(new Path2D(GHPATH));g.restore();
+  g.fillStyle='#fff';g.font='700 40px "JetBrains Mono", monospace';var t=label;while(g.measureText(t+' ↗').width>390&&t.length>4)t=t.slice(0,-1);g.fillText(t+' ↗',110,72);
+  var w=1.15,m=new THREE.Mesh(new THREE.PlaneGeometry(w,w*112/512),new THREE.MeshStandardMaterial({map:tex(c),roughness:.5}));
+  m.position.set(x,y,z+.03);m.rotation.z=-.06;m.castShadow=true;group.add(m);}
 
 /* canvas-drawn paper */
 function wrap(g,text,max){var w=text.split(' '),lines=[],l='';w.forEach(function(x){var t=l?l+' '+x:x;if(g.measureText(t).width>max&&l){lines.push(l);l=x;}else l=t;});if(l)lines.push(l);return lines;}
 function noteTex(it){
-  var W=512,H=Math.round(512*it.h/it.w),c=document.createElement('canvas');c.width=W;c.height=H;var g=c.getContext('2d');
+  var W=512,H=Math.round(512*it.h/it.w),c=mk(W,H),g=c.getContext('2d');
   g.fillStyle=it.color;g.fillRect(0,0,W,H);
   g.fillStyle='rgba(0,0,0,.05)';g.fillRect(0,0,W,46);
-  var gr=g.createLinearGradient(W*.5,H*.5,W,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.12)');g.fillStyle=gr;g.fillRect(0,0,W,H);
-  var ink=it.ink||'#1c1712',y=64;g.fillStyle=ink;
-  if(it.label){g.font='700 22px "JetBrains Mono", monospace';g.globalAlpha=.7;g.fillText(it.label.toUpperCase(),36,y);g.globalAlpha=1;y+=22;}
-  if(it.big){g.font='900 '+(it.bigSize||130)+'px Archivo, sans-serif';y+=(it.bigSize||130)*.85;g.fillText(it.big,32,y);y+=10;}
-  if(it.title){var ts=it.titleSize||74;g.font='700 '+ts+'px Caveat, cursive';wrap(g,it.title,W-64).forEach(function(l){y+=ts*.92;g.fillText(l,34,y);});y+=6;}
-  if(it.text){var s=it.textSize||46;g.font='500 '+s+'px Caveat, cursive';it.text.split('\n').forEach(function(par){wrap(g,par,W-64).forEach(function(l){y+=s*.98;g.fillText(l,34,y);});});}
-  var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
+  for(var i=0;i<600;i++){g.fillStyle='rgba(0,0,0,'+Math.random()*.035+')';g.fillRect(Math.random()*W,Math.random()*H,2,2);}
+  var gr=g.createLinearGradient(W*.5,H*.5,W,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.13)');g.fillStyle=gr;g.fillRect(0,0,W,H);
+  var ink=it.ink||'#1c1712',y=66;g.fillStyle=ink;
+  if(it.label){g.font='700 22px "JetBrains Mono", monospace';g.globalAlpha=.7;g.fillText(it.label.toUpperCase(),36,y);g.globalAlpha=1;y+=20;}
+  if(it.big){var bs=it.bigSize||130;g.font='900 '+bs+'px Archivo, sans-serif';y+=bs*.85;g.fillText(it.big,32,y);y+=10;}
+  if(it.title){var ts=it.titleSize||72;g.font='700 '+ts+'px Caveat, cursive';wrap(g,it.title,W-64).forEach(function(l){y+=ts*.92;g.fillText(l,34,y);});y+=6;}
+  if(it.text){var s=it.textSize||44;g.font='500 '+s+'px Caveat, cursive';it.text.split('\n').forEach(function(par){wrap(g,par,W-64).forEach(function(l){y+=s*.98;g.fillText(l,34,y);});});}
+  if(it.gh||it.url){g.font='700 30px Caveat, cursive';g.globalAlpha=.75;g.fillText(it.gh?'↗ open on GitHub':'↗ click to open',34,H-30);g.globalAlpha=1;}
+  return tex(c);}
 function addNote(cx,cy,it){
   var g=new THREE.Group(),geo=new THREE.PlaneGeometry(it.w,it.h,12,12);curl(geo,it.w,it.h,.16);
   var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:noteTex(it),roughness:.92,side:THREE.DoubleSide}));
-  m.castShadow=true;g.add(m);addPin(g,0,it.h/2-.16,.02,pinCols[(Math.random()*pinCols.length)|0]);place(g,cx,cy,it);}
+  m.castShadow=true;g.add(m);addPin(g,0,it.h/2-.16,.02);place(g,cx,cy,it);}
+function addCard(cx,cy,it){
+  var W=640,H=Math.round(640*it.h/it.w),c=mk(W,H),g=c.getContext('2d');
+  g.fillStyle='#fdfbf3';g.fillRect(0,0,W,H);
+  g.strokeStyle='#9cc3e0';g.lineWidth=2;for(var y=118;y<H;y+=46){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();}
+  g.strokeStyle='#e58a8a';g.beginPath();g.moveTo(0,84);g.lineTo(W,84);g.stroke();g.beginPath();g.moveTo(52,0);g.lineTo(52,H);g.stroke();
+  g.fillStyle='#1c1712';g.font='900 42px Archivo, sans-serif';g.fillText(it.title,66,64);
+  g.font='600 38px Caveat, cursive';var yy=110;(it.lines||[]).forEach(function(l){g.fillText(l,66,yy);yy+=46;});
+  if(it.chips){var x=66;g.font='700 20px "JetBrains Mono", monospace';it.chips.forEach(function(ch){var w=g.measureText(ch).width+20;g.strokeStyle='#1c1712';g.lineWidth=3;g.strokeRect(x,H-58,w,34);g.fillText(ch,x+10,H-34);x+=w+10;});}
+  var grp=new THREE.Group(),geo=new THREE.PlaneGeometry(it.w,it.h,10,10);curl(geo,it.w,it.h,.12);
+  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(c),roughness:.9,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);
+  if(it.clip)addClip(grp,-it.w/2+.35,it.h/2,.0,.0);else addPin(grp,0,it.h/2-.14,.02);
+  if(it.gh)ghTag(grp,it.w/2-.5,-it.h/2-.08,.0,it.gh);
+  place(grp,cx,cy,it);}
+function addDymo(cx,cy,it){
+  var c=mk(1024,96),g=c.getContext('2d');g.font='900 58px Archivo, sans-serif';
+  var tw=g.measureText(it.text.split('').join(' ')).width;c.width=Math.ceil(tw+70);g=c.getContext('2d');
+  g.fillStyle='#141414';g.fillRect(0,0,c.width,96);for(var i=0;i<500;i++){g.fillStyle='rgba(255,255,255,'+Math.random()*.05+')';g.fillRect(Math.random()*c.width,Math.random()*96,3,1);}
+  g.font='900 58px Archivo, sans-serif';g.fillStyle='#f5f5f0';g.shadowColor='rgba(255,255,255,.35)';g.shadowBlur=2;g.fillText(it.text.split('').join(' '),35,68);
+  var h=.3,w=h*c.width/96,grp=new THREE.Group();
+  var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,.02),[0,0,0,0,new THREE.MeshStandardMaterial({map:tex(c),roughness:.35}),0].map(function(x){return x||new THREE.MeshStandardMaterial({color:0x141414});}));
+  m.castShadow=true;grp.add(m);it.z=it.z||.03;it.x=(it.x==null?-2.6+w/2:it.x);place(grp,cx,cy,it);}
+function addMarker(cx,cy,it){
+  var c=mk(768,192),g=c.getContext('2d');g.font='700 92px Caveat, cursive';g.fillStyle=it.color||'#fff6e0';g.globalAlpha=.92;
+  var tw=g.measureText(it.text).width;var x0=it.arrow==='left'?130:20;g.fillText(it.text,x0,120);
+  g.strokeStyle=g.fillStyle;g.lineWidth=7;g.lineCap='round';g.beginPath();
+  if(it.arrow==='left'){g.moveTo(115,95);g.quadraticCurveTo(60,70,20,110);g.moveTo(20,110);g.lineTo(52,82);g.moveTo(20,110);g.lineTo(58,122);}
+  if(it.arrow==='right'){var ax=x0+tw+15;g.moveTo(ax,90);g.quadraticCurveTo(ax+50,60,ax+95,100);g.lineTo(ax+60,90);g.moveTo(ax+95,100);g.lineTo(ax+82,64);}
+  if(it.arrow==='down'){var dx=x0+tw+30;g.moveTo(dx,40);g.quadraticCurveTo(dx+30,100,dx+10,170);g.lineTo(dx-14,140);g.moveTo(dx+10,170);g.lineTo(dx+34,146);}
+  if(it.under){g.moveTo(x0,140);g.quadraticCurveTo(x0+tw/2,150,x0+tw,134);}
+  g.stroke();
+  var w=it.w||2.4,m=new THREE.Mesh(new THREE.PlaneGeometry(w,w/4),new THREE.MeshBasicMaterial({map:tex(c),transparent:true,depthWrite:false,toneMapped:false}));
+  m.position.set(cx+it.x,cy+it.y,.006);m.rotation.z=THREE.MathUtils.degToRad(it.r||0);scene.add(m);}
+function addRing(cx,cy,it){
+  var c=mk(256,256),g=c.getContext('2d');g.strokeStyle='rgba(92,52,18,.35)';g.lineWidth=10;g.beginPath();g.arc(128,128,96,.3,6.0);g.stroke();g.lineWidth=3;g.strokeStyle='rgba(92,52,18,.25)';g.beginPath();g.arc(128,128,104,1,5.5);g.stroke();
+  var m=new THREE.Mesh(new THREE.PlaneGeometry(1.3,1.3),new THREE.MeshBasicMaterial({map:tex(c),transparent:true,depthWrite:false}));m.position.set(cx+it.x,cy+it.y,.004);scene.add(m);}
 
 var loadMgr=new THREE.LoadingManager(), tl=new THREE.TextureLoader(loadMgr);
 function addPhoto(cx,cy,it){
-  tl.load(it.src,function(tex){
-    tex.encoding=THREE.sRGBEncoding;tex.anisotropy=8;
-    var a=tex.image.width/tex.image.height,w=it.w,h=w/a,m=.09,capH=it.cap?.42:m;
-    var g=new THREE.Group();
-    var fc=document.createElement('canvas');fc.width=512;fc.height=Math.round(512*(h+m+capH)/(w+2*m));var fg=fc.getContext('2d');
-    fg.fillStyle='#fdfbf5';fg.fillRect(0,0,fc.width,fc.height);
-    if(it.cap){var ps=fc.width/(w+2*m);fg.fillStyle='#2a221b';fg.font='700 '+Math.round(.26*ps)+'px Caveat, cursive';fg.fillText(it.cap,Math.round(m*ps),fc.height-Math.round(.13*ps));}
-    var ft=new THREE.CanvasTexture(fc);ft.encoding=THREE.sRGBEncoding;
-    var frame=new THREE.Mesh(new THREE.PlaneGeometry(w+2*m,h+m+capH),new THREE.MeshStandardMaterial({map:ft,roughness:.85}));
-    frame.position.y=-(capH-m)/2;frame.castShadow=true;g.add(frame);
-    var img=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:tex,roughness:.55}));
-    img.position.z=.004;g.add(img);
-    var tape=new THREE.Mesh(new THREE.PlaneGeometry(.9,.26),new THREE.MeshStandardMaterial({color:0xf3ead2,transparent:true,opacity:.78,roughness:.9}));
-    tape.position.set(0,h/2+.02,.012);tape.rotation.z=(Math.random()-.5)*.25;g.add(tape);
-    place(g,cx,cy,it);});}
+  tl.load(it.src,function(t){t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,maxAniso);buildPhoto(cx,cy,it,t,t.image.width/t.image.height);},undefined,function(){
+    var c=mk(640,400),g=c.getContext('2d');g.fillStyle=it.ph||'#2b2620';g.fillRect(0,0,640,400);g.fillStyle='#fff';g.font='900 64px Archivo, sans-serif';wrap(g,it.cap||'',560).forEach(function(l,i){g.fillText(l,40,120+i*70);});
+    buildPhoto(cx,cy,it,tex(c),1.6);});}
+function buildPhoto(cx,cy,it,t,a){
+  var w=it.w,h=w/a,m=.09,capH=it.cap?.44:m;
+  var g=new THREE.Group();
+  if(it.stack){var back=new THREE.Mesh(new THREE.PlaneGeometry(w+2*m,h+m+capH),new THREE.MeshStandardMaterial({color:0xf3efe4,roughness:.9}));back.position.set(.08,-(capH-m)/2-.05,-.02);back.rotation.z=.07;back.castShadow=true;g.add(back);}
+  var fc=mk(512,Math.round(512*(h+m+capH)/(w+2*m))),fg=fc.getContext('2d');
+  fg.fillStyle='#fdfbf5';fg.fillRect(0,0,fc.width,fc.height);
+  if(it.cap){var ps=fc.width/(w+2*m),fs=Math.round(.27*ps);fg.fillStyle='#2a221b';fg.font='700 '+fs+'px Caveat, cursive';var cap=it.cap;while(fg.measureText(cap).width>fc.width-m*ps*2&&fs>10){fs--;fg.font='700 '+fs+'px Caveat, cursive';}fg.fillText(cap,Math.round(m*ps),fc.height-Math.round(.14*ps));}
+  var frame=new THREE.Mesh(new THREE.PlaneGeometry(w+2*m,h+m+capH),new THREE.MeshStandardMaterial({map:tex(fc),roughness:.85}));
+  frame.position.y=-(capH-m)/2;frame.castShadow=true;g.add(frame);
+  var img=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:t,roughness:.5}));img.position.z=.004;g.add(img);
+  if(it.clip)addClip(g,-w/2+.25,h/2+.04,.0,0);else if(it.pin)addPin(g,0,h/2-.02,.0);else addTape(g,0,h/2+.02,0,.9,null,it.tape);
+  if(it.gh)ghTag(g,w/2-.45,-h/2-capH+.02,.0,it.gh);
+  place(g,cx,cy,it);}
 function addSticker(cx,cy,it){
-  tl.load(it.src,function(tex){tex.encoding=THREE.sRGBEncoding;var a=tex.image.width/tex.image.height;
-    var g=new THREE.Group(),m=new THREE.Mesh(new THREE.PlaneGeometry(it.w,it.w/a),new THREE.MeshStandardMaterial({map:tex,transparent:true,alphaTest:.4,roughness:.6}));
+  tl.load(it.src,function(t){t.encoding=THREE.sRGBEncoding;var a=t.image.width/t.image.height;
+    var g=new THREE.Group(),m=new THREE.Mesh(new THREE.PlaneGeometry(it.w,it.w/a),new THREE.MeshStandardMaterial({map:t,transparent:true,alphaTest:.4,roughness:.6}));
     g.add(m);place(g,cx,cy,it);});}
 function addReel(cx,cy,it){
-  var W=360,H=640,c=document.createElement('canvas');c.width=W;c.height=H;var g=c.getContext('2d');
+  var W=360,H=640,c=mk(W,H),g=c.getContext('2d');
   g.fillStyle=it.bg;g.fillRect(0,0,W,H);
   g.fillStyle='rgba(255,255,255,.12)';for(var i=0;i<6;i++){g.beginPath();g.moveTo(W/2,H*.42);g.arc(W/2,H*.42,520,i*1.05,i*1.05+.5);g.fill();}
   g.font='900 50px Archivo, sans-serif';var y=H*.62;it.lines.forEach(function(l){var w=g.measureText(l).width;g.fillStyle=it.chip;g.fillRect(24,y-44,w+20,56);g.fillStyle='#1c1712';g.fillText(l,34,y);y+=62;});
   g.fillStyle='rgba(255,255,255,.9)';g.beginPath();g.arc(W/2,H*.34,44,0,7);g.fill();g.fillStyle=it.bg;g.beginPath();g.moveTo(W/2-14,H*.34-22);g.lineTo(W/2+24,H*.34);g.lineTo(W/2-14,H*.34+22);g.fill();
   g.fillStyle='rgba(0,0,0,.35)';g.fillRect(24,H-40,W-48,6);g.fillStyle='#fff';g.fillRect(24,H-40,(W-48)*.62,6);
   g.font='700 22px "JetBrains Mono", monospace';g.fillStyle='#fff';g.fillText('@AKverseOfficial',24,H-58);
-  var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;
-  var grp=new THREE.Group(),w=it.w,h=w*16/9;
+  var t=tex(c),grp=new THREE.Group(),w=it.w,h=w*16/9;
   var body=new THREE.Mesh(new THREE.BoxGeometry(w+.12,h+.24,.06),new THREE.MeshStandardMaterial({color:0x17130f,roughness:.4}));body.castShadow=true;grp.add(body);
   var scr=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:t,roughness:.4,emissive:0xffffff,emissiveMap:t,emissiveIntensity:.25}));scr.position.z=.031;grp.add(scr);
-  if(it.cap){addCaption(grp,it.cap,-h/2-.38,w+.6);}
+  if(it.cap){var cc=mk(512,96),cg=cc.getContext('2d');cg.fillStyle='#fdfbf5';cg.fillRect(0,0,512,96);cg.fillStyle='#1c1712';cg.font='700 58px Caveat, cursive';cg.textAlign='center';cg.fillText(it.cap,256,66);
+    var cm=new THREE.Mesh(new THREE.PlaneGeometry(w+.6,(w+.6)*96/512),new THREE.MeshStandardMaterial({map:tex(cc),roughness:.9}));cm.position.set(0,-h/2-.4,0);cm.rotation.z=.03;cm.castShadow=true;grp.add(cm);addPin(grp,0,-h/2-.4,0,0xc42132);}
   place(grp,cx,cy,it);}
-function addCaption(grp,text,y,w){
-  var c=document.createElement('canvas');c.width=512;c.height=96;var g=c.getContext('2d');g.fillStyle='#fdfbf5';g.fillRect(0,0,512,96);g.fillStyle='#1c1712';g.font='700 58px Caveat, cursive';g.textAlign='center';g.fillText(text,256,66);
-  var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;
-  var m=new THREE.Mesh(new THREE.PlaneGeometry(w,w*96/512),new THREE.MeshStandardMaterial({map:t,roughness:.9}));m.position.set(0,y,.0);m.rotation.z=.03;m.castShadow=true;grp.add(m);addPin(grp,0,y,.0,0xc42132);}
 function addKit(cx,cy,it){
-  var W=640,H=460,c=document.createElement('canvas');c.width=W;c.height=H;var g=c.getContext('2d');
+  var W=640,H=460,c=mk(W,H),g=c.getContext('2d');
   g.fillStyle='#17130f';g.fillRect(0,0,W,H);
   g.fillStyle='#ffc20e';g.font='700 62px Caveat, cursive';g.fillText('AKverse channel kit',30,72);
   g.fillStyle='#bdb2a0';g.font='500 20px "JetBrains Mono", monospace';g.fillText('THUMBNAILS · TITLES · END SCREENS · SEO',30,108);
-  var cols=[['#e9a23b','EP. NEXT','#fff'],['#2b62d6','BUILD','#ffc20e'],['#2f8f5b','DR LODHA','#fff']];
-  cols.forEach(function(k,i){var x=30+i*197,y=140;g.fillStyle=k[0];g.fillRect(x,y,182,102);g.font='900 22px Archivo, sans-serif';var tw=g.measureText(k[1]).width;g.fillStyle=k[2];g.fillRect(x+8,y+66,tw+12,28);g.fillStyle='#17130f';g.fillText(k[1],x+14,y+88);
+  [['#e9a23b','EP. NEXT','#fff'],['#2b62d6','BUILD','#ffc20e'],['#2f8f5b','DR LODHA','#fff']].forEach(function(k,i){var x=30+i*197,y=140;g.fillStyle=k[0];g.fillRect(x,y,182,102);g.font='900 22px Archivo, sans-serif';var tw=g.measureText(k[1]).width;g.fillStyle=k[2];g.fillRect(x+8,y+66,tw+12,28);g.fillStyle='#17130f';g.fillText(k[1],x+14,y+88);
     g.fillStyle='#efe6d4';g.fillRect(x,y+116,150,12);g.fillStyle='#6d6153';g.fillRect(x,y+136,100,10);});
   g.fillStyle='#c42132';g.fillRect(30,330,220,58);g.fillStyle='#fff';g.font='900 26px Archivo, sans-serif';g.fillText('SUBSCRIBE',62,368);
   g.fillStyle='#efe6d4';g.font='700 44px Caveat, cursive';g.fillText('21.9K subscribers',280,372);
-  var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;
   var grp=new THREE.Group(),w=it.w,h=w*H/W,geo=new THREE.PlaneGeometry(w,h,10,10);curl(geo,w,h,.1);
-  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:t,roughness:.7,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);
+  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(c),roughness:.7,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);
   addPin(grp,-w/2+.2,h/2-.2,.02,0xffc20e);addPin(grp,w/2-.2,h/2-.2,.02,0xffc20e);place(grp,cx,cy,it);}
+function addGhCard(cx,cy,it){
+  var W=640,H=380,c=mk(W,H),g=c.getContext('2d');g.fillStyle='#17130f';g.fillRect(0,0,W,H);
+  g.save();g.translate(40,40);g.scale(5,5);g.fillStyle='#fff';g.fill(new Path2D(GHPATH));g.restore();
+  g.fillStyle='#fff';g.font='900 54px Archivo, sans-serif';g.fillText('GitHub',190,100);
+  g.fillStyle='#ffc20e';g.font='700 30px "JetBrains Mono", monospace';g.fillText('@itsAayush2004',190,145);
+  g.fillStyle='#efe6d4';g.font='600 40px Caveat, cursive';g.fillText('20 repos · games, AI, 3D, tools',40,250);
+  g.fillStyle='#ffc20e';g.font='700 46px Caveat, cursive';g.fillText('click to open ↗',40,320);
+  var grp=new THREE.Group(),w=it.w,h=w*H/W,geo=new THREE.PlaneGeometry(w,h,8,8);curl(geo,w,h,.1);
+  var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex(c),roughness:.6,side:THREE.DoubleSide}));m.castShadow=true;grp.add(m);addPin(grp,0,h/2-.15,.02,0xffc20e);place(grp,cx,cy,it);}
 
 var Y='#f8dc6c',P='#f5a9bb',B='#a2d4ea',G='#b9dd92',O='#f7b267',Wh='#fbf7ec';
 var BOARD=[
- [ {k:'photo',src:'assets/dp.png',w:1.8,x:-1.5,y:.75,r:-6,cap:"that's me"},
-   {k:'photo',src:'assets/art-01.jpg',w:3.1,x:1.2,y:-.7,r:3,z:.1,cap:'Unity · Web 3D · AI'},
-   {k:'note',color:Y,w:1.9,h:1.9,x:1.75,y:1.55,r:6,z:.16,label:'hello',title:"hi, I'm Aayush",text:'I build worlds, games & the tools behind them.'},
-   {k:'note',color:P,w:1.6,h:1.25,x:-1.7,y:-1.55,r:-4,label:'based in',title:'Jaipur, India',titleSize:66} ],
- [ {k:'photo',src:'assets/art-06.jpg',w:3.6,x:.2,y:.1,r:-2,cap:'counted, not estimated'},
-   {k:'note',color:Y,w:1.35,h:1.35,x:-2.3,y:1.55,r:-7,z:.18,big:'154',bigSize:150,text:'interactive builds'},
-   {k:'note',color:B,w:1.35,h:1.35,x:2.35,y:1.65,r:5,z:.18,big:'21.9K',bigSize:110,text:'YouTube subs'},
-   {k:'note',color:G,w:1.35,h:1.35,x:2.3,y:-1.75,r:-4,z:.18,big:'28',bigSize:150,text:'Blender add-ons'} ],
- [ {k:'photo',src:'assets/space-feed.jpg',w:2.9,x:-1.15,y:.85,r:-3,cap:'arthis.space, the feed'},
-   {k:'photo',src:'assets/land-wall.jpg',w:3.0,x:1.25,y:-.95,r:2.5,z:.12,cap:'arthis.land, The Wall'},
-   {k:'sticker',src:'assets/logo-space.png',w:.9,x:2.15,y:1.45,r:8,z:.06},
-   {k:'sticker',src:'assets/logo-land.png',w:.95,x:-2.45,y:-1.45,r:-6,z:.06},
-   {k:'note',color:Y,w:1.3,h:1.15,x:-1.0,y:-1.75,r:4,z:.2,label:'arthis.space',title:'10,000 DAU',titleSize:62} ],
- [ {k:'photo',src:'assets/art-03.jpg',w:3.2,x:-.55,y:.6,r:-2,cap:'HexaBed, 160+ hex tiles'},
-   {k:'photo',src:'assets/space-fruit.jpg',w:1.35,x:2.05,y:-.6,r:5,z:.13,cap:'Fruit Blast'},
-   {k:'photo',src:'assets/space-doodle.jpg',w:1.1,x:-2.3,y:-1.3,r:-6,z:.13,cap:'Doodle Militia'},
-   {k:'note',color:G,w:1.65,h:1.45,x:1.95,y:1.75,r:4,z:.18,label:'game app 02',title:'ARTHIS app',text:'Expo · Skia · 60fps'},
-   {k:'note',color:B,w:1.5,h:1.1,x:-.2,y:-1.85,r:-3,z:.18,label:'unity',text:'14 scripts\n3,705 lines of C#',textSize:40} ],
- [ {k:'photo',src:'assets/art-05.jpg',w:3.3,x:.2,y:.25,r:2,cap:'Clymora: systems & inference'},
-   {k:'note',color:O,w:1.75,h:1.6,x:-2.15,y:1.45,r:-5,z:.18,label:'system 01',title:'Game Factory',text:'idea in → AI judge loop → finished game'},
-   {k:'note',color:Wh,w:1.75,h:1.6,x:2.25,y:-1.55,r:4,z:.18,label:'system 02',title:'Reel Factory',text:'script → storyboard → Blender render'},
-   {k:'note',color:Y,w:1.3,h:1.1,x:-1.9,y:-1.6,r:3,z:.18,label:'built',title:'GPT-2 from scratch',titleSize:52} ],
- [ {k:'photo',src:'assets/art-04.jpg',w:3.2,x:0,y:.55,r:-2,cap:'28 Blender add-ons'},
-   {k:'note',color:Y,w:2.0,h:1.6,x:1.75,y:-1.45,r:3,z:.18,label:'favourites',text:'lipsync_pro\ncamera_animator_pro\narthis_auto_pose',textSize:42},
-   {k:'note',color:P,w:1.5,h:1.2,x:-1.85,y:-1.5,r:-5,z:.18,big:'27,208',bigSize:84,text:'lines of Python'} ],
- [ {k:'reel',bg:'#e9a23b',chip:'#ffffff',lines:['KALESHI','FAMILY'],w:1.15,x:-1.95,y:.35,r:-5,z:.1,cap:'reel 01'},
-   {k:'reel',bg:'#2b62d6',chip:'#ffc20e',lines:['AAJ HUM','BANAYENGE!'],w:1.15,x:-.25,y:.55,r:4,z:.1,cap:'reel 02'},
-   {k:'kit',w:2.5,x:2.05,y:1.0,r:2,z:.1},
-   {k:'note',color:P,w:1.6,h:1.2,x:1.85,y:-1.45,r:-4,z:.18,label:'youtube',title:'@AKverseOfficial',titleSize:56} ],
- [ {k:'photo',src:'assets/art-07.jpg',w:3.2,x:.35,y:.45,r:2,cap:'say hi'},
-   {k:'photo',src:'assets/gallery-poster.jpg',w:1.9,x:-2.1,y:1.45,r:-6,z:.12,cap:'my 3D gallery'},
-   {k:'note',color:Y,w:2.4,h:1.25,x:-1.2,y:-1.65,r:-2,z:.18,label:'email',title:'aayushkumarofficial21@gmail.com',titleSize:40} ]
+ [ {k:'dymo',text:'HELLO, I AM AAYUSH',y:2.08},
+   {k:'photo',src:'assets/dp.png',w:1.7,x:-1.6,y:1.05,r:-6,cap:"that's me",stack:true,url:GH.slice(0,-1),tip:'Open my GitHub profile ↗'},
+   {k:'note',color:Y,w:1.9,h:1.9,x:1.55,y:1.2,r:5,z:.16,label:'hello',title:"hi, I'm Aayush",text:'I build worlds, games & the tools behind them.'},
+   {k:'photo',src:'assets/art-01.jpg',w:3.1,x:.55,y:-1.25,r:3,z:.1,cap:'Unity · Web 3D · AI · GitHub',clip:true},
+   {k:'note',color:P,w:1.45,h:1.15,x:-2.05,y:-1.2,r:-4,z:.14,label:'based in',title:'Jaipur, India',titleSize:64},
+   {k:'card',w:2.5,h:1.45,x:-1.2,y:-3.05,r:-2,z:.1,title:'NIT Jaipur · ECE',lines:['JEE Main: 98.9 %ile','JEE Advanced: AIR 8956'],chips:['B.TECH','2026']},
+   {k:'ring',x:1.9,y:-3.1},
+   {k:'marker',text:'scroll down',arrow:'down',x:1.6,y:-3.05,w:2.2,r:-4} ],
+ [ {k:'dymo',text:'BY THE NUMBERS',y:2.08},
+   {k:'photo',src:'assets/art-06.jpg',w:3.7,x:.1,y:.85,r:-2,cap:'counted, not estimated',pin:true},
+   {k:'note',color:Y,w:1.3,h:1.3,x:-2.0,y:-1.55,r:-6,z:.18,big:'154',bigSize:150,text:'interactive builds'},
+   {k:'note',color:O,w:1.3,h:1.3,x:-.65,y:-1.75,r:4,z:.18,big:'141K',bigSize:120,text:'lines of game code'},
+   {k:'note',color:G,w:1.3,h:1.3,x:.7,y:-1.55,r:-3,z:.18,big:'43',bigSize:150,text:'Three.js builds'},
+   {k:'note',color:P,w:1.3,h:1.3,x:2.05,y:-1.75,r:5,z:.18,big:'15',bigSize:150,text:'P2P multiplayer'},
+   {k:'note',color:Wh,w:1.3,h:1.3,x:-1.3,y:-3.25,r:3,z:.18,big:'28',bigSize:150,text:'Blender add-ons'},
+   {k:'note',color:B,w:1.3,h:1.3,x:.1,y:-3.35,r:-4,z:.18,big:'21.9K',bigSize:108,text:'YouTube subs',url:'https://www.youtube.com/@AKverseOfficial'},
+   {k:'marker',text:'measured, not guessed!',x:1.6,y:-3.2,w:2.2,r:6,under:true} ],
+ [ {k:'dymo',text:'WEBSITES',y:2.08},
+   {k:'photo',src:'assets/space-feed.jpg',w:3.0,x:-.95,y:.95,r:-3,cap:'arthis.space, the swipe feed',url:'https://arthis.space',gh:'arthis.space'},
+   {k:'sticker',src:'assets/logo-space.png',w:.85,x:2.0,y:2.2,r:10,z:.06,url:'https://arthis.space'},
+   {k:'note',color:Y,w:1.5,h:1.4,x:1.85,y:.75,r:5,z:.16,label:'arthis.space',title:'10,000 DAU',titleSize:66,text:'1 → 10K daily players'},
+   {k:'marker',text:'live!',arrow:'left',x:2.1,y:-.4,w:1.6,r:-8},
+   {k:'photo',src:'assets/land-wall.jpg',w:3.1,x:.6,y:-1.75,r:2.5,z:.12,cap:'arthis.land, The Wall',url:'https://arthis.land',gh:'arthis.land'},
+   {k:'sticker',src:'assets/logo-land.png',w:1.0,x:-2.25,y:-1.0,r:-8,z:.06,url:'https://arthis.land'},
+   {k:'photo',src:'assets/land-room.jpg',w:2.1,x:-1.35,y:-3.65,r:-4,z:.1,cap:'the Akverse Room',url:'https://arthis.land',pin:true},
+   {k:'card',w:2.45,h:1.6,x:1.35,y:-3.75,r:3,z:.14,title:'arthisland-relay',lines:['TCP + WebSocket, one port','pure Python, 0 dependencies','2–4 players · 4-digit rooms'],gh:'arthisland-relay',clip:true},
+   {k:'card',w:2.7,h:1.55,x:-.4,y:-5.85,r:-2,z:.1,title:'Arthis Land Maker',lines:['11-chapter Unity tool spec','islands → rooms → furniture'],chips:['DOCS','UNITY'],url:'https://itsaayush2004.github.io/arthis-land-maker-docs/',gh:'arthis-land-maker-docs'},
+   {k:'marker',text:'I wrote the relay from scratch',x:1.45,y:-5.6,w:2.3,r:-6} ],
+ [ {k:'dymo',text:'GAMES & ENGINES',y:2.08},
+   {k:'photo',src:'assets/art-03.jpg',w:3.3,x:-.3,y:.95,r:-2,cap:'HexaBed: Unity hex terrain engine'},
+   {k:'note',color:B,w:1.35,h:1.2,x:2.05,y:-.55,r:5,z:.18,label:'hexabed',text:'14 scripts\n3,705 lines C#',textSize:40},
+   {k:'photo',src:'assets/shot-hexgrid.jpg',w:2.7,x:.55,y:-2.2,r:2,z:.12,cap:'HexGrid Architect',gh:'build-it-again-friend',ph:'#2f5f8f'},
+   {k:'sticker',src:'assets/panda-sticker.png',w:1.5,x:-2.0,y:-1.6,r:-5,z:.06,gh:'stage-play'},
+   {k:'photo',src:'assets/shot-panda.jpg',w:2.5,x:-.85,y:-4.35,r:-3,z:.1,cap:'Panda, a stage story game',gh:'stage-play',ph:'#4c7a3a'},
+   {k:'note',color:G,w:1.6,h:1.5,x:1.9,y:-4.0,r:4,z:.16,label:'game app',title:'ARTHIS app',text:'Expo · Skia · 60fps',gh:'game-reel-galaxy'},
+   {k:'photo',src:'assets/space-fruit.jpg',w:1.15,x:-2.15,y:-6.55,r:-5,z:.12,cap:'Fruit Blast',url:'https://arthis.space',pin:true},
+   {k:'photo',src:'assets/space-doodle.jpg',w:1.0,x:-.75,y:-6.65,r:4,z:.12,cap:'Doodle Militia',url:'https://arthis.space',pin:true},
+   {k:'note',color:Y,w:1.9,h:1.55,x:1.3,y:-6.4,r:-3,z:.16,label:'also playable',text:'Flappy Fird · Trigger Runner · 3072 · Sudoku',textSize:42,url:'https://arthis.space'} ],
+ [ {k:'dymo',text:'WEB APPS & TOOLS',y:2.08},
+   {k:'sticker',src:'assets/logo-hustiq.png',w:1.4,x:1.85,y:2.4,r:6,z:.06,gh:'editease-pro'},
+   {k:'photo',src:'assets/shot-hustiq.jpg',w:3.3,x:-.35,y:.75,r:-2,cap:'Hustiq: edit video by chatting',gh:'editease-pro',ph:'#c42132'},
+   {k:'card',w:2.5,h:1.5,x:1.3,y:-1.95,r:3,z:.12,title:'Avatar Maker',lines:['presets or mix your own parts','saved to your account'],chips:['REACT','SUPABASE'],gh:'avatar-studio-maker'},
+   {k:'photo',src:'assets/shot-pomodoro.jpg',w:2.0,x:-1.55,y:-2.1,r:-4,z:.14,cap:'Work For it, a pomodoro app',gh:'daily-rest-flow',ph:'#2f8f5b'},
+   {k:'photo',src:'assets/shot-3dasset.jpg',w:2.4,x:-1.0,y:-4.4,r:2,z:.1,cap:'3D asset viewer',gh:'3d-asset',ph:'#3b82c4'},
+   {k:'photo',src:'assets/shot-atlas.jpg',w:2.4,x:1.4,y:-4.6,r:-2,z:.12,cap:'Travel Atlas, a 3D globe',url:'https://itsaayush2004.github.io/TravelDiary/',gh:'TravelAtlas',ph:'#0b3b5c'},
+   {k:'photo',src:'assets/gallery-poster.jpg',w:2.5,x:-.5,y:-6.75,r:3,z:.1,cap:'my 3D gallery portfolio',url:'https://itsaayush2004.github.io/portfolio/',gh:'portfolio'},
+   {k:'marker',text:'all built solo',arrow:'left',x:1.7,y:-6.6,w:1.9,r:-5} ],
+ [ {k:'dymo',text:'AI AUTOMATION',y:2.08},
+   {k:'photo',src:'assets/art-05.jpg',w:3.4,x:.1,y:.9,r:2,cap:'Clymora: systems & inference',clip:true},
+   {k:'note',color:O,w:1.9,h:1.7,x:-1.5,y:-1.55,r:-5,z:.18,label:'system 01',title:'Game Factory',text:'idea in → AI judge loop → finished game'},
+   {k:'note',color:Wh,w:1.9,h:1.7,x:1.45,y:-1.75,r:4,z:.18,label:'system 02',title:'Reel Factory',text:'script → storyboard → Blender render'},
+   {k:'card',w:2.4,h:1.5,x:-1.25,y:-3.95,r:-2,z:.12,title:'GPT-2 from scratch',lines:['transformer blocks','tokeniser + training loop'],chips:['PYTORCH']},
+   {k:'card',w:2.4,h:1.5,x:1.35,y:-4.1,r:3,z:.12,title:'23 ComfyUI flows',lines:['Flux · SDXL · Hunyuan3D','WAN VACE · LTX-2'],chips:['RAG','FASTAPI']} ],
+ [ {k:'dymo',text:'BLENDER ADD-ONS',y:2.08},
+   {k:'photo',src:'assets/art-04.jpg',w:3.3,x:0,y:.85,r:-2,cap:'28 add-ons, 27,208 lines of Python',pin:true},
+   {k:'card',w:2.6,h:1.85,x:1.2,y:-1.85,r:3,z:.14,title:'my favourites',lines:['lipsync_pro (v5)','camera_animator_pro','arthis_auto_pose'],clip:true},
+   {k:'note',color:P,w:1.5,h:1.3,x:-1.7,y:-1.7,r:-5,z:.18,big:'28',bigSize:140,text:'add-ons, all mine'},
+   {k:'note',color:Y,w:2.1,h:1.3,x:-1.0,y:-3.6,r:2,z:.16,label:'dioramas',text:'houses, clinics, dhabas & trucks, matte low-poly',textSize:40},
+   {k:'marker',text:'no more frame-by-frame',x:1.5,y:-3.65,w:2.2,r:-5,under:true} ],
+ [ {k:'dymo',text:'REELS & YOUTUBE',y:2.08},
+   {k:'reel',bg:'#e9a23b',chip:'#ffffff',lines:['KALESHI','FAMILY'],w:1.15,x:-1.95,y:.75,r:-5,z:.1,cap:'reel 01',url:'https://www.youtube.com/@AKverseOfficial'},
+   {k:'reel',bg:'#2b62d6',chip:'#ffc20e',lines:['AAJ HUM','BANAYENGE!'],w:1.15,x:-.3,y:.95,r:4,z:.1,cap:'reel 02',url:'https://www.youtube.com/@AKverseOfficial'},
+   {k:'kit',w:2.2,x:1.7,y:1.25,r:2,z:.1,url:'https://www.youtube.com/@AKverseOfficial'},
+   {k:'note',color:P,w:1.6,h:1.25,x:1.75,y:-.75,r:-4,z:.18,label:'youtube',title:'@AKverseOfficial',titleSize:56,url:'https://www.youtube.com/@AKverseOfficial'},
+   {k:'card',w:2.7,h:1.45,x:.4,y:-2.85,r:-2,z:.12,title:'more series',lines:['Dr Lodha reels','Friends On Stand-Up · school eps'],url:'https://www.youtube.com/@AKverseOfficial',clip:true} ],
+ [ {k:'dymo',text:'SAY HI',y:2.08},
+   {k:'photo',src:'assets/art-07.jpg',w:3.3,x:.3,y:.85,r:2,cap:'say hi'},
+   {k:'note',color:Y,w:2.4,h:1.25,x:-1.25,y:-1.6,r:-2,z:.18,label:'email',title:'aayushkumarofficial21@gmail.com',titleSize:40},
+   {k:'gh',w:2.1,x:1.5,y:-1.75,r:3,z:.16,url:GH.slice(0,-1),tip:'Open github.com/itsAayush2004 ↗'},
+   {k:'marker',text:'open to roles from 2026',x:-.2,y:-2.85,w:2.4,r:-3,under:true} ]
 ];
 
-/* red string: through a lead pin in each cluster, sagging between them */
 function buildString(){
   var pts=[];
-  anchors.forEach(function(a,i){var p=new THREE.Vector3(a.x-2.9,a.y+2.25,.03);
-    if(i>0){var q=pts[pts.length-1];pts.push(new THREE.Vector3((q.x+p.x)/2,Math.min(q.y,p.y)-1.6,.035));}
+  anchors.forEach(function(a,i){var p=new THREE.Vector3(a.x+2.85,a.y+2.55,.03);
+    if(i>0){var q=pts[pts.length-1];pts.push(new THREE.Vector3((q.x+p.x)/2,Math.min(q.y,p.y)-2.6,.035));}
     pts.push(p);});
   var curve=new THREE.CatmullRomCurve3(pts,false,'centripetal');
-  var s=new THREE.Mesh(new THREE.TubeGeometry(curve,400,.014,6,false),new THREE.MeshStandardMaterial({color:0xb3261e,roughness:.7}));
+  var s=new THREE.Mesh(new THREE.TubeGeometry(curve,500,.014,6,false),new THREE.MeshStandardMaterial({color:0xb3261e,roughness:.7}));
   s.castShadow=true;scene.add(s);
-  var g=new THREE.Group();anchors.forEach(function(a){addPin(g,a.x-2.9,a.y+2.25,.0,0xc42132);});scene.add(g);}
-
+  var g=new THREE.Group();anchors.forEach(function(a){addPin(g,a.x+2.85,a.y+2.55,0,0xc42132);});scene.add(g);}
 function build(){
-  BOARD.forEach(function(list,i){var a=anchors[i];list.forEach(function(it){
-    ({note:addNote,photo:addPhoto,sticker:addSticker,reel:addReel,kit:addKit})[it.k](a.x,a.y,it);});});
+  var F={note:addNote,photo:addPhoto,sticker:addSticker,reel:addReel,kit:addKit,card:addCard,dymo:addDymo,marker:addMarker,ring:addRing,gh:addGhCard};
+  BOARD.forEach(function(list,i){var a=anchors[i];list.forEach(function(it){F[it.k](a.x,a.y,it);});});
   buildString();}
 
 var fontsReady=document.fonts?Promise.race([Promise.all(['700 40px Caveat','500 40px Caveat','900 40px Archivo','700 20px "JetBrains Mono"'].map(function(f){return document.fonts.load(f);})),new Promise(function(r){setTimeout(r,2500);})]):Promise.resolve();
-var built=false;
-fontsReady.then(function(){build();built=true;});
+fontsReady.then(build);
 loadMgr.onLoad=function(){setTimeout(hideLoader,150);};
-setTimeout(hideLoader,4500);
+setTimeout(hideLoader,5000);
+
+/* hover + click */
+var ray=new THREE.Raycaster(),ptr=new THREE.Vector2(),hot=null,tip=document.getElementById('tip'),mouse={x:0,y:0},downAt=null;
+function pick(cx,cy){ptr.set(cx/innerWidth*2-1,-(cy/innerHeight)*2+1);ray.setFromCamera(ptr,camera);
+  var hit=ray.intersectObjects(clickables,true)[0];if(!hit)return null;var o=hit.object;while(o&&!(o.userData&&o.userData.url))o=o.parent;return o;}
+function overCard(cx,cy){var el=document.elementFromPoint(cx,cy);return el&&el!==canvas&&!el.classList.contains('cork-bg');}
+addEventListener('pointermove',function(e){
+  mouse.x=e.clientX/innerWidth-.5;mouse.y=e.clientY/innerHeight-.5;
+  var o=(e.pointerType==='mouse'&&!overCard(e.clientX,e.clientY))?pick(e.clientX,e.clientY):null;
+  hot=o;canvas.classList.toggle('hot',!!o);
+  if(o){tip.hidden=false;tip.textContent=o.userData.tip;tip.style.left=e.clientX+'px';tip.style.top=e.clientY+'px';}else tip.hidden=true;
+},{passive:true});
+addEventListener('pointerdown',function(e){downAt=[e.clientX,e.clientY];},{passive:true});
+addEventListener('click',function(e){
+  if(!downAt||Math.abs(e.clientX-downAt[0])+Math.abs(e.clientY-downAt[1])>8)return;
+  if(overCard(e.clientX,e.clientY))return;
+  var o=pick(e.clientX,e.clientY);if(o)openUrl(o.userData.url);});
 
 /* camera */
-var mouse={x:0,y:0},cur=0;
-addEventListener('pointermove',function(e){mouse.x=e.clientX/innerWidth-.5;mouse.y=e.clientY/innerHeight-.5;},{passive:true});
+var cur=0;
 function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();measure();}
 addEventListener('resize',resize);resize();
-function ease(f){if(f<.12)return 0;if(f>.88)return 1;f=(f-.12)/.76;return f*f*f*(f*(f*6-15)+10);}
+function ease(f){return f*f*f*(f*(f*6-15)+10);}
 function frame(t){
   t*=.001;
-  var target=progress();cur+=(target-cur)*(reduce?1:.08);
-  var i=Math.min(Math.floor(cur),N-2),f=ease(cur-i),A=anchors[i],B=anchors[i+1];
-  var ax=A.x+(B.x-A.x)*f,ay=A.y+(B.y-A.y)*f,swoop=Math.sin(Math.PI*f);
+  var target=progress();cur+=(target-cur)*(reduce?1:.085);
+  var i=Math.min(Math.floor(cur),N-1),f=cur-i,ax,ay,swoop=0,dir=0;
+  if(f<=.5||i===N-1){var pan=Math.min(1,f*2);ax=anchors[i].x;ay=anchors[i].y-.3-SPAN[i]*ease(pan);}
+  else{var e=ease((f-.5)*2),A=anchors[i],B=anchors[i+1];ax=A.x+(B.x-A.x)*e;ay=(A.y-.3-SPAN[i])+((B.y-.3)-(A.y-.3-SPAN[i]))*e;swoop=Math.sin(Math.PI*e);dir=B.x-A.x;}
   var asp=camera.aspect,z,ox=0,oy=0;
-  if(asp>=.9){z=Math.max(9,11.2/(2*FOVT*asp));ox=-2*z*FOVT*asp*.2;}
-  else{z=6.4/(2*FOVT*asp);oy=-2*z*FOVT*.22;}
-  z+=2.4*swoop;
-  var px=reduce?0:mouse.x*.45,py=reduce?0:-mouse.y*.3;
+  if(asp>=.9){z=Math.max(7.5,9.2/(2*FOVT*asp));ox=-2*z*FOVT*asp*.215;}
+  else{z=6.1/(2*FOVT*asp);oy=-2*z*FOVT*.22;}
+  z+=2.2*swoop;
+  var px=reduce?0:mouse.x*.35,py=reduce?0:-mouse.y*.25;
   camera.position.set(ax+ox+px,ay+oy+py,z);
-  camera.lookAt(ax+ox+(B.x-A.x)*.04*swoop,ay+oy,0);
+  camera.lookAt(ax+ox+dir*.03*swoop,ay+oy,0);
   sun.position.set(camera.position.x-7,camera.position.y+9,7);sun.target.position.set(camera.position.x,camera.position.y,0);
-  if(!reduce)floaters.forEach(function(g){var u=g.userData;g.rotation.z=u.base+Math.sin(t*.7+u.ph)*.012;g.rotation.y=Math.sin(t*.5+u.ph)*.03;});
+  floaters.forEach(function(g){var u=g.userData;u.lift+=((g===hot?1:0)-u.lift)*.18;
+    g.position.z=u.z0+u.lift*.22;g.scale.setScalar(1+u.lift*.04);
+    if(!reduce){g.rotation.z=u.base+Math.sin(t*.7+u.ph)*.01;g.rotation.y=Math.sin(t*.5+u.ph)*.025;}});
   renderer.render(scene,camera);
   requestAnimationFrame(frame);}
 requestAnimationFrame(frame);
